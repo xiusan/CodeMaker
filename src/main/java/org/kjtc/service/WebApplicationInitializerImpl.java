@@ -66,11 +66,11 @@ public class WebApplicationInitializerImpl extends WebMvcConfigurerAdapter imple
         public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
             String uuid = (String)request.getSession().getAttribute("UUID");
-            if (!StringUtils.isEmpty(uuid) && redisTemplate.hasKey(uuid)) {
+            /*if (!StringUtils.isEmpty(uuid) && redisTemplate.hasKey(uuid)) {
                 redisTemplate.opsForValue().set(uuid, (User)redisTemplate.opsForValue().get(uuid), 1, TimeUnit.HOURS);
             } else {
                 response.sendRedirect("/New/login");
-            }
+            }*/
             return super.preHandle(request, response, handler);
         }
     }

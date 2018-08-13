@@ -1,235 +1,7 @@
 /**
- * @FH
+ * @xiaojinlu1990@163.com
  */	
-	//生成
-	function save(){
-		
-		/*if($("#packageName").val()==""){
-			$("#packageName").tips({
-				side:3,
-	            msg:'输入包名',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#packageName").focus();
-			return false;
-		}else{
-			var pat = new RegExp("^[A-Za-z]+$");
-			if(!pat.test($("#packageName").val())){
-				$("#packageName").tips({
-					side:3,
-		            msg:'只能输入字母',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#packageName").focus();
-				return false;
-			}
-		}*/
-		
-		if($("#objectName").val()==""){
-			$("#objectName").tips({
-				side:3,
-	            msg:'输入类名',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#objectName").focus();
-			return false;
-		}else{
-			var headstr = $("#objectName").val().substring(0,1);
-			var pat = new RegExp("^[a-z0-9]+$");
-			if(pat.test(headstr)){
-				$("#objectName").tips({
-					side:3,
-		            msg:'类名首字母必须为大写字母或下划线',
-		            bg:'#AE81FF',
-		            time:2
-		        });
-				$("#objectName").focus();
-				return false;
-			}
-		}
-		
-		if($("#fields").html() == ''){
-			$("#table_report").tips({
-				side:3,
-	            msg:'请添加属性',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			return false;
-		}
-		
-		if(!confirm("确定要生成吗?")){
-			return false;
-		}
-		
-		$("#Form").submit();
 
-		$("#objectName").val('');
-		$("#productc").tips({
-			side:3,
-            msg:'提交成功,等待下载',
-            bg:'#AE81FF',
-            time:9
-        });
-		window.parent.jzts();
-		setTimeout("top.Dialog.close()",10000);
-		
-	}
-	
-	
-	//保存编辑属性
-	function saveD(){
-		
-		var dname = $("#dname").val(); 	 		 //属性名
-		var dtype = $("#dtype").val(); 	 		 //类型
-		var dbz	  = $("#dbz").val();   	 		 //备注
-		var isQian = $("#isQian").val(); 		 //是否前台录入
-		var ddefault = $("#ddefault").val(); 	 //默认值
-		var msgIndex = $("#msgIndex").val(); 	 //msgIndex不为空时是修改
-		
-		if(dname==""){
-			$("#dname").tips({
-				side:3,
-	            msg:'输入属性名',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#dname").focus();
-			return false;
-		}else{
-			dname = dname.toUpperCase();		//转化为大写
-			if(isSame(dname)){
-				var headstr = dname.substring(0,1);
-				var pat = new RegExp("^[0-9]+$");
-				if(pat.test(headstr)){
-					$("#dname").tips({
-						side:3,
-			            msg:'属性名首字母必须为字母或下划线',
-			            bg:'#AE81FF',
-			            time:2
-			        });
-					$("#dname").focus();
-					return false;
-				}
-			}else{
-				
-				if(msgIndex != ''){
-					var hcdname = $("#hcdname").val();
-					if(hcdname != dname){
-						if(!isSame(dname)){
-							$("#dname").tips({
-								side:3,
-					            msg:'属性名重复',
-					            bg:'#AE81FF',
-					            time:2
-					        });
-							$("#dname").focus();
-							return false;
-						}
-					}
-				}else{
-					
-					$("#dname").tips({
-						side:3,
-			            msg:'属性名重复',
-			            bg:'#AE81FF',
-			            time:2
-			        });
-					$("#dname").focus();
-					return false;
-					
-				}
-			}
-		}
-		
-		if(dbz==""){
-			$("#dbz").tips({
-				side:3,
-	            msg:'输入备注',
-	            bg:'#AE81FF',
-	            time:2
-	        });
-			$("#dbz").focus();
-			return false;
-		}
-		
-		dbz = dbz == '' ? '无':dbz;
-		ddefault = ddefault == '' ? '无':ddefault;
-		var fields = dname + ',fh,' + dtype + ',fh,' + dbz + ',fh,' + isQian + ',fh,' + ddefault;
-		
-		if(msgIndex == ''){
-			arrayField(fields);
-		}else{
-			editArrayField(fields,msgIndex);
-		}
-		$("#dialog-add").css("display","none");
-	}
-	//打开编辑属性(新增)
-	function dialog_open(){
-		$("#dname").val('');
-		$("#dbz").val('');
-		$("#ddefault").val('');
-		$("#msgIndex").val('');
-		$("#dtype").val('String');
-		$("#isQian").val('是');
-		$("#form-field-radio1").attr("checked",true);
-		$("#form-field-radio4").attr("checked",true);
-		$("#dialog-add").css("display","block");
-		$("#ddefault").attr("disabled",true);
-	}
-	//打开编辑属性(修改)
-	function editField(value,msgIndex){
-		var efieldarray = value.split(',fh,');
-		$("#dname").val(efieldarray[0]);
-		$("#hcdname").val(efieldarray[0]);
-		$("#dbz").val(efieldarray[2]);
-		$("#ddefault").val(efieldarray[4]);
-		$("#msgIndex").val(msgIndex);
-		if(efieldarray[1] == 'String'){
-			$("#form-field-radio1").attr("checked",true);
-			$("#dtype").val('String');
-		}else if(efieldarray[1] == 'Integer'){
-			$("#form-field-radio2").attr("checked",true);
-			$("#dtype").val('Integer');
-		}else{
-			$("#form-field-radio3").attr("checked",true);
-			$("#dtype").val('Date');
-		}
-		if(efieldarray[3] == '是'){
-			$("#form-field-radio4").attr("checked",true);
-			$("#isQian").val('是');
-		}else{
-			$("#form-field-radio5").attr("checked",true);
-			$("#isQian").val('否');
-		}
-		$("#dialog-add").css("display","block");
-	}
-	//关闭编辑属性
-	function cancel_pl(value){
-		$("#"+value).css("display","none");
-	}
-	//赋值类型
-	function setType(value){
-		$("#dtype").val(value);
-	}
-	
-	//赋值是否前台录入
-	function isQian(value){
-		if(value == '是'){
-			$("#isQian").val('是');
-			$("#ddefault").val("无");
-			$("#ddefault").attr("disabled",true);
-		}else{
-			$("#isQian").val('否');
-			$("#ddefault").val('');
-			$("#ddefault").attr("disabled",false);
-		}
-	}
-	
-	
 	var arField = new Array();
 	var index = 0;
 	//追加属性列表
@@ -301,6 +73,7 @@ function arrayFieldMysql(value){
     appendCMysql(value);
 }
 //追加属性列表
+
 function appendCMysql(value){
     var fieldarray = value.split(',fh,');
     $("#table_gai_yao_fields").append(
@@ -370,9 +143,131 @@ function editArrayFieldMysql(value,msgIndex){
 }
 
 
+/*--------------------------------生成mysql代码-----------------------------------*/
+
+var arFieldMysqlTap = new Array();
+var indexMysql = 0;
+function arrayFieldMysqlTap(value){
+    $("#mysqlIndexTap").val(''); //判断是新增还是
+    arFieldMysqlTap[indexMysql] = value;
+    console.log(arFieldMysqlTap.length+"mysql開始")
+    appendCMysqlTap(value);
+}
 
 
+//追加属性列表
+function appendCMysqlTap(value){
+    var fieldarray = value.split(',fh,');
+    $("#table_mysql_fields").append(
+        '<tr>'+
+        '<td class="center" style="width: 200px">'+fieldarray[0]+'<input type="hidden" name="mysql0'+index+'" value="'+fieldarray[0]+'"></td>'+
+        '<td class="center">'+fieldarray[1]+'<input type="hidden" name="mysql1'+indexMysql+'" value="'+fieldarray[1]+'"></td>'+
+        '<td class="center">'+fieldarray[2]+'<input type="hidden" name="mysql2'+indexMysql+'" value="'+fieldarray[2]+'"></td>'+
+        '<td class="center">'+fieldarray[3]+'<input type="hidden" name="mysql3'+indexMysql+'" value="'+fieldarray[3]+'"></td>'+
+        '<td class="center">'+fieldarray[4]+'<input type="hidden" name="mysql4'+indexMysql+'" value="'+fieldarray[4]+'"></td>'+
+        '<td class="center">'+fieldarray[5]+'<input type="hidden" name="mysql5'+indexMysql+'" value="'+fieldarray[5]+'"></td>'+
+        '<td class="center">'+
+        '<input type="hidden" name="mysql'+indexMysql+'" value="'+value+'">'+
+        '<a class="btn btn-mini btn-info" title="编辑" onclick="editFieldMysqlTap(\''+value+'\',\''+indexMysql+'\')"><i class="icon-edit"></i></a>&nbsp;'+
+        '<a class="btn btn-mini btn-danger" title="删除" onclick="removeFieldTap(\''+indexMysql+'\')"><i class="icon-trash"></i></a>'+
+        '</td>'+
+        '</tr>'
+    );
 
+    indexMysql++;
+    $("#mysqlIndexTap").val(indexMysql);
+}
+
+//打开编辑属性(修改)
+function editFieldMysqlTap(value,msgIndex){
+    $("#mysql_dialog-add_tap").css("display","block");
+    $("#mysqlIndexTap").val(msgIndex);//添加mysql隐藏的id
+    var efieldarray = value.split(',fh,');
+
+    $("#mysql_attribute_tap").val(efieldarray[0]);   	 		 //属性名
+    $("#mysql_chine_tap").val(efieldarray[1]); 	 //属性中文
+    $("#mysql_type_tap").val(efieldarray[2]);   	 		 //类型
+    $("#mysql_default_tap").val(efieldarray[3]); 	 //默认值
+    $("input[name='mysql_form-tap-radiot']:checked").val();  	 		 //是否允许为空
+    $("input[name='mysql_form-key-radiot']:checked").val();  	 		 //是否为主键
+
+
+    if(efieldarray[4] == '是'){
+        $("#mysql_form-tap-radio1").attr("checked",true);
+
+        $("#mysql_form-tap-radio2").removeAttr("checked");
+    }else{
+        $("#mysql_form-tap-radio2").attr("checked",true);
+        $("#mysql_form-tap-radio1").removeAttr("checked");
+    }
+    if(efieldarray[5] == '是'){
+        $("#mysql_form-key-radio1").attr("checked",true);
+
+        $("#mysql_form-key-radio2").removeAttr("checked");
+    }else{
+        $("#mysql_form-key-radio2").attr("checked",true);
+        $("#mysql_form-key-radio1").removeAttr("checked");
+    }
+}
+//删除数组添加元素并重组列表
+function removeFieldTap(value){
+    $("#table_mysql_fields").html('');
+    arFieldMysqlTap.splice(value,1);
+    for(var i=0;i<arFieldMysqlTap.length;i++){
+        appendC(arFieldMysqlTap[i]);
+    }
+}
+
+//保存编辑属性
+function saveDMysqltap(){
+    var mysqlAttributeTap	  = $("#mysql_attribute_tap").val();   	 		 //属性名
+    var mysqlChineTap = $("#mysql_chine_tap").val(); 	 //属性中文
+	var mysqlTypeTap	  = $("#mysql_type_tap").val();   	 		 //类型
+    var mysqlDefaultTap = $("#mysql_default_tap").val(); 	 //默认值
+    var mysqlFormTapRadiot	  = $("input[name='mysql_form-tap-radiot']:checked").val();;   	 		 //是否允许为空
+    var mysqlFormKeyRadiot	  = $("input[name='mysql_form-key-radiot']:checked").val();;   	 		 //是否为主键
+
+
+    var fields = mysqlAttributeTap+',fh,' + mysqlChineTap + ',fh,' + mysqlTypeTap+ ',fh,' + mysqlDefaultTap+ ',fh,' + mysqlFormTapRadiot+ ',fh,' + mysqlFormKeyRadiot ;
+    //獲取编辑的Id
+    var mysqlIndexTap = $("#mysqlIndexTap").val();
+    if(mysqlIndexTap == ''){
+        console.log("添加");
+        arrayFieldMysqlTap(fields);
+    }else{
+        console.log("修改");
+       editArrayFieldMysqlTap(fields,mysqlIndexTap);  //修改初始化内容
+    }
+
+
+    $("#mysql_dialog-add_tap").css("display","none");
+
+}
+
+//修改属性
+function editArrayFieldMysqlTap(value,mysqlIndexTap){
+    arFieldMysqlTap[mysqlIndexTap] = value;
+    $("#table_mysql_fields").html('');
+    for(var i=0;i<arFieldMysqlTap.length;i++){
+        appendCMysqlTap(arFieldMysqlTap[i]);
+    }
+}
+
+//打开mysql编辑属性(新增)
+function mysql_dialog_open(){
+    $("#mysql_attribute_tap").val('');   	 		 //属性名
+    $("#mysql_chine_tap").val(''); 	 //属性中文
+    $("#mysql_type_tap").val('');   	 		 //类型
+    $("#mysql_default_tap").val(''); 	 //默认值
+    $("input[name='mysql_form-tap-radiot']:checked").val();  	 		 //是否允许为空
+    $("input[name='mysql_form-key-radiot']:checked").val();  	 		 //是否为主键
+
+    $("#mysqlIndexTap").val('');//置为空标识新增
+
+    $("#mysql_form-key-radio2").attr("checked",true);
+    $("#mysql_form-tap-radio2").attr("checked",true);
+    $("#mysql_dialog-add_tap").css("display","block");
+}
 
 
 /*生成代码*/
