@@ -48,7 +48,13 @@ public class CreateCodeservice {
 
             logger.info("生成"+strings[1]+"开始");
             List<String[]>  mysqlList = getTableList(pd,"mysqlIndexTap","mysql");
-            root.put("mysqlList", mysqlList);
+            root.put("mysqlList", mysqlList);//获取mysql的所有参数
+            root.put("mysqlGrTable", pd.get("mysqlGrTable")==null?"":pd.get("mysqlGrTable"));//获取是否生成创建表
+            root.put("mysqlDeleteTable", pd.get("mysqlDeleteTable")==null?"":pd.get("mysqlDeleteTable"));//获取是否删除表
+            root.put("mysqlEditTable", pd.get("mysqlEditTable")==null?"":pd.get("mysqlEditTable"));//获取是否修改表
+            root.put("mysqlAddTable", pd.get("mysqlAddTable")==null?"":pd.get("mysqlAddTable"));//获取是否新增
+
+
             Freemarker.printFile(strings[1],root,"mysql/"+ objectName +  "mysql.sql", filePath, ftlPath);
             logger.info("生成"+strings[1]+"结束");
         }

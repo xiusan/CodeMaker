@@ -191,12 +191,10 @@
         <!--mysql生成-->
         <div class="tab-pane fade" id="mysql">
             <div>
-                <td style="padding-left: 16px;text-align: right;">是否允许为空：</td>
-                <td>
-                    <label style="float:left;padding-left: 20px;"><input name=""  value = ""   type="checkbox" value="是" ></input><span class="lbl" >生成创建表</span></label>
-                    <label style="float:left;padding-left: 20px;"><input name=""    type="checkbox" value="否" ></input><span class="lbl" >删除表</span></label>
-                    <label style="float:left;padding-left: 20px;"><input name=""    type="checkbox" value="否" ></input><span class="lbl" >修改表</span></label>
-                </td>
+                <label style="float:left;padding-left: 20px;"><input name="mysqlGrTable"  checked = "checked"  type="checkbox" value="mysqlGrTable" ></input><span class="lbl" >生成创建表</span></label>
+                <label style="float:left;padding-left: 20px;"><input name="mysqlDeleteTable"   checked = "checked"  type="checkbox" value="mysqlDeleteTable" ></input><span class="lbl" >删除</span></label>
+                <label style="float:left;padding-left: 20px;"><input name="mysqlEditTable"   checked = "checked"  type="checkbox" value="mysqlEditTable" ></input><span class="lbl" >修改</span></label>
+                <label style="float:left;padding-left: 20px;"><input name="mysqlAddTable"   checked = "checked"  type="checkbox" value="mysqlAddTable" ></input><span class="lbl" >新增</span></label>
             </div>
 
             <table id="table_mysql" class="table table-striped table-bordered table-hover">
@@ -278,14 +276,15 @@
             }
         });
         //mysql tap页
-        var fieldsMsql ='id'+',fh,'+'id'+',fh,'+'String'+',fh,'+'主键'+',fh,'+'是'+',fh,'+'是';
+        var fieldsMsql ='id'+',fh,'+'id'+',fh,'+'String'+',fh,'+'主键'+',fh,'+'否'+',fh,'+'是';
+        var fieldsMsql1 ='name'+',fh,'+'名字'+',fh,'+'String'+',fh,'+'无'+',fh,'+'是'+',fh,'+'否';
+        var fieldsMsql2 ='age'+',fh,'+'年龄'+',fh,'+'Integer'+',fh,'+'无'+',fh,'+'是'+',fh,'+'否';
+        var fieldsMsql3 ='creattime'+',fh,'+'时间'+',fh,'+'DATE'+',fh,'+'无'+',fh,'+'否'+',fh,'+'否';
         arrayFieldMysqlTap(fieldsMsql);
-
-
-
+        arrayFieldMysqlTap(fieldsMsql1);
+        arrayFieldMysqlTap(fieldsMsql2);
+        arrayFieldMysqlTap(fieldsMsql3);
     });
-
-
 </script>
 
 </body>
