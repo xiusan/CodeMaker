@@ -147,12 +147,12 @@
     <table border="0">
         <tr>
             <td style="width:76px;text-align: right;">项目名：</td>
-            <td><input type="text" name="objectName" id="objectName" value="" placeholder="项目名" style="width:200px" title="类名称"/></td>
+            <td><input type="text" name="objectName" id="objectName" value="项目名" placeholder="项目名"   style="width:200px" title="类名称"/></td>
             <td style="width:76px;text-align: right;">功能名称：</td>
-            <td><input type="text" name="tabletop"  id="tabletop"   placeholder="功能名称" style="width:200px" title="表前缀"/></td>
+            <td><input type="text" name="tabletop"  id="tabletop"  value="功能名称"   placeholder="功能名称" style="width:200px" title="表前缀"/></td>
 
             <td style="width:76px;text-align: right;">功能备注：</td>
-            <td><input type="text" name="objectRemark" id="objectRemark" value="" placeholder="功能备注" style="width:200px" title="备注"/></td>
+            <td><input type="text" name="objectRemark" id="objectRemark" value="功能备注" placeholder="功能备注" style="width:200px" title="备注"/></td>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-app btn-success btn-mini" onclick="saveAll();" id="productcAll"><i class="icon-print"></i>生成</a></td>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-app btn-danger btn-mini" onclick="top.Dialog.close();"><i class="icon-share-alt"></i>重置</a></td>
         </tr>
@@ -161,12 +161,12 @@
     <ul id="myTab" class="nav nav-tabs">
         <li class="active"><a href="#gaiYao" data-toggle="tab">   概要    </a></li>
         <li>               <a href="#mysql"  data-toggle="tab">       MySql     </a></li>
-        <li>               <a href="#mapper"  data-toggle="tab">       Mapper      </a></li>
-        <li>               <a href="#service"  data-toggle="tab">       Service      </a></li>
         <li>               <a href="#entity"  data-toggle="tab">       Entity      </a></li>
+        <li>               <a href="#controller"  data-toggle="tab">       Controller      </a></li>
+        <li>               <a href="#service"  data-toggle="tab">       Service      </a></li>
+        <li>               <a href="#mapper"  data-toggle="tab">       Mapper      </a></li>
         <li>               <a href="#html"  data-toggle="tab">       Html      </a></li>
         <li>               <a href="#js"  data-toggle="tab">       JS      </a></li>
-        <li>               <a href="#controller"  data-toggle="tab">       Controller      </a></li>
         <li>               <a href="#redis"  data-toggle="tab">       Redis      </a></li>
 
     </ul>
@@ -222,24 +222,37 @@
                 </tr>
             </table>
         </div>
-        <div class="tab-pane fade" id="mapper">
+        <div class="tab-pane fade" id="entity">
             <p>菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档，帮助广大web技术爱好者快速入门并建立自己的网站。菜鸟先飞早入行——学的不仅是技术，更是梦想。</p>
+        </div>
+        <div class="tab-pane fade" id="controller">
+            <div>
+                <label style="float:left;padding-left: 20px;"><input name="controllerSelect"  checked = "checked"  type="checkbox" value="controllerSelect" ></input><span class="lbl" >生成查询</span></label>
+                <label style="float:left;padding-left: 20px;"><input name="controllerDelete"   checked = "checked"  type="checkbox" value="controllerDelete" ></input><span class="lbl" >生成删除</span></label>
+                <label style="float:left;padding-left: 20px;"><input name="controllerUpadte"   checked = "checked"  type="checkbox" value="controllerUpadte" ></input><span class="lbl" >生成修改</span></label>
+                <label style="float:left;padding-left: 20px;"><input name="controllerAdd"   checked = "checked"  type="checkbox" value="controllerAdd" ></input><span class="lbl" >生成新增</span></label>
+                <label style="float:left;padding-left: 20px;"><input name="controllerExport"   checked = "checked"  type="checkbox" value="controllerExport" ></input><span class="lbl" >生成导出</span></label>
+                <label style="float:left;padding-left: 20px;"><input name="controllerImport"   checked = "checked"  type="checkbox" value="controllerImport" ></input><span class="lbl" >生成导入</span></label>
+
+                <td style="width:76px;text-align: right;">创建者：</td>
+                <td><input type="text" name="controllerCreator"  id="controllerCreator"  value="root"   placeholder="创建者" style="width:200px" title="创建者"/></td>
+
+            </div>
         </div>
         <div class="tab-pane fade" id="service">
             <p>菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档，帮助广大web技术爱好者快速入门并建立自己的网站。菜鸟先飞早入行——学的不仅是技术，更是梦想。</p>
         </div>
-        <div class="tab-pane fade" id="entity">
-            <p>菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档，帮助广大web技术爱好者快速入门并建立自己的网站。菜鸟先飞早入行——学的不仅是技术，更是梦想。</p>
+        <div class="tab-pane fade" id="mapper">
+        <p>菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档，帮助广大web技术爱好者快速入门并建立自己的网站。菜鸟先飞早入行——学的不仅是技术，更是梦想。</p>
         </div>
+
         <div class="tab-pane fade" id="html">
             <p>菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档，帮助广大web技术爱好者快速入门并建立自己的网站。菜鸟先飞早入行——学的不仅是技术，更是梦想。</p>
         </div>
         <div class="tab-pane fade" id="js">
             <p>菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档，帮助广大web技术爱好者快速入门并建立自己的网站。菜鸟先飞早入行——学的不仅是技术，更是梦想。</p>
         </div>
-        <div class="tab-pane fade" id="controller">
-            <p>菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档，帮助广大web技术爱好者快速入门并建立自己的网站。菜鸟先飞早入行——学的不仅是技术，更是梦想。</p>
-        </div>
+
         <div class="tab-pane fade" id="redis">
             <p>菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档，帮助广大web技术爱好者快速入门并建立自己的网站。菜鸟先飞早入行——学的不仅是技术，更是梦想。</p>
         </div>

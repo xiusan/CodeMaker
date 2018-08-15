@@ -53,16 +53,33 @@ public class CreateCodeservice {
             root.put("mysqlDeleteTable", pd.get("mysqlDeleteTable")==null?"":pd.get("mysqlDeleteTable"));//获取是否删除表
             root.put("mysqlEditTable", pd.get("mysqlEditTable")==null?"":pd.get("mysqlEditTable"));//获取是否修改表
             root.put("mysqlAddTable", pd.get("mysqlAddTable")==null?"":pd.get("mysqlAddTable"));//获取是否新增
+            root.put("controllerCreator", pd.get("controllerCreator")==null?"":pd.get("controllerCreator"));//创建人
 
 
             Freemarker.printFile(strings[1],root,"mysql/"+ objectName +  "mysql.sql", filePath, ftlPath);
             logger.info("生成"+strings[1]+"结束");
         }
 
+		/*生成 实体*/
+        if(strings[1].equals("EntityTemplate.ftl")){
+            logger.info("生成"+strings[1]+"开始");
+            List<String[]>  mysqlList = getTableList(pd,"mysqlIndexTap","mysql");
+            root.put("mysqlList", mysqlList);//获取mysql的所有参数
+            Freemarker.printFile(strings[1],root,"entity/"+ objectName +  "Entity.java", filePath, ftlPath);
+            logger.info("生成"+strings[1]+"结束");
+        }
 
         /*生成controller*/
         if(strings[1].equals("controllerTemplate.ftl")){
-
+            logger.info("生成"+strings[1]+"开始");
+            root.put("controllerSelect", pd.get("controllerSelect")==null?"":pd.get("controllerSelect"));//获取生成查询
+            root.put("controllerDelete", pd.get("controllerDelete")==null?"":pd.get("controllerDelete"));//获取生成删除
+            root.put("controllerUpadte", pd.get("controllerUpadte")==null?"":pd.get("controllerUpadte"));//获取生成修改
+            root.put("controllerAdd", pd.get("controllerAdd")==null?"":pd.get("controllerAdd"));//获取生成新增
+            root.put("controllerExport", pd.get("controllerExport")==null?"":pd.get("controllerExport"));//获取生成导出
+            root.put("controllerImport", pd.get("controllerImport")==null?"":pd.get("controllerImport"));//获取生成导入
+            Freemarker.printFile(strings[1],root,"controller/"+ objectName +  "Controller.java", filePath, ftlPath);
+            logger.info("生成"+strings[1]+"结束");
 
         }
         /*生成service*/
@@ -93,10 +110,7 @@ public class CreateCodeservice {
         if(strings[1].equals("jsOperateTemplate.ftl")){
 
         }
-		/*生成 实体*/
-       if(strings[1].equals("EntityTemplate.ftl")){
 
-        }
 
 
 

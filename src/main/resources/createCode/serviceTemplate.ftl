@@ -1,11 +1,11 @@
-package com.mogateway.service;
+package org.kjtc.service;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mogateway.entity.${objectName};
-import com.mogateway.mapper.${objectName}Mapper;
+import org.kjtc.entity.${objectName};
+import org.kjtc.mapper.${objectName}Mapper;
 
 
 /**

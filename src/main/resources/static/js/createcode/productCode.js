@@ -332,6 +332,29 @@ function saveAll(){
         return false;
     }*/
 
+    //项目名
+    var objectName = $("#objectName").val();
+    var tabletop = $("#tabletop").val();  //类名
+    var objectRemark = $("#objectRemark").val();//备注
+    if (objectName == ''){
+        alert("项目名不能为空");
+        $("#objectName").focus();
+        return;
+    }
+    if (tabletop == ''){
+        alert("类名不能为空");
+        $("#tabletop").focus();
+        return;
+    }
+    if (objectRemark == ''){
+        alert("备注不能为空");
+        $("#objectRemark").focus();
+        return;
+    }
+
+
+
+
     if(!confirm("确定要生成吗?")){
         return false;
     }

@@ -64,7 +64,7 @@ public class CreateCodeController {
 		for (String[] strings : gaiYaoList) {
 			if (strings[0].equals("是")){
 				System.out.println(strings[1]);
-				createCodeservice.getCreatCode(pd,strings,root,objectName ,filePath, ftlPath);
+				createCodeservice.getCreatCode(pd,strings,root,tabletop ,filePath, ftlPath);
 			}else {
 				logger.info(strings[1]+"用户不需要生成");
 			}

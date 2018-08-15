@@ -1,7 +1,7 @@
-package com.mogateway.mapper;
+package org.kjtc.mapper;
 
 
-import com.mogateway.entity.${objectName};
+import org.kjtc.entity.${objectName};
 import org.apache.ibatis.jdbc.SQL;
 
 /**

@@ -1,4 +1,4 @@
-package com.mogateway.controller;
+package org.kjtc.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -12,62 +12,66 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.mogateway.entity.${objectName};
-import com.mogateway.service.${objectName}Service;
+import org.kjtc.entity.${tabletop}Entity;
+import org.kjtc.service.${tabletop}Service;
 
 
 /**
-* 类名称：${objectName}Controller
-* 创建人：
-* 创建时间：${nowDate?string("yyyy-MM-dd")}
+* 类名称：${tabletop}Controller
+* 创建人：${controllerCreator}
+* 创建时间：${nowDate?string("yyyy-MM-dd HH:mm:ss")}
 * 描   述: ${objectRemark}
 */
 @Controller
-public class ${objectName}Controller {
+public class ${tabletop?cap_first}Controller {
 
 
     @Autowired
-    private ${objectName}Service ${objectNameLower}Service;
+    private ${tabletop?cap_first}Service ${tabletop?uncap_first}Service;
 
+<#if controllerSelect != '' >
     /**
     *  ${objectRemark}映射到Html
     * @return
     */
-    @RequestMapping(value = "/${objectNameLower}")
-            public String ${objectNameLower}Page(){
-                return "${objectName}";
+    @RequestMapping(value = "/${tabletop?uncap_first}")
+            public String ${tabletop?uncap_first}Page(){
+                return "${tabletop?uncap_first}";
             }
 
+<#-- 生成查询 -->
     /**
     * ${objectRemark}查询List
     * @param pageNum
     * @param pageSize
     * @return
     */
-    @RequestMapping("/get${objectName}List")
+    @RequestMapping("/get${tabletop?cap_first}List")
     @ResponseBody
-    public Object get${objectName}List(
-    ${objectName} ${objectNameLower}, @RequestParam(value="pageNum", defaultValue="1") Integer pageNum,
+    public Object get${tabletop?cap_first}List(
+    ${tabletop?cap_first} ${tabletop?uncap_first}, @RequestParam(value="pageNum", defaultValue="1") Integer pageNum,
     @RequestParam(value="pageSize", defaultValue="10") Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<${objectName}> ${objectNameLower}List = ${objectNameLower}Service.get${objectName}List(${objectNameLower});
-        PageInfo pageInfo = new PageInfo(${objectNameLower}List);
+        List<${tabletop?cap_first}> ${tabletop?uncap_first}List = ${tabletop?uncap_first}Service.get${tabletop?cap_first}List(${tabletop?uncap_first});
+        PageInfo pageInfo = new PageInfo(${tabletop?uncap_first}List);
 
         return pageInfo;
     }
-
+</#if>
+<#if controllerAdd != '' >
+<#-- 生成添加  -->
     /**
     * 添加
     * @param
     * @return
     */
-    @PostMapping("/save${objectName}")
+    @PostMapping("/save${tabletop?cap_first}")
     @ResponseBody
-    public Object save${objectName}(${objectName} ${objectNameLower}) {
+    public Object save${tabletop?cap_first}(${tabletop?cap_first} ${tabletop?uncap_first}) {
 
     Map<String, Object> map = new HashMap<String, Object>();
     try {
-        int count = ${objectNameLower}Service.save${objectName}(${objectNameLower});
+        int count = ${tabletop?uncap_first}Service.save${tabletop?cap_first}(${tabletop?uncap_first});
         if (count > 0) {
             map.put("result", "Success");
         } else {
@@ -89,15 +93,17 @@ public class ${objectName}Controller {
     }
     return map;
     }
-
+</#if>
+<#if controllerUpadte != '' >
+<#-- 生成更新 -->
     /**
     * 更新
     * @param
     * @return
     */
-    @PostMapping("/update${objectName}")
+    @PostMapping("/update${tabletop?cap_first}")
     @ResponseBody
-    public Object updateOperatorInfo(${objectName} ${objectNameLower}) {
+    public Object updateOperatorInfo(${tabletop?cap_first} ${tabletop?uncap_first}) {
 
     Map<String, Object> map = new HashMap<String, Object>();
 
@@ -108,7 +114,7 @@ public class ${objectName}Controller {
     }
     */
     try {
-        int count = ${objectNameLower}Service.update${objectName}(${objectNameLower});
+        int count = ${tabletop?uncap_first}Service.update${tabletop?cap_first}(${tabletop?uncap_first});
         if (count > 0) {
             map.put("result", "Success");
         } else {
@@ -128,15 +134,17 @@ public class ${objectName}Controller {
     }
     return map;
     }
-
+</#if>
+<#if controllerDelete != '' >
+<#-- 生成删除  -->
     /**
     * 删除
     * @param
     * @return
     */
-    @RequestMapping(value = "/del${objectName}")
+    @RequestMapping(value = "/del${tabletop?cap_first}")
     @ResponseBody
-    public Object delOperatorInfo(${objectName} ${objectNameLower}) {
+    public Object delOperatorInfo(${tabletop?cap_first} ${tabletop?uncap_first}) {
 
     Map<String, Object> map = new HashMap<String, Object>();
     /* 需要单独实现ID判定
@@ -146,7 +154,7 @@ public class ${objectName}Controller {
     }
     */
     try {
-        int count = ${objectNameLower}Service.del${objectName}(${objectNameLower});
+        int count = ${tabletop?uncap_first}Service.del${tabletop?cap_first}(${tabletop?uncap_first});
         if (count > 0) {
             map.put("result", "Success");
         } else {
@@ -158,5 +166,15 @@ public class ${objectName}Controller {
     }
     return map;
     }
+</#if>
+<#if controllerImport != '' >
+<#-- 生成导入  -->
+//导入
+</#if>
+<#if controllerExport != '' >
+<#-- 生成导出  -->
+//导出
+</#if>
 
     }
+
