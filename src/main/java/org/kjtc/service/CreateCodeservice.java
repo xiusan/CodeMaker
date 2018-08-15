@@ -43,6 +43,9 @@ public class CreateCodeservice {
      */
     public void getCreatCode(PageData pd, String[] strings, Map<String, Object> root, String objectName, String filePath, String ftlPath) throws Exception {
 
+        //首字母大写
+        objectName = objectName.substring(0,1).toUpperCase().concat(objectName.substring(1,objectName.length()));
+
         		/*生成  mysql*/
         if(strings[1].equals("mysql_SQL_Template.ftl")){
 
@@ -78,21 +81,51 @@ public class CreateCodeservice {
             root.put("controllerAdd", pd.get("controllerAdd")==null?"":pd.get("controllerAdd"));//获取生成新增
             root.put("controllerExport", pd.get("controllerExport")==null?"":pd.get("controllerExport"));//获取生成导出
             root.put("controllerImport", pd.get("controllerImport")==null?"":pd.get("controllerImport"));//获取生成导入
+            root.put("controllerCreator", pd.get("controllerCreator")==null?"":pd.get("controllerCreator"));//创建人
+
             Freemarker.printFile(strings[1],root,"controller/"+ objectName +  "Controller.java", filePath, ftlPath);
             logger.info("生成"+strings[1]+"结束");
 
         }
         /*生成service*/
          if(strings[1].equals("serviceTemplate.ftl")){
-
+             logger.info("生成"+strings[1]+"开始");
+             root.put("controllerSelect", pd.get("controllerSelect")==null?"":pd.get("controllerSelect"));//获取生成查询
+             root.put("controllerDelete", pd.get("controllerDelete")==null?"":pd.get("controllerDelete"));//获取生成删除
+             root.put("controllerUpadte", pd.get("controllerUpadte")==null?"":pd.get("controllerUpadte"));//获取生成修改
+             root.put("controllerAdd", pd.get("controllerAdd")==null?"":pd.get("controllerAdd"));//获取生成新增
+             root.put("controllerExport", pd.get("controllerExport")==null?"":pd.get("controllerExport"));//获取生成导出
+             root.put("controllerImport", pd.get("controllerImport")==null?"":pd.get("controllerImport"));//获取生成导入
+             root.put("controllerCreator", pd.get("controllerCreator")==null?"":pd.get("controllerCreator"));//创建人
+             Freemarker.printFile("serviceTemplate.ftl", root, "service/"+ objectName +  "Service.java", filePath, ftlPath);
+             logger.info("生成"+strings[1]+"结束");
         }
 		/*生成mapper*/
          if(strings[1].equals("mapperTemplate.ftl")){
-
+             logger.info("生成"+strings[1]+"开始");
+             root.put("controllerSelect", pd.get("controllerSelect")==null?"":pd.get("controllerSelect"));//获取生成查询
+             root.put("controllerDelete", pd.get("controllerDelete")==null?"":pd.get("controllerDelete"));//获取生成删除
+             root.put("controllerUpadte", pd.get("controllerUpadte")==null?"":pd.get("controllerUpadte"));//获取生成修改
+             root.put("controllerAdd", pd.get("controllerAdd")==null?"":pd.get("controllerAdd"));//获取生成新增
+             root.put("controllerExport", pd.get("controllerExport")==null?"":pd.get("controllerExport"));//获取生成导出
+             root.put("controllerImport", pd.get("controllerImport")==null?"":pd.get("controllerImport"));//获取生成导入
+             root.put("controllerCreator", pd.get("controllerCreator")==null?"":pd.get("controllerCreator"));//创建人
+             Freemarker.printFile("mapperTemplate.ftl", root, "mapper/"+ objectName +  "Mapper.java", filePath, ftlPath);
+             logger.info("生成"+strings[1]+"结束");
         }
 		/*生成Provider*/
         if(strings[1].equals("ProviderTemplate.ftl")){
-
+            logger.info("生成"+strings[1]+"开始");
+            root.put("controllerSelect", pd.get("controllerSelect")==null?"":pd.get("controllerSelect"));//获取生成查询
+            root.put("controllerDelete", pd.get("controllerDelete")==null?"":pd.get("controllerDelete"));//获取生成删除
+            root.put("controllerUpadte", pd.get("controllerUpadte")==null?"":pd.get("controllerUpadte"));//获取生成修改
+            root.put("controllerAdd", pd.get("controllerAdd")==null?"":pd.get("controllerAdd"));//获取生成新增
+            root.put("controllerExport", pd.get("controllerExport")==null?"":pd.get("controllerExport"));//获取生成导出
+            root.put("controllerImport", pd.get("controllerImport")==null?"":pd.get("controllerImport"));//获取生成导入
+            root.put("controllerCreator", pd.get("controllerCreator")==null?"":pd.get("controllerCreator"));//创建人
+            root.put("tableName", pd.get("tableName")==null?pd.get("tabletop")==null?"":pd.get("tabletop"):pd.get("tableName"));//表明
+            Freemarker.printFile("ProviderTemplate.ftl", root, "mapper/"+ objectName +  "Provider.java", filePath, ftlPath);
+            logger.info("生成"+strings[1]+"结束");
         }
 		 /*生成HTML*/
         if(strings[1].equals("htmlTemplate.ftl")){

@@ -1,53 +1,27 @@
 /**
  * @xiaojinlu1990@163.com
- */	
+ */
 
+/*------------------------------------公用开始----------------------------------------------*/
+//关闭弹出框
+function cancel_pl(idVame){
+    $("#"+idVame).css("display","none");
+}
+/*------------------------------------公用结束----------------------------------------------*/
+/*------------------------------------概要开始----------------------------------------------*/
 	var arField = new Array();
 	var index = 0;
-	//追加属性列表
-	function appendC(value){
-		
-		var fieldarray = value.split(',fh,');
-		
-		$("#fields").append(
-			'<tr>'+
-			'<td class="center">'+fieldarray[0]+'<input type="hidden" name="field0'+index+'" value="'+fieldarray[0]+'"></td>'+
-			'<td class="center">'+fieldarray[1]+'<input type="hidden" name="field1'+index+'" value="'+fieldarray[1]+'"></td>'+
-			'<td class="center">'+fieldarray[2]+'<input type="hidden" name="field2'+index+'" value="'+fieldarray[2]+'"></td>'+
-			'<td class="center">'+fieldarray[3]+'<input type="hidden" name="field3'+index+'" value="'+fieldarray[3]+'"></td>'+
-			'<td class="center">'+fieldarray[4]+'<input type="hidden" name="field4'+index+'" value="'+fieldarray[4]+'"></td>'+
-			'<td class="center">'+
-				'<input type="hidden" name="field'+index+'" value="'+value+'">'+
-				'<a class="btn btn-mini btn-info" title="编辑" onclick="editField(\''+value+'\',\''+index+'\')"><i class="icon-edit"></i></a>&nbsp;'+
-				'<a class="btn btn-mini btn-danger" title="删除" onclick="removeField(\''+index+'\')"><i class="icon-trash"></i></a>'+
-			'</td>'+
-			'</tr>'
-		);
-		index++;
-		$("#zindex").val(index);
-	}
-	
-	//保存属性后往数组添加元素
-	function arrayField(value){
-		arField[index] = value;
-		appendC(value);
-	}
-	
-	//修改属性
-	function editArrayField(value,msgIndex){
-		arField[msgIndex] = value;
-		$("#fields").html('');
-		for(var i=0;i<arField.length;i++){
-			appendC(arField[i]);
-		}
-	}
+
+
 	
 	//删除数组添加元素并重组列表
 	function removeField(value){
-		$("#fields").html('');
-		arField.splice(value,1);
+	    console.log("概要"+value);
+		$("#table_gai_yao_fields").html('');
+        arField.splice(value,1);
+        index = 0 ;
 		for(var i=0;i<arField.length;i++){
-			appendC(arField[i]);
+            appendCMysql(arField[i]);
 		}
 	}
 	
@@ -62,14 +36,12 @@
 		return true;
 	}
 
-/*第二版js*/
-//概要
 //存储所有概要信息
 var arFieldMysql = new Array();
 //添加mysql默认值
 function arrayFieldMysql(value){
     $("#msgIndex").val(''); //判断是新增还是
-    arFieldMysql[index] = value;
+    arField[index] = value;
     appendCMysql(value);
 }
 //追加属性列表
@@ -134,16 +106,16 @@ function saveDMysql(){
 //修改属性
 function editArrayFieldMysql(value,msgIndex){
 
-    arFieldMysql[0] = value;
+    arField[msgIndex] = value;
     index = 0;
     $("#table_gai_yao_fields").html('');
-    for(var i=0;i<arFieldMysql.length;i++){
-        appendCMysql(arFieldMysql[i]);
+    for(var i=0;i<arField.length;i++){
+        appendCMysql(arField[i]);
     }
 }
 
-
-/*--------------------------------生成mysql代码-----------------------------------*/
+/*------------------------------------概要结束----------------------------------------------*/
+/*------------------------------------生成mysql代码开始-------------------------------------*/
 
 var arFieldMysqlTap = new Array();
 var indexMysql = 0;
@@ -175,6 +147,7 @@ function appendCMysqlTap(value){
     );
 
     indexMysql++;
+    console.log('编码='+indexMysql);
     $("#mysqlIndexTap").val(indexMysql);
 }
 
@@ -213,8 +186,9 @@ function editFieldMysqlTap(value,msgIndex){
 function removeFieldTap(value){
     $("#table_mysql_fields").html('');
     arFieldMysqlTap.splice(value,1);
+    indexMysql = 0;  //初始化为0
     for(var i=0;i<arFieldMysqlTap.length;i++){
-        appendC(arFieldMysqlTap[i]);
+        appendCMysqlTap(arFieldMysqlTap[i]);
     }
 }
 
@@ -268,9 +242,105 @@ function mysql_dialog_open(){
     $("#mysql_form-tap-radio2").attr("checked",true);
     $("#mysql_dialog-add_tap").css("display","block");
 }
+/*------------------------------------生成mysql代码结束-------------------------------------*/
+
+/*------------------------------------生成Entity代码开始-------------------------------------*/
+
+var arFieldEntityTap = new Array();
+var indexEntity = 0;
 
 
-/*生成代码*/
+//打开entity编辑属性(新增)
+function entity_dialog_open(){
+    $("#entity_attribute_tap").val('');   	 		 //属性名
+    $("#entity_chine_tap").val(''); 	 //属性中文
+    $("#entity_type_tap").val('');   	 		 //类型
+    $("#entity_default_tap").val(''); 	 //默认值
+    $("input[name='entity_form-tap-radiot']:checked").val();  	 		 //是否允许为空
+    $("input[name='entity_form-key-radiot']:checked").val();  	 		 //是否为主键
+
+    $("#entityIndexTap").val('');//置为空标识新增
+
+    $("#entity_form-key-radio2").attr("checked",true);
+    $("#entity_form-tap-radio2").attr("checked",true);
+    $("#entity_dialog-add_tap").css("display","block");
+}
+
+//保存编辑属性
+function saveDentitytap(){
+    var entityAttributeTap	  = $("#entity_attribute_tap").val();   	 		 //属性名
+    var entityChineTap = $("#entity_chine_tap").val(); 	 //属性中文
+    var entityTypeTap	  = $("#entity_type_tap").val();   	 		 //类型
+    var entityDefaultTap = $("#entity_default_tap").val(); 	 //默认值
+    var entityFormTapRadiot	  = $("input[name='entity_form-tap-radiot']:checked").val();;   	 		 //是否允许为空
+    var entityFormKeyRadiot	  = $("input[name='entity_form-key-radiot']:checked").val();;   	 		 //是否为主键
+
+
+    var fields = entityAttributeTap+',fh,' + entityChineTap + ',fh,' + entityTypeTap+ ',fh,' + entityDefaultTap+ ',fh,' + entityFormTapRadiot+ ',fh,' + entityFormKeyRadiot ;
+    //獲取编辑的Id
+    var entityIndexTap = $("#entityIndexTap").val();
+    if(entityIndexTap == ''){
+        console.log("添加");
+        arrayFieldEntityTap(fields);
+    }else{
+        console.log("修改");
+        editArrayFieldentityTap(fields,entityIndexTap);  //修改初始化内容
+    }
+
+
+    $("#entity_dialog-add_tap").css("display","none");
+
+}
+
+
+function arrayFieldEntityTap(value){
+    $("#entityIndexTap").val(''); //判断是新增还是
+    arFieldEntityTap[indexEntity] = value;
+    console.log(arFieldEntityTap.length+"entity開始")
+    appendCEntityTap(value);
+}
+
+
+
+//追加属性列表
+function appendCEntityTap(value){
+    var fieldarray = value.split(',fh,');
+    $("#table_entity_fields").append(
+        '<tr>'+
+        '<td class="center" style="width: 200px">'+fieldarray[0]+'<input type="hidden" name="mysql0'+index+'" value="'+fieldarray[0]+'"></td>'+
+        '<td class="center">'+fieldarray[1]+'<input type="hidden" name="mysql1'+indexEntity+'" value="'+fieldarray[1]+'"></td>'+
+        '<td class="center">'+fieldarray[2]+'<input type="hidden" name="mysql2'+indexEntity+'" value="'+fieldarray[2]+'"></td>'+
+        '<td class="center">'+fieldarray[3]+'<input type="hidden" name="mysql3'+indexEntity+'" value="'+fieldarray[3]+'"></td>'+
+        '<td class="center">'+fieldarray[4]+'<input type="hidden" name="mysql4'+indexEntity+'" value="'+fieldarray[4]+'"></td>'+
+        '<td class="center">'+fieldarray[5]+'<input type="hidden" name="mysql5'+indexEntity+'" value="'+fieldarray[5]+'"></td>'+
+        '<td class="center">'+
+        '<input type="hidden" name="mysql'+indexEntity+'" value="'+value+'">'+
+        '<a class="btn btn-mini btn-info" title="编辑" onclick="editFieldMysqlTap(\''+value+'\',\''+indexEntity+'\')"><i class="icon-edit"></i></a>&nbsp;'+
+        '<a class="btn btn-mini btn-danger" title="删除" onclick="removeFieldEntityTap(\''+indexEntity+'\')"><i class="icon-trash"></i></a>'+
+        '</td>'+
+        '</tr>'
+    );
+
+    indexEntity++;
+    console.log('编码='+indexEntity);
+    $("#mysqlIndexTap").val(indexEntity);
+}
+
+
+//删除数组添加元素并重组列表
+function removeFieldEntityTap(value){
+    $("#table_entity_fields").html('');
+    arFieldEntityTap.splice(value,1);
+    indexEntity = 0;  //初始化为0
+    for(var i=0;i<arFieldEntityTap.length;i++){
+        appendCMysqlTap(arFieldEntityTap[i]);
+    }
+}
+
+
+/*------------------------------------生成Entity代码结束-------------------------------------*/
+
+
 
 //生成
 function saveAll(){

@@ -4,42 +4,52 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import org.kjtc.entity.${objectName};
-import org.kjtc.mapper.${objectName}Mapper;
+import org.kjtc.entity.${tabletop?cap_first}Entity;
+import org.kjtc.mapper.${tabletop?cap_first}Mapper;
 
 
 /**
-* 类名称：${objectName}Service
-* 创建人：
-* 创建时间：${nowDate?string("yyyy-MM-dd")}
-* 描   述:
+* 类名称：${tabletop}Service
+* 创建人：${controllerCreator}
+* 创建时间：${nowDate?string("yyyy-MM-dd HH:mm:ss")}
+* 描   述: ${objectRemark}
 */
 
-@Service("${objectNameLower}Service")
-public class  ${objectName}Service {
+@Service("${tabletop?uncap_first}Service")
+public class  ${tabletop?cap_first}Service {
 
 	@Autowired
-	private ${objectName}Mapper ${objectNameLower}Mapper;
+	private ${tabletop?cap_first}Mapper ${tabletop?uncap_first}Mapper;
 
 	/**
 	* 查询列表
-	* @param ${objectNameLower}
+	* @param ${tabletop?uncap_first}
 	* @return
 	*/
-	public List<${objectName}> get${objectName}List(${objectName} ${objectNameLower}) {
-		return ${objectNameLower}Mapper.get${objectName}List(${objectNameLower});
-		}
 
+<#if controllerSelect != '' >
 
-	public int save${objectName}(${objectName} ${objectNameLower}) {
-		return ${objectNameLower}Mapper.save${objectName}(${objectNameLower});
+	public List<${tabletop?cap_first}Entity> get${tabletop?cap_first}List(${tabletop?cap_first}Entity ${tabletop?uncap_first}Entity) {
+		return ${tabletop?uncap_first}Mapper.get${tabletop?cap_first}List(${tabletop?uncap_first}Entity);
 		}
-
-	public int update${objectName}(${objectName} ${objectNameLower}) {
-		return ${objectNameLower}Mapper.update${objectName}(${objectNameLower});
+</#if>
+<#if controllerAdd != '' >
+	public int save${tabletop?cap_first}(${tabletop?cap_first}Entity ${tabletop?uncap_first}Entity) {
+		return ${tabletop?uncap_first}Mapper.save${tabletop?cap_first}(${tabletop?uncap_first}Entity);
 		}
-
-	public int del${objectName}(${objectName} ${objectNameLower}) {
-	return ${objectNameLower}Mapper.del${objectName}(${objectNameLower});
+</#if>
+<#if controllerUpadte != '' >
+	public int update${tabletop?cap_first}(${tabletop?cap_first}Entity ${tabletop?uncap_first}Entity) {
+		return ${tabletop?uncap_first}Mapper.update${tabletop?cap_first}(${tabletop?uncap_first}Entity);
 		}
+</#if>
+<#if controllerDelete != '' >
+	public int del${tabletop?cap_first}(${tabletop?cap_first}Entity ${tabletop?uncap_first}Entity) {
+	return ${tabletop?uncap_first}Mapper.del${tabletop?cap_first}(${tabletop?uncap_first}Entity);
+		}
+</#if>
+<#if controllerImport != '' >
+</#if>
+<#if controllerExport != '' >
+</#if>
 }

@@ -5,11 +5,11 @@ package org.kjtc.entity;
 
 /**
 * ${objectRemark}实体
-* 类名 ${tabletop}
+* 类名 ${tabletop?cap_first}
 *
 */
 
-public class ${tabletop}Entity {
+public class ${tabletop?cap_first}Entity {
 
 <#list mysqlList as var>
 	<#assign foo="${var[0]}">

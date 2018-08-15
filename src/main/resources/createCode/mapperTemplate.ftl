@@ -1,33 +1,42 @@
 package org.kjtc.mapper;
 
-import org.kjtc.entity.${objectName};
+import org.kjtc.entity.${tabletop?cap_first}Entity;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
 /**
-* 类名称：${objectName}Mapper
-* 创建人：
-* 创建时间：${nowDate?string("yyyy-MM-dd")}
-* 描   述: {objectRemark}
+* 类名称：${tabletop}Mapper 
+* 创建人：${controllerCreator}
+* 创建时间：${nowDate?string("yyyy-MM-dd HH:mm:ss")}
+* 描   述: ${objectRemark}
 */
 
 @Mapper
-public interface ${objectName}Mapper {
+public interface ${tabletop?cap_first}Mapper {
 
 
-@SelectProvider(type = ${objectName}Provider.class, method = "get${objectName}List")
-List<${objectName}> get${objectName}List(${objectName} ${objectNameLower});
+<#if controllerSelect != '' >
+    @SelectProvider(type = ${tabletop?cap_first}Provider.class, method = "get${tabletop?cap_first}List")
+    List<${tabletop?cap_first}Entity> get${tabletop?cap_first}List(${tabletop?cap_first}Entity ${tabletop?uncap_first}Entity);
+</#if>
+<#if controllerAdd != '' >
 
+    @InsertProvider(type = ${tabletop?cap_first}Provider.class, method = "save${tabletop?cap_first}")
+    int save${tabletop?cap_first}(${tabletop?cap_first}Entity ${tabletop?uncap_first}Entity);
+</#if>
+<#if controllerUpadte != '' >
 
-    @InsertProvider(type = ${objectName}Provider.class, method = "save${objectName}")
-    int save${objectName}(${objectName} ${objectNameLower});
+    @UpdateProvider(type = ${tabletop?cap_first}Provider.class, method = "update${tabletop?cap_first}")
+    int update${tabletop?cap_first}(${tabletop?cap_first}Entity ${tabletop?uncap_first}Entity);
 
-
-    @UpdateProvider(type = ${objectName}Provider.class, method = "update${objectName}")
-    int update${objectName}(${objectName} ${objectNameLower});
-
-
-    @DeleteProvider(type = ${objectName}Provider.class, method = "del${objectName}")
-    int del${objectName}(${objectName} ${objectNameLower});
+</#if>
+<#if controllerDelete != '' >
+    @DeleteProvider(type = ${tabletop?cap_first}Provider.class, method = "del${tabletop?cap_first}")
+    int del${tabletop?cap_first}(${tabletop?cap_first}Entity ${tabletop?uncap_first}Entity);
+</#if>
+<#if controllerImport != '' >
+</#if>
+<#if controllerExport != '' >
+</#if>
     }

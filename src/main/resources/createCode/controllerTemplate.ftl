@@ -12,12 +12,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.kjtc.entity.${tabletop}Entity;
-import org.kjtc.service.${tabletop}Service;
+import org.kjtc.entity.${tabletop?cap_first}Entity;
+import org.kjtc.service.${tabletop?cap_first}Service;
 
 
 /**
-* 类名称：${tabletop}Controller
+* 类名称：${tabletop?cap_first}Controller
 * 创建人：${controllerCreator}
 * 创建时间：${nowDate?string("yyyy-MM-dd HH:mm:ss")}
 * 描   述: ${objectRemark}
@@ -49,10 +49,10 @@ public class ${tabletop?cap_first}Controller {
     @RequestMapping("/get${tabletop?cap_first}List")
     @ResponseBody
     public Object get${tabletop?cap_first}List(
-    ${tabletop?cap_first} ${tabletop?uncap_first}, @RequestParam(value="pageNum", defaultValue="1") Integer pageNum,
+    ${tabletop?cap_first}Entity ${tabletop?uncap_first}Entity, @RequestParam(value="pageNum", defaultValue="1") Integer pageNum,
     @RequestParam(value="pageSize", defaultValue="10") Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<${tabletop?cap_first}> ${tabletop?uncap_first}List = ${tabletop?uncap_first}Service.get${tabletop?cap_first}List(${tabletop?uncap_first});
+        List<${tabletop?cap_first}Entity> ${tabletop?uncap_first}List = ${tabletop?uncap_first}Service.get${tabletop?cap_first}List(${tabletop?uncap_first}Entity);
         PageInfo pageInfo = new PageInfo(${tabletop?uncap_first}List);
 
         return pageInfo;
@@ -67,11 +67,11 @@ public class ${tabletop?cap_first}Controller {
     */
     @PostMapping("/save${tabletop?cap_first}")
     @ResponseBody
-    public Object save${tabletop?cap_first}(${tabletop?cap_first} ${tabletop?uncap_first}) {
+    public Object save${tabletop?cap_first}(${tabletop?cap_first}Entity ${tabletop?uncap_first}Entity) {
 
     Map<String, Object> map = new HashMap<String, Object>();
     try {
-        int count = ${tabletop?uncap_first}Service.save${tabletop?cap_first}(${tabletop?uncap_first});
+        int count = ${tabletop?uncap_first}Service.save${tabletop?cap_first}(${tabletop?uncap_first}Entity);
         if (count > 0) {
             map.put("result", "Success");
         } else {
@@ -103,7 +103,7 @@ public class ${tabletop?cap_first}Controller {
     */
     @PostMapping("/update${tabletop?cap_first}")
     @ResponseBody
-    public Object updateOperatorInfo(${tabletop?cap_first} ${tabletop?uncap_first}) {
+    public Object updateOperatorInfo(${tabletop?cap_first}Entity ${tabletop?uncap_first}Entity) {
 
     Map<String, Object> map = new HashMap<String, Object>();
 
@@ -114,7 +114,7 @@ public class ${tabletop?cap_first}Controller {
     }
     */
     try {
-        int count = ${tabletop?uncap_first}Service.update${tabletop?cap_first}(${tabletop?uncap_first});
+        int count = ${tabletop?uncap_first}Service.update${tabletop?cap_first}(${tabletop?uncap_first}Entity);
         if (count > 0) {
             map.put("result", "Success");
         } else {
@@ -144,7 +144,7 @@ public class ${tabletop?cap_first}Controller {
     */
     @RequestMapping(value = "/del${tabletop?cap_first}")
     @ResponseBody
-    public Object delOperatorInfo(${tabletop?cap_first} ${tabletop?uncap_first}) {
+    public Object delOperatorInfo(${tabletop?cap_first}Entity ${tabletop?uncap_first}Entity) {
 
     Map<String, Object> map = new HashMap<String, Object>();
     /* 需要单独实现ID判定
@@ -154,7 +154,7 @@ public class ${tabletop?cap_first}Controller {
     }
     */
     try {
-        int count = ${tabletop?uncap_first}Service.del${tabletop?cap_first}(${tabletop?uncap_first});
+        int count = ${tabletop?uncap_first}Service.del${tabletop?cap_first}(${tabletop?uncap_first}Entity);
         if (count > 0) {
             map.put("result", "Success");
         } else {
