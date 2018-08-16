@@ -1,7 +1,7 @@
-var ${objectName}List = [];
+var ${tabletop}List = [];
 var operatorInfoData = {};
 var bootstrapTableOption = {
-    url: 'get${objectName}List',
+    url: 'get${tabletop}List',
     queryParams: function(params) {
         return {
             pageNum: params.pageNumber,// 每页要显示的数据条数
@@ -14,7 +14,7 @@ var bootstrapTableOption = {
     columns: [
         {checkbox: true}, // 显示一个勾选框
         {title: '序号', align: 'center', formatter: 'increases'},
-        <#list fieldList as var>
+        <#list mysqlList as var>
             <#assign foo="${var[0]}">
             <#if var[1]=='Integer' >
                 <#assign stradd=1>
@@ -39,21 +39,21 @@ $(document).ready(function() {
 	//$('title', parent.document).html($('title').text());
     //$("#DiagnosisHistoryIDDiv").hide();
     //getChargingStationName("#chargingStationID");  初始化查询条件
-    setBootstrapTable('#operator${objectName}', bootstrapTableOption);  //初始化页面table
+    setBootstrapTable('#operator${tabletop}', bootstrapTableOption);  //初始化页面table
 });
 
 function getChargingStationName(id) {
     changeSelectpicker(id, 'destroy');
     $(id).empty();
-    if (${objectName}List && ${objectName}List.length > 0) {
-        setChargingStationName(id, ${objectName}List);
+    if (${tabletop}List && ${tabletop}List.length > 0) {
+        setChargingStationName(id, ${tabletop}List);
     } else {
         $ajax("getChargingStationName", setChargingStationName, '', id, "get");
     }
 };
 function setChargingStationName(id, data) {
     var length = data.length;
-    ${objectName}List = data;
+    ${tabletop}List = data;
     for (var i = 0; i < length; i++) {
         $(id).append("<option value ='" + data[i].chargingStationID + "'>" + data[i].chargingStationName + "</option>");
     }

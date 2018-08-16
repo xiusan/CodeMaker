@@ -120,14 +120,27 @@
                                 <label style="float:left;padding-left: 20px;"><input name="mysql_form-tap-radiot" id="mysql_form-tap-radio1"   type="radio" value="是" ></input><span class="lbl" >是</span></label>
                                 <label style="float:left;padding-left: 20px;"><input name="mysql_form-tap-radiot" id="mysql_form-tap-radio2"   type="radio" value="否" ></input><span class="lbl" >否</span></label>
                             </td>
-                        </tr>
-                        <tr>
+
                             <td style="padding-left: 16px;text-align: right;">是否为主键：</td>
                             <td>
                                 <label style="float:left;padding-left: 20px;"><input name="mysql_form-key-radiot" id="mysql_form-key-radio1"   type="radio" value="是" ></input><span class="lbl" >是</span></label>
                                 <label style="float:left;padding-left: 20px;"><input name="mysql_form-key-radiot" id="mysql_form-key-radio2"   type="radio" value="否" ></input><span class="lbl" >否</span></label>
                             </td>
+
+                            <td style="padding-left: 16px;text-align: right;">是否为查询：</td>
+                            <td>
+                                <label style="float:left;padding-left: 20px;"><input name="mysql_form-sel-radiot" id="mysql_form-sel-radio1"   type="radio" value="是" ></input><span class="lbl" >是</span></label>
+                                <label style="float:left;padding-left: 20px;"><input name="mysql_form-sel-radiot" id="mysql_form-sel-radio2"   type="radio" value="否" ></input><span class="lbl" >否</span></label>
+                            </td>
                         </tr>
+
+                        <tr>
+                            <td style="padding-left: 16px;text-align: right;">查询类型：</td>
+                            <td>
+                            <input name="mysql_default_sel" id="mysql_default_sel" type="text" value="" placeholder="查询类型" title="查询类型"/>
+                            </td>
+                        </tr>
+
                         <tr>
                             <td>
                                 <div class="commitbox_cen">
@@ -262,6 +275,8 @@
                     <th class="center">默认值</th>
                     <th class="center">是否允许为空</th>
                     <th class="center">是否为主键</th>
+                    <th class="center">是否为查询</th>
+                    <th class="center">查询类型</th>
                     <th class="center" style="width:69px;">操作</th>
                 </tr>
                 </thead>
@@ -369,14 +384,16 @@
             }
         });
         //mysql tap页
-        var fieldsMsql ='id'+',fh,'+'id'+',fh,'+'String'+',fh,'+'主键'+',fh,'+'否'+',fh,'+'是';
-        var fieldsMsql1 ='name'+',fh,'+'名字'+',fh,'+'String'+',fh,'+'无'+',fh,'+'是'+',fh,'+'否';
-        var fieldsMsql2 ='age'+',fh,'+'年龄'+',fh,'+'Integer'+',fh,'+'无'+',fh,'+'是'+',fh,'+'否';
-        var fieldsMsql3 ='creattime'+',fh,'+'时间'+',fh,'+'DATE'+',fh,'+'无'+',fh,'+'否'+',fh,'+'否';
+        var fieldsMsql ='id'+',fh,'+'id'+',fh,'+'String'+',fh,'+'主键'+',fh,'+'否'+',fh,'+'是'+',fh,'+'是'+',fh,'+'=';
+        var fieldsMsql1 ='name'+',fh,'+'名字'+',fh,'+'String'+',fh,'+'无'+',fh,'+'是'+',fh,'+'否'+',fh,'+'是'+',fh,'+'=';
+        var fieldsMsql2 ='age'+',fh,'+'年龄'+',fh,'+'Integer'+',fh,'+'无'+',fh,'+'是'+',fh,'+'否'+',fh,'+'是'+',fh,'+'=';
+        var fieldsMsql3 ='creattime'+',fh,'+'时间'+',fh,'+'DATE'+',fh,'+'无'+',fh,'+'否'+',fh,'+'否'+',fh,'+'否'+',fh,'+'=';
+        var fieldsMsql4 ='updattime'+',fh,'+'时间'+',fh,'+'DATE'+',fh,'+'无'+',fh,'+'否'+',fh,'+'否'+',fh,'+'否'+',fh,'+'=';
         arrayFieldMysqlTap(fieldsMsql);
         arrayFieldMysqlTap(fieldsMsql1);
         arrayFieldMysqlTap(fieldsMsql2);
         arrayFieldMysqlTap(fieldsMsql3);
+        arrayFieldMysqlTap(fieldsMsql4);
     });
 </script>
 

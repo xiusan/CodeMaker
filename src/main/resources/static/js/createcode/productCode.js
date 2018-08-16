@@ -7,6 +7,24 @@
 function cancel_pl(idVame){
     $("#"+idVame).css("display","none");
 }
+//是否包含某个字符串
+function  strisN(str) {
+    var bo = false;
+    if(str == 'String' || str == 'DATE' || str == 'Integer'){
+        bo = true;
+    }
+    return bo;
+
+}
+//查询是否
+function  selectIs(str) {
+    var bo = false;
+    if(str == '=' || str == 'like' || str == 'DATE'){
+        bo = true;
+    }
+    return bo;
+
+}
 /*------------------------------------公用结束----------------------------------------------*/
 /*------------------------------------概要开始----------------------------------------------*/
 	var arField = new Array();
@@ -138,6 +156,8 @@ function appendCMysqlTap(value){
         '<td class="center">'+fieldarray[3]+'<input type="hidden" name="mysql3'+indexMysql+'" value="'+fieldarray[3]+'"></td>'+
         '<td class="center">'+fieldarray[4]+'<input type="hidden" name="mysql4'+indexMysql+'" value="'+fieldarray[4]+'"></td>'+
         '<td class="center">'+fieldarray[5]+'<input type="hidden" name="mysql5'+indexMysql+'" value="'+fieldarray[5]+'"></td>'+
+        '<td class="center">'+fieldarray[6]+'<input type="hidden" name="mysql5'+indexMysql+'" value="'+fieldarray[6]+'"></td>'+
+        '<td class="center">'+fieldarray[7]+'<input type="hidden" name="mysql5'+indexMysql+'" value="'+fieldarray[7]+'"></td>'+
         '<td class="center">'+
         '<input type="hidden" name="mysql'+indexMysql+'" value="'+value+'">'+
         '<a class="btn btn-mini btn-info" title="编辑" onclick="editFieldMysqlTap(\''+value+'\',\''+indexMysql+'\')"><i class="icon-edit"></i></a>&nbsp;'+
@@ -147,7 +167,7 @@ function appendCMysqlTap(value){
     );
 
     indexMysql++;
-    console.log('编码='+indexMysql);
+    console.log('mysql编码='+indexMysql);
     $("#mysqlIndexTap").val(indexMysql);
 }
 
@@ -181,6 +201,15 @@ function editFieldMysqlTap(value,msgIndex){
         $("#mysql_form-key-radio2").attr("checked",true);
         $("#mysql_form-key-radio1").removeAttr("checked");
     }
+    if(efieldarray[6] == '是'){
+        $("#mysql_form-sel-radio1").attr("checked",true);
+
+        $("#mysql_form-sel-radio2").removeAttr("checked");
+    }else{
+        $("#mysql_form-sel-radio2").attr("checked",true);
+        $("#mysql_form-sel-radio1").removeAttr("checked");
+    }
+    $("#mysql_default_sel").val(efieldarray[7]); 	 //查询类型
 }
 //删除数组添加元素并重组列表
 function removeFieldTap(value){
@@ -198,11 +227,20 @@ function saveDMysqltap(){
     var mysqlChineTap = $("#mysql_chine_tap").val(); 	 //属性中文
 	var mysqlTypeTap	  = $("#mysql_type_tap").val();   	 		 //类型
     var mysqlDefaultTap = $("#mysql_default_tap").val(); 	 //默认值
-    var mysqlFormTapRadiot	  = $("input[name='mysql_form-tap-radiot']:checked").val();;   	 		 //是否允许为空
-    var mysqlFormKeyRadiot	  = $("input[name='mysql_form-key-radiot']:checked").val();;   	 		 //是否为主键
+    var mysqlFormTapRadiot	  = $("input[name='mysql_form-tap-radiot']:checked").val();  	 		 //是否允许为空
+    var mysqlFormKeyRadiot	  = $("input[name='mysql_form-key-radiot']:checked").val();  	 		 //是否为主键
+    var mysqlFormSelRadiot	  = $("input[name='mysql_form-sel-radiot']:checked").val(); 	 		 //是否为查询
+    var mysqlDefaultSel = $("#mysql_default_sel").val();  	 		 //查询类型
+   if(!strisN(mysqlTypeTap)){
+       alert("类型只能为String,DATE,Integer");
+       return;
+   }
 
-
-    var fields = mysqlAttributeTap+',fh,' + mysqlChineTap + ',fh,' + mysqlTypeTap+ ',fh,' + mysqlDefaultTap+ ',fh,' + mysqlFormTapRadiot+ ',fh,' + mysqlFormKeyRadiot ;
+    if(!selectIs(mysqlDefaultSel)){
+        alert("类型只能为=,DATE,like");
+        return;
+    }
+    var fields = mysqlAttributeTap+',fh,' + mysqlChineTap + ',fh,' + mysqlTypeTap+ ',fh,' + mysqlDefaultTap+ ',fh,' + mysqlFormTapRadiot+ ',fh,' + mysqlFormKeyRadiot+',fh,'+mysqlFormSelRadiot+',fh,'+mysqlDefaultSel;
     //獲取编辑的Id
     var mysqlIndexTap = $("#mysqlIndexTap").val();
     if(mysqlIndexTap == ''){
@@ -222,6 +260,7 @@ function saveDMysqltap(){
 function editArrayFieldMysqlTap(value,mysqlIndexTap){
     arFieldMysqlTap[mysqlIndexTap] = value;
     $("#table_mysql_fields").html('');
+    indexMysql = 0;
     for(var i=0;i<arFieldMysqlTap.length;i++){
         appendCMysqlTap(arFieldMysqlTap[i]);
     }

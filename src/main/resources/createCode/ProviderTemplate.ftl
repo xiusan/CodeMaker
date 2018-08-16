@@ -27,10 +27,24 @@ public class ${tabletop?cap_first}Provider {
 					<#else >
                     	sql.append("  ${foo}, " );
 					</#if>
-
-
 				</#list>
 				sql.append("  FROM ${tableName}  ");//表名
+				sql.append("   WHERE 1 = 1          ");
+				<#list mysqlList as var>
+					<#if var[6] == "是">
+						<#if var[7] == "=">
+                        sql.append("   AND    ${var[0]}   ${var[7]}   '${var[0]}'  ");//查询${var[1]}
+						</#if>
+						<#if var[7] == "like">
+                        sql.append("   AND    ${var[0]}   ${var[7]}   '%${var[0]}%'  ");//查询${var[1]}
+						</#if>
+						<#if var[7] == "DATE">
+                        sql.append("   AND    ${var[0]}   ${var[7]}   ${var[0]}  ");//查询${var[1]}
+						</#if>
+                    </#if>
+
+				</#list>
+
 			return sql.toString();
 
 		}

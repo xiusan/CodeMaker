@@ -6,7 +6,7 @@ function showSave(index) {
     if (index != undefined) {
         saveFlag = "UPDATE";
         $(".modal-title").text("${objectRemark}修改");
-    <#list fieldList as var>
+    <#list mysqlList as var>
         <#assign foo="${var[0]}">
         <#if var[1]=='Integer' >
             <#assign stradd=1>
@@ -41,9 +41,9 @@ function save() {
     if (checkForm("#saveForm")) {
         if (saveFlag == "INSERT") {
             //获取到i
-            $ajax('save${objectName}', saveEquipmentCallback, ($("#saveForm").serialize() || "").replace(/save/g, ""));
+            $ajax('save${tabletop}', saveEquipmentCallback, ($("#saveForm").serialize() || "").replace(/save/g, ""));
         } else if (saveFlag == "UPDATE") {
-            $ajax('update${objectName}', saveEquipmentCallback, ($("#saveForm").serialize() || "").replace(/save/g, ""));
+            $ajax('update${tabletop}', saveEquipmentCallback, ($("#saveForm").serialize() || "").replace(/save/g, ""));
         }
     }
 }
@@ -58,7 +58,7 @@ function saveEquipmentCallback(data) {
         message += "Update.";
     }
     if (result == "Success"){
-        $('#operator${objectName}').bootstrapTable('refresh');
+        $('#operator${tabletop}').bootstrapTable('refresh');
         closeSave();
         showSuccess(messageContent[message + "Success"]);
     } else if (result == "ChargingStationIDEmpty") {
@@ -83,7 +83,7 @@ function delConfirm(index) {
         showWarn(messageContent["Delete.Confirm"], delone, operatorInfoData[index]);
     }
     else {
-        var selectData = $('#operator${objectName}').bootstrapTable('getSelections');
+        var selectData = $('#operator${tabletop}').bootstrapTable('getSelections');
         if (selectData.length == 0) {
             showInfo(messageContent["Delete.Select"]);
         } else {
@@ -101,20 +101,20 @@ function del(data) {
     for (var i in data) {
         operatorInfoList.push(data[i].operatorId);
     }
-    $ajax('del${objectName}', delEquipmentCallback, {id: operatorInfoList.join(',')});
+    $ajax('del${tabletop}', delEquipmentCallback, {id: operatorInfoList.join(',')});
 }
 
 function delone(data) {
     var operatorInfoList = [];
         operatorInfoList.push(data.operatorId);
 
-    $ajax('del${objectName}', delEquipmentCallback, {id: operatorInfoList.join(',')});
+    $ajax('del${tabletop}', delEquipmentCallback, {id: operatorInfoList.join(',')});
 }
 
 function delEquipmentCallback(data) {
     var result = data && data.result;
     if (result == "Success"){
-        $('#operator${objectName}').bootstrapTable('refresh');
+        $('#operator${tabletop}').bootstrapTable('refresh');
         showSuccess(messageContent["Delete.Success"]);
     } else if (result == "EquipmentIDEmpty") {
         showError(messageContent["Delete.Failed"] + result);

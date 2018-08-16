@@ -5,7 +5,7 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-    <title>${objectRemark}</title>
+    <title>功能备注</title>
 
     <link href="static/css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
     <link href="static/css/bootstrap/bootstrap-table.min.css" rel="stylesheet"/>
@@ -24,24 +24,24 @@
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>${objectRemark}</h5>
+                    <h5>功能备注</h5>
                 </div>
                 <div class="ibox-content">
                     <!-- 查询工具栏 -->
                     <div class="form-inline">
                         <div  class="form-group" >
-                            <label for="id">${var[1]}:</label>
-                        <#list mysqlList as var>
-                                        <#assign foo="${var[0]}">
-                                        <#assign stradd=1>
-                                        <#assign straddad=1>
-                                        <#assign straddac=1>
-                            <#if var[6] == "是">
-                                <input id="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>" name="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>" class="selectpicker" data-live-search="true"  >
-                                </input>
-                            </#if>
-
-                        </#list>
+                            <label for="id">id</label>
+                            <input id="id" name="id"  data-live-search="true"   >
+                            </input>
+                            <label for="id">名字:</label>
+                            <input id="name" name="name"  data-live-search="true"   >
+                            </input>
+                            <input id="age" name="age"  data-live-search="true" title="年龄" >
+                            </input>
+                            <input id="creattime" name="creattime"  data-live-search="true" title="时间" >
+                            </input>
+                            <input id="12" name="12"  data-live-search="true" title="问问" >
+                            </input>
 
                         </div>
                         <button type="button" class="btn btn-primary btn-sm" onclick="search()" >
@@ -61,7 +61,7 @@
                     <button type="button" class="btn btn-primary btn-sm" onclick="delConfirm()">
                         <img src="static/images/delete_btn.png" height="16" width="16"/> 删除
                     </button>
-                    <table id="operator${objectName}"></table>
+                    <table id="operator项目名"></table>
                     <!--  添加框 -->
 
                     <div class="modal inmodal" id="save" tabindex="-1" data-backdrop="static" role="dialog" aria-hidden="true">
@@ -77,20 +77,46 @@
                                 <div class="modal-footer" style="text-align: left">
                                     <form id="saveForm">
 
-                                    <#list mysqlList as var>
                                         <div class="col-sm-6">
                                             <div class="form-group">
                                                 <div class="fg-line">
-                                                    <#assign foo="${var[0]}">
-                                                    <#assign stradd=1>
-                                                    <#assign straddad=1>
-                                                    <#assign straddac=1>
-                                                    <label for="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign stradd=stradd+1><#if stradd==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>">${var[2]}</label>
-                                                    <input  id="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>" name="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddad=straddad+1><#if straddad==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>" type="text" required="" class="form-control" minlength="1" maxlength="100" placeholder="${var[2]}" title="${var[2]}"/>
+                                                    <label for="id">String</label>
+                                                    <input  id="id" name="id" type="text" required="" class="form-control" minlength="1" maxlength="100" placeholder="String" title="String"/>
                                                 </div>
                                             </div>
                                         </div>
-                                    </#list>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div class="fg-line">
+                                                    <label for="name">String</label>
+                                                    <input  id="name" name="name" type="text" required="" class="form-control" minlength="1" maxlength="100" placeholder="String" title="String"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div class="fg-line">
+                                                    <label for="age">Integer</label>
+                                                    <input  id="age" name="age" type="text" required="" class="form-control" minlength="1" maxlength="100" placeholder="Integer" title="Integer"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div class="fg-line">
+                                                    <label for="creattime">DATE</label>
+                                                    <input  id="creattime" name="creattime" type="text" required="" class="form-control" minlength="1" maxlength="100" placeholder="DATE" title="DATE"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <div class="fg-line">
+                                                    <label for="12">String</label>
+                                                    <input  id="12" name="12" type="text" required="" class="form-control" minlength="1" maxlength="100" placeholder="String" title="String"/>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                         <div class="col-sm-12" style="text-align: right">
                                             <button type="button" class="btn" onclick="closeSave()">
@@ -133,8 +159,8 @@
 <script src="static/js/common.js"></script>
 <script src="static/js/messageContent.js"></script>
 
-<script src="static/js/${tabletop}/${tabletop}.js"></script>
-<script src="static/js/${tabletop}/${tabletop}Operate.js"></script>
+<script src="static/js/test/test.js"></script>
+<script src="static/js/test/testOperate.js"></script>
 
 
 </body>
