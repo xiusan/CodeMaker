@@ -131,10 +131,12 @@ public class CreateCodeservice {
         }
 		 /*生成HTML*/
         if(strings[1].equals("htmlTemplate.ftl")){
+            Freemarker.printFile("htmlTemplate.ftl", root, "html/"+ objectName +  ".html", filePath, ftlPath);
 
         }
 		/*生成index.xml  的菜单栏*/
         if(strings[1].equals("IndexTemplate.ftl")){
+            Freemarker.printFile("IndexTemplate.ftl", root, "html/"+ objectName +  "index.html", filePath, ftlPath);
 
         }
 		/*生成js*/
