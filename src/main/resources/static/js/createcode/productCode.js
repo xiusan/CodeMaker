@@ -307,23 +307,23 @@ function appendCEntityTap(value){
     var fieldarray = value.split(',fh,');
     $("#table_entity_fields").append(
         '<tr>'+
-        '<td class="center" style="width: 200px">'+fieldarray[0]+'<input type="hidden" name="mysql0'+index+'" value="'+fieldarray[0]+'"></td>'+
-        '<td class="center">'+fieldarray[1]+'<input type="hidden" name="mysql1'+indexEntity+'" value="'+fieldarray[1]+'"></td>'+
-        '<td class="center">'+fieldarray[2]+'<input type="hidden" name="mysql2'+indexEntity+'" value="'+fieldarray[2]+'"></td>'+
-        '<td class="center">'+fieldarray[3]+'<input type="hidden" name="mysql3'+indexEntity+'" value="'+fieldarray[3]+'"></td>'+
-        '<td class="center">'+fieldarray[4]+'<input type="hidden" name="mysql4'+indexEntity+'" value="'+fieldarray[4]+'"></td>'+
-        '<td class="center">'+fieldarray[5]+'<input type="hidden" name="mysql5'+indexEntity+'" value="'+fieldarray[5]+'"></td>'+
+        '<td class="center" style="width: 200px">'+fieldarray[0]+'<input type="hidden" name="entity0'+index+'" value="'+fieldarray[0]+'"></td>'+
+        '<td class="center">'+fieldarray[1]+'<input type="hidden" name="entity1'+indexEntity+'" value="'+fieldarray[1]+'"></td>'+
+        '<td class="center">'+fieldarray[2]+'<input type="hidden" name="entity2'+indexEntity+'" value="'+fieldarray[2]+'"></td>'+
+        '<td class="center">'+fieldarray[3]+'<input type="hidden" name="entity3'+indexEntity+'" value="'+fieldarray[3]+'"></td>'+
+        '<td class="center">'+fieldarray[4]+'<input type="hidden" name="entity4'+indexEntity+'" value="'+fieldarray[4]+'"></td>'+
+        '<td class="center">'+fieldarray[5]+'<input type="hidden" name="entity5'+indexEntity+'" value="'+fieldarray[5]+'"></td>'+
         '<td class="center">'+
-        '<input type="hidden" name="mysql'+indexEntity+'" value="'+value+'">'+
-        '<a class="btn btn-mini btn-info" title="编辑" onclick="editFieldMysqlTap(\''+value+'\',\''+indexEntity+'\')"><i class="icon-edit"></i></a>&nbsp;'+
+        '<input type="hidden" name="entity'+indexEntity+'" value="'+value+'">'+
+        '<a class="btn btn-mini btn-info" title="编辑" onclick="editFieldEntityTap(\''+value+'\',\''+indexEntity+'\')"><i class="icon-edit"></i></a>&nbsp;'+
         '<a class="btn btn-mini btn-danger" title="删除" onclick="removeFieldEntityTap(\''+indexEntity+'\')"><i class="icon-trash"></i></a>'+
         '</td>'+
         '</tr>'
     );
 
     indexEntity++;
-    console.log('编码='+indexEntity);
-    $("#mysqlIndexTap").val(indexEntity);
+    console.log('实体编码='+indexEntity);
+    $("#entityIndexTap").val(indexEntity);
 }
 
 
@@ -334,6 +334,22 @@ function removeFieldEntityTap(value){
     indexEntity = 0;  //初始化为0
     for(var i=0;i<arFieldEntityTap.length;i++){
         appendCMysqlTap(arFieldEntityTap[i]);
+    }
+}
+
+function editFieldEntityTap(value,msgIndex){
+    $("#entity_dialog-add").css("display","block");
+    $("#entityIndexTap").val(msgIndex);//添加mysql隐藏的id
+    var efieldarray = value.split(',fh,');
+    $("#mysql_dbz").val(efieldarray[1]);
+    $("#mysql_ddefault").val(efieldarray[2]);
+    if(efieldarray[0] == '是'){
+        $("#entity_form-field-radio1").attr("checked",true);
+
+        $("#entity_form-field-radio2").removeAttr("checked");
+    }else{
+        $("#entity_form-field-radio2").attr("checked",true);
+        $("#entity_form-field-radio1").removeAttr("checked");
     }
 }
 
