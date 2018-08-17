@@ -1,4 +1,9 @@
+<#if packageName != ''>
+package ${packageName}.controller;
+<#else >
 package org.kjtc.controller;
+</#if>
+
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -12,8 +17,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+<#if packageName != ''>
+import ${packageName}.entity.${tabletop?cap_first}Entity;
+import ${packageName}.service.${tabletop?cap_first}Service;
+<#else >
 import org.kjtc.entity.${tabletop?cap_first}Entity;
 import org.kjtc.service.${tabletop?cap_first}Service;
+</#if>
+
 
 
 /**

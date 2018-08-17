@@ -1,11 +1,21 @@
+<#if packageName != ''>
+package ${packageName}.service;
+<#else >
 package org.kjtc.service;
+</#if>
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+<#if packageName != ''>
+import ${packageName}.entity.${tabletop?cap_first}Entity;
+import ${packageName}.mapper.${tabletop?cap_first}Mapper;
+<#else >
 import org.kjtc.entity.${tabletop?cap_first}Entity;
 import org.kjtc.mapper.${tabletop?cap_first}Mapper;
+</#if>
+
 
 
 /**

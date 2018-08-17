@@ -1,13 +1,25 @@
 var ${tabletop}List = [];
 var operatorInfoData = {};
 var bootstrapTableOption = {
-    url: 'get${tabletop}List',
+    url: 'get${tabletop?cap_first}List',
     queryParams: function(params) {
         return {
             pageNum: params.pageNumber,// 每页要显示的数据条数
             pageSize: params.pageSize,// 每页显示数据的开始行号
-            equipmentid: $('#DiagnosisHistoryID').val() && $('#DiagnosisHistoryID').val().replace("ALL", ""),
-            chargingstationid: $('#chargingStationID').val(),
+            <#list mysqlList as var>
+                <#assign foo="${var[0]}">
+                <#if var[6] == "是">
+                    <#if var[2]=='DATE' >
+                        <#assign straddac=1>
+                        <#assign straddacstr=1>
+                        <#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>:$('#<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign stradd=stradd+1><#if stradd==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>').val(),  //${var[0]},
+                        <#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddacstr=straddacstr+1><#if straddacstr==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>:$('#<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddacstr=straddacstr+1><#if straddacstr==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>').val(),  //${var[0]},
+                    <#else>
+                        <#assign straddac=1>
+                        <#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>:$('#<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign stradd=stradd+1><#if stradd==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>').val(),  //${var[0]},
+                    </#if>
+                </#if>
+            </#list>
         }
     },
 
@@ -16,12 +28,12 @@ var bootstrapTableOption = {
         {title: '序号', align: 'center', formatter: 'increases'},
         <#list mysqlList as var>
             <#assign foo="${var[0]}">
-            <#if var[1]=='Integer' >
+            <#if var[2]=='Integer' >
                 <#assign stradd=1>
-            { field: '<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign stradd=stradd+1><#if stradd==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>', title: '${var[2]}'},
+            { field: '<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign stradd=stradd+1><#if stradd==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>', title: '${var[1]}'},
             <#else>
                 <#assign stradd=1>
-            { field: '<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign stradd=stradd+1><#if stradd==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>', title: '${var[2]}'},
+            { field: '<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign stradd=stradd+1><#if stradd==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>', title: '${var[1]}'},
             </#if>
         </#list>
         {title: '操作', formatter:function (value, row, index) {
@@ -111,7 +123,7 @@ function searchReset() {
 };
 //查询
 function search() {
-    operateBootstrapTable('#operatorInfoTable', 'selectPage', 1);
+    operateBootstrapTable('#operator${tabletop}', 'selectPage', 1);
 }
 
 /*table内部操作*/

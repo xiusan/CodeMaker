@@ -30,15 +30,25 @@
                     <!-- 查询工具栏 -->
                     <div class="form-inline">
                         <div  class="form-group" >
-                            <label for="id">${var[1]}:</label>
                         <#list mysqlList as var>
-                                        <#assign foo="${var[0]}">
-                                        <#assign stradd=1>
-                                        <#assign straddad=1>
-                                        <#assign straddac=1>
+                            <#assign foo="${var[0]}">
                             <#if var[6] == "是">
-                                <input id="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>" name="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>" class="selectpicker" data-live-search="true"  >
-                                </input>
+                                <#if var[2]=='DATE' >
+                                    <#assign straddac=1>
+                                    <label for="id">开始${var[1]}:</label>
+                                    <input id="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>str" name="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>str" class="selectpicker" data-live-search="true"  >
+                                    </input>
+                                    <#assign straddacend=1>
+                                    <label for="id">结束${var[1]}:</label>
+                                    <input id="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddacend=straddacend+1><#if straddacend==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>end" name="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddacend=straddacend+1><#if straddacend==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>end" class="selectpicker" data-live-search="true"  >
+                                    </input>
+                                <#else>
+                                    <#assign straddac=1>
+                                    <label for="id">${var[1]}:</label>
+                                    <input id="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>" name="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>" class="selectpicker" data-live-search="true"  >
+                                    </input>
+                                </#if>
+
                             </#if>
 
                         </#list>
@@ -61,7 +71,7 @@
                     <button type="button" class="btn btn-primary btn-sm" onclick="delConfirm()">
                         <img src="static/images/delete_btn.png" height="16" width="16"/> 删除
                     </button>
-                    <table id="operator${objectName}"></table>
+                    <table id="operator${tabletop}"></table>
                     <!--  添加框 -->
 
                     <div class="modal inmodal" id="save" tabindex="-1" data-backdrop="static" role="dialog" aria-hidden="true">
@@ -85,8 +95,8 @@
                                                     <#assign stradd=1>
                                                     <#assign straddad=1>
                                                     <#assign straddac=1>
-                                                    <label for="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign stradd=stradd+1><#if stradd==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>">${var[2]}</label>
-                                                    <input  id="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>" name="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddad=straddad+1><#if straddad==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>" type="text" required="" class="form-control" minlength="1" maxlength="100" placeholder="${var[2]}" title="${var[2]}"/>
+                                                    <label for="save<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign stradd=stradd+1><#if stradd==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>">${var[1]}</label>
+                                                    <input  id="save<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>" name="save<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddad=straddad+1><#if straddad==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>" type="text" required="" class="form-control" minlength="1" maxlength="100" placeholder="${var[2]}" title="${var[2]}"/>
                                                 </div>
                                             </div>
                                         </div>

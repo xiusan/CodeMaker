@@ -1,8 +1,19 @@
+<#if packageName != ''>
+package ${packageName}.mapper;
+<#else >
 package org.kjtc.mapper;
+</#if>
 
 
 import org.kjtc.entity.${tabletop?cap_first}Entity;
 import org.apache.ibatis.jdbc.SQL;
+
+<#if packageName != ''>
+import org.kjtc.util.StringUtils;
+<#else >
+import org.kjtc.util.StringUtils;
+</#if>
+
 
 /**
 * 类名称：${tabletop?cap_first}Provider
@@ -28,25 +39,37 @@ public class ${tabletop?cap_first}Provider {
                     	sql.append("  ${foo}, " );
 					</#if>
 				</#list>
-				sql.append("  FROM ${tableName}  ");//表名
+				sql.append("  FROM  ${tabletop} ");//表名
 				sql.append("   WHERE 1 = 1          ");
+
 				<#list mysqlList as var>
+					<#assign foo="${var[0]}">
 					<#if var[6] == "是">
+
+						<#assign stradd=1>
+                    if (!StringUtils.isEmpty(${tabletop?uncap_first}Entity.get${var[0]?cap_first}())) {
 						<#if var[7] == "=">
-                        sql.append("   AND    ${var[0]}   ${var[7]}   '${var[0]}'  ");//查询${var[1]}
+                        sql.append("   AND    ${var[0]}   ${var[7]}   #${"{"}<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign stradd=stradd+1><#if stradd==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>}  ");//查询${var[1]}
 						</#if>
 						<#if var[7] == "like">
-                        sql.append("   AND    ${var[0]}   ${var[7]}   '%${var[0]}%'  ");//查询${var[1]}
+                        sql.append("   AND    ${var[0]}   ${var[7]}   #${"{"}<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign stradd=stradd+1><#if stradd==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>}  ");//查询${var[1]}
 						</#if>
 						<#if var[7] == "DATE">
-                        sql.append("   AND    ${var[0]}   ${var[7]}   ${var[0]}  ");//查询${var[1]}
+                        if (!StringUtils.isEmpty(${tabletop?uncap_first}Entity.get${var[0]?cap_first}())) {
+							<#assign straddstr=1>
+						sql.append("   AND    ${var[0]}   <   #${"{"}<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddstr=straddstr+1><#if straddstr==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>str}  ");//查询开始${var[1]}
+
+                        }
+						if (!StringUtils.isEmpty(${tabletop?uncap_first}Entity.get${var[0]?cap_first}())) {
+							<#assign straddend=1>
+                        sql.append("   AND    ${var[0]}   >   #${"{"}<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddend=straddend+1><#if straddend==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>end}  ");//查询结束${var[1]}
+
+                        }
 						</#if>
+                    };
                     </#if>
-
 				</#list>
-
 			return sql.toString();
-
 		}
 
 </#if>

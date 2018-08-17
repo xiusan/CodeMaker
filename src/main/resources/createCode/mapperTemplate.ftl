@@ -1,6 +1,15 @@
+<#if packageName != ''>
+package ${packageName}.mapper;
+<#else >
 package org.kjtc.mapper;
+</#if>
 
+<#if packageName != ''>
+import ${packageName}.entity.${tabletop?cap_first}Entity;
+<#else >
 import org.kjtc.entity.${tabletop?cap_first}Entity;
+</#if>
+
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

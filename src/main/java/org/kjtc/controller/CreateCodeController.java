@@ -41,13 +41,15 @@ public class CreateCodeController {
 		pd = this.getPageData();
 
 		String objectName = pd.getString("objectName");            //项目名			========1
+		String packageName = pd.getString("packageName")==null?"":pd.getString("packageName");                //包名称			========2
 		String tabletop = pd.getString("tabletop");                //功能名称			========2
 		String objectRemark = pd.getString("objectRemark");        //功能备注			========3
 
 
 		Map<String, Object> root = new HashMap<String, Object>();        //创建数据模型
 		//root.put("fieldList", fieldList);
-		root.put("objectName", objectName);                        //包名
+		root.put("objectName", objectName);                        //项目名
+		root.put("packageName", packageName);                        //包名
 		root.put("tabletop", tabletop);                            //类名
 		root.put("objectRemark", objectRemark);                    //备注
 		root.put("nowDate", new Date());                            //当前日期
@@ -69,39 +71,6 @@ public class CreateCodeController {
 				logger.info(strings[1]+"用户不需要生成");
 			}
 		}
-
-    //ftl路径
-	/*
-		*//*生成controller*//*
-		Freemarker.printFile("controllerTemplate.ftl", root, "controller/" + objectName + "Controller.java", filePath, ftlPath);
-
-		*//*生成service*//*
-		Freemarker.printFile("serviceTemplate.ftl", root, "service/"+ objectName +  "Service.java", filePath, ftlPath);
-
-		*//*生成mapper*//*
-		Freemarker.printFile("mapperTemplate.ftl", root, "mapper/"+ objectName +  "Mapper.java", filePath, ftlPath);
-
-		*//*生成Provider*//*
-		Freemarker.printFile("ProviderTemplate.ftl", root, "mapper/"+ objectName +  "Provider.java", filePath, ftlPath);
-
-		*//*生成HTML*//*
-		Freemarker.printFile("htmlTemplate.ftl", root, "html/"+ objectName +  ".html", filePath, ftlPath);
-
-		*//*生成index.xml  的菜单栏*//*
-		Freemarker.printFile("IndexTemplate.ftl", root, "html/"+ objectName +  "index.html", filePath, ftlPath);
-
-		*//*生成js*//*
-		Freemarker.printFile("jsTemplate.ftl", root, objectName+"/"+ objectName +  ".js", filePath, ftlPath);
-
-		*//*生成 *Operate.js*//*
-		Freemarker.printFile("jsOperateTemplate.ftl", root, objectName+"/"+ objectName +  "Operate.js", filePath, ftlPath);
-
-		*//*生成 实体*//*
-		Freemarker.printFile("EntityTemplate.ftl", root, "entity/"+ objectName +  ".java", filePath, ftlPath);
-
-		*//*生成 实体*//*
-		Freemarker.printFile("mysql_SQL_Template.ftl", root, "mysql/"+ objectName +  "mysql.txt", filePath, ftlPath);
-*/
 
 
 		

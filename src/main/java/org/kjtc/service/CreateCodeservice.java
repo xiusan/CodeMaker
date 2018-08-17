@@ -45,6 +45,8 @@ public class CreateCodeservice {
 
         //首字母大写
         objectName = objectName.substring(0,1).toUpperCase().concat(objectName.substring(1,objectName.length()));
+        //获取包名
+        String  packageName= getPackage(root.get("packageName").toString())+"/";
 
         		/*生成  mysql*/
         if(strings[1].equals("mysql_SQL_Template.ftl")){
@@ -70,7 +72,7 @@ public class CreateCodeservice {
             List<String[]>  entityList = getTableList(pd,"entityIndexTap","entity");
             root.put("mysqlList", mysqlList);//获取mysql的所有参数
             root.put("entityList", entityList);//获取entity的所有参数
-            Freemarker.printFile(strings[1],root,"entity/"+ objectName +  "Entity.java", filePath, ftlPath);
+            Freemarker.printFile(strings[1],root,packageName+"entity/"+ objectName +  "Entity.java", filePath, ftlPath);
             logger.info("生成"+strings[1]+"结束");
         }
 
@@ -85,7 +87,7 @@ public class CreateCodeservice {
             root.put("controllerImport", pd.get("controllerImport")==null?"":pd.get("controllerImport"));//获取生成导入
             root.put("controllerCreator", pd.get("controllerCreator")==null?"":pd.get("controllerCreator"));//创建人
 
-            Freemarker.printFile(strings[1],root,"controller/"+ objectName +  "Controller.java", filePath, ftlPath);
+            Freemarker.printFile(strings[1],root,packageName+"controller/"+ objectName +  "Controller.java", filePath, ftlPath);
             logger.info("生成"+strings[1]+"结束");
 
         }
@@ -99,7 +101,7 @@ public class CreateCodeservice {
              root.put("controllerExport", pd.get("controllerExport")==null?"":pd.get("controllerExport"));//获取生成导出
              root.put("controllerImport", pd.get("controllerImport")==null?"":pd.get("controllerImport"));//获取生成导入
              root.put("controllerCreator", pd.get("controllerCreator")==null?"":pd.get("controllerCreator"));//创建人
-             Freemarker.printFile("serviceTemplate.ftl", root, "service/"+ objectName +  "Service.java", filePath, ftlPath);
+             Freemarker.printFile("serviceTemplate.ftl", root, packageName+"service/"+ objectName +  "Service.java", filePath, ftlPath);
              logger.info("生成"+strings[1]+"结束");
         }
 		/*生成mapper*/
@@ -112,7 +114,7 @@ public class CreateCodeservice {
              root.put("controllerExport", pd.get("controllerExport")==null?"":pd.get("controllerExport"));//获取生成导出
              root.put("controllerImport", pd.get("controllerImport")==null?"":pd.get("controllerImport"));//获取生成导入
              root.put("controllerCreator", pd.get("controllerCreator")==null?"":pd.get("controllerCreator"));//创建人
-             Freemarker.printFile("mapperTemplate.ftl", root, "mapper/"+ objectName +  "Mapper.java", filePath, ftlPath);
+             Freemarker.printFile("mapperTemplate.ftl", root, packageName+"mapper/"+ objectName +  "Mapper.java", filePath, ftlPath);
              logger.info("生成"+strings[1]+"结束");
         }
 		/*生成Provider*/
@@ -131,7 +133,7 @@ public class CreateCodeservice {
 
             root.put("mysqlList", mysqlList);//获取mysql的所有参数
 
-            Freemarker.printFile("ProviderTemplate.ftl", root, "mapper/"+ objectName +  "Provider.java", filePath, ftlPath);
+            Freemarker.printFile("ProviderTemplate.ftl", root, packageName+"mapper/"+ objectName +  "Provider.java", filePath, ftlPath);
             logger.info("生成"+strings[1]+"结束");
         }
 		 /*生成HTML*/
@@ -143,29 +145,39 @@ public class CreateCodeservice {
 
             }
             root.put("mysqlList", mysqlList);//获取mysql的所有参数
-            Freemarker.printFile("htmlTemplate.ftl", root, "html/"+ objectName +  ".html", filePath, ftlPath);
+            Freemarker.printFile("htmlTemplate.ftl", root, "html/"+ objectName.toLowerCase() +  ".html", filePath, ftlPath);
 
         }
 		/*生成index.xml  的菜单栏*/
         if(strings[1].equals("IndexTemplate.ftl")){
-            Freemarker.printFile("IndexTemplate.ftl", root, "html/"+ objectName +  "index.html", filePath, ftlPath);
+            Freemarker.printFile("IndexTemplate.ftl", root, "html/"+ objectName.toLowerCase() +  "index.html", filePath, ftlPath);
 
         }
 		/*生成js*/
          if(strings[1].equals("jsTemplate.ftl")){
              List<String[]>  mysqlList = getTableList(pd,"mysqlIndexTap","mysql");
              root.put("mysqlList", mysqlList);//获取mysql的所有参数
-             Freemarker.printFile("jsTemplate.ftl", root, objectName.toLowerCase()+"/"+ objectName +  ".js", filePath, ftlPath);
+             Freemarker.printFile("jsTemplate.ftl", root, objectName.toLowerCase()+"/"+ objectName.toLowerCase() +  ".js", filePath, ftlPath);
 
         }
 		/*生成 *Operate.js*/
         if(strings[1].equals("jsOperateTemplate.ftl")){
             List<String[]>  mysqlList = getTableList(pd,"mysqlIndexTap","mysql");
             root.put("mysqlList", mysqlList);//获取mysql的所有参数
-            Freemarker.printFile("jsOperateTemplate.ftl", root, objectName.toLowerCase()+"/"+ objectName +  "Operate.js", filePath, ftlPath);
+            Freemarker.printFile("jsOperateTemplate.ftl", root, objectName.toLowerCase()+"/"+ objectName.toLowerCase() +  "Operate.js", filePath, ftlPath);
 
         }
 
+    }
+
+    private String getPackage(String packageName) {
+
+        String[] ba = packageName.split("\\.");
+        String pack = "";
+        for (int i = 0; i < ba.length; i++) {
+            pack = ba[i];
+        }
+        return pack;
     }
 
     /**

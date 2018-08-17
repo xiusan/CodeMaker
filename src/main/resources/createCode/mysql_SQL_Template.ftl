@@ -6,11 +6,11 @@ CREATE TABLE ${tabletop} (
 	<#list mysqlList as var>
 		<#if  var?size/2 == var_index >
 			<#if var[2] == 'Integer'>
-			${var[0]}  int(11)   <#if var[4] != '是'> NOT NULL </#if> COMMENT '${var[1]}'
+			${var[0]}  int(11)   <#if var[4] != '是'> NOT NULL </#if> COMMENT '${var[1]}',
 			<#elseif var[2] == 'String'>
-			${var[0]}   varchar(255)   <#if var[4] != '是'> NOT NULL </#if>     COMMENT '${var[1]}'
+			${var[0]}   varchar(255)   <#if var[4] != '是'> NOT NULL </#if>     COMMENT '${var[1]}',
 			<#else>
-			${var[0]}   datetime <#if var[4] != '是'>  DEFAULT NULL </#if>   COMMENT '${var[1]}'
+			${var[0]}   datetime <#if var[4] != '是'>  DEFAULT NULL </#if>   COMMENT '${var[1]}',
 			</#if>
 		<#else>
 			<#if var[2] == 'Integer'>
