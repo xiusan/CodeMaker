@@ -4,8 +4,17 @@ package ${packageName}.mapper;
 package org.kjtc.mapper;
 </#if>
 
-
+<#if packageName != ''>
+import ${packageName}.entity.${tabletop?cap_first}Entity;
+<#else >
 import org.kjtc.entity.${tabletop?cap_first}Entity;
+</#if>
+
+
+
+
+
+
 import org.apache.ibatis.jdbc.SQL;
 
 <#if packageName != ''>
@@ -79,6 +88,7 @@ public class ${tabletop?cap_first}Provider {
 
 					StringBuffer sql = new StringBuffer();
 					sql.append("insert into ${tableName}");
+					sql.append(" ${tabletop} ");
 					sql.append("(" );
 				<#assign stradd=1>
 				<#list mysqlList as var>
@@ -112,9 +122,10 @@ public class ${tabletop?cap_first}Provider {
 		public String update${tabletop?cap_first}(${tabletop?cap_first}Entity ${tabletop?uncap_first}Entity){
 
 					StringBuffer sql = new StringBuffer();
-					sql.append("update ${tableName} set ");
+					sql.append("update ${tabletop} set ");
 					<#assign stradd=1>
 					<#list mysqlList as var>
+						<#assign foo="${var[0]}">
 						<#assign strfrt=mysqlList?size>
 						<#if strfrt==stradd >
 							sql.append("${var[0]}=#${"{"}<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign stradd=stradd+1><#if stradd==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>}");
@@ -125,6 +136,7 @@ public class ${tabletop?cap_first}Provider {
 					</#list>
 					<#assign straesd=1>
 					<#list mysqlList as var>
+						<#assign foo="${var[0]}">
 							<#if straesd<2 >
 							sql.append(" where  ${var[0]}=#${"{"}<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign stradd=stradd+1><#if stradd==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>}");
 							</#if>
@@ -139,7 +151,7 @@ public class ${tabletop?cap_first}Provider {
 					<#assign straesd=1>
 					<#list mysqlList as var>
 						<#if straesd<2 >
-						String newSql = "  ${tableName}  where   ${var[0]} in (";
+						String newSql = "  ${tabletop}  where   ${var[0]} in (";
 						</#if>
 						<#assign straesd=straesd+1>
 					</#list>

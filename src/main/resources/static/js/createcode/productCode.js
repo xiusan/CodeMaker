@@ -400,72 +400,15 @@ function editFieldEntityTap(value,msgIndex){
 //生成
 function saveAll(){
 
-	/*if($("#packageName").val()==""){
-	 $("#packageName").tips({
-	 side:3,
-	 msg:'输入包名',
-	 bg:'#AE81FF',
-	 time:2
-	 });
-	 $("#packageName").focus();
-	 return false;
-	 }else{
-	 var pat = new RegExp("^[A-Za-z]+$");
-	 if(!pat.test($("#packageName").val())){
-	 $("#packageName").tips({
-	 side:3,
-	 msg:'只能输入字母',
-	 bg:'#AE81FF',
-	 time:2
-	 });
-	 $("#packageName").focus();
-	 return false;
-	 }
-	 }*/
-
-    /*if($("#objectName").val()==""){
-        $("#objectName").tips({
-            side:3,
-            msg:'输入类名',
-            bg:'#AE81FF',
-            time:2
-        });
-        $("#objectName").focus();
-        return false;
-    }else{
-        var headstr = $("#objectName").val().substring(0,1);
-        var pat = new RegExp("^[a-z0-9]+$");
-        if(pat.test(headstr)){
-            $("#objectName").tips({
-                side:3,
-                msg:'类名首字母必须为大写字母或下划线',
-                bg:'#AE81FF',
-                time:2
-            });
-            $("#objectName").focus();
-            return false;
-        }
-    }
-
-    if($("#fields").html() == ''){
-        $("#table_report").tips({
-            side:3,
-            msg:'请添加属性',
-            bg:'#AE81FF',
-            time:2
-        });
-        return false;
-    }*/
-
     //项目名
     var objectName = $("#objectName").val();
     var tabletop = $("#tabletop").val();  //类名
     var objectRemark = $("#objectRemark").val();//备注
-    if (objectName == ''){
+/*    if (objectName == ''){
         alert("项目名不能为空");
         $("#objectName").focus();
         return;
-    }
+    }*/
     if (tabletop == ''){
         alert("类名不能为空");
         $("#tabletop").focus();

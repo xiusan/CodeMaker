@@ -2,6 +2,7 @@ package org.kjtc.controller;
 
 
 
+import com.github.pagehelper.PageInfo;
 import org.kjtc.entity.OutLineEntity;
 import org.kjtc.service.BaseAutomaticService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,9 @@ public class BaseAutomaticController {
     @ResponseBody
     public Object queryGaiYao() {
         List<OutLineEntity>  outLineEntities= baseAutomaticService.getQueryGaiYao();
-        return outLineEntities;
+        PageInfo pageInfo = new PageInfo(outLineEntities);
+
+        return pageInfo;
     }
 
 

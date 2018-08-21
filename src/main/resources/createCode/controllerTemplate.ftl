@@ -62,7 +62,10 @@ public class ${tabletop?cap_first}Controller {
     public Object get${tabletop?cap_first}List(
     ${tabletop?cap_first}Entity ${tabletop?uncap_first}Entity, @RequestParam(value="pageNum", defaultValue="1") Integer pageNum,
     @RequestParam(value="pageSize", defaultValue="10") Integer pageSize) {
+    <#if controllerOrPage != '' >
         PageHelper.startPage(pageNum, pageSize);
+    </#if>
+
         List<${tabletop?cap_first}Entity> ${tabletop?uncap_first}List = ${tabletop?uncap_first}Service.get${tabletop?cap_first}List(${tabletop?uncap_first}Entity);
         PageInfo pageInfo = new PageInfo(${tabletop?uncap_first}List);
 

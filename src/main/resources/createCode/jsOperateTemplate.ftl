@@ -41,9 +41,9 @@ function save() {
     if (checkForm("#saveForm")) {
         if (saveFlag == "INSERT") {
             //获取到i
-            $ajax('save${tabletop}', saveEquipmentCallback, ($("#saveForm").serialize() || "").replace(/save/g, ""));
+            $ajax('save${tabletop?cap_first}', saveEquipmentCallback, ($("#saveForm").serialize() || "").replace(/save/g, ""));
         } else if (saveFlag == "UPDATE") {
-            $ajax('update${tabletop}', saveEquipmentCallback, ($("#saveForm").serialize() || "").replace(/save/g, ""));
+            $ajax('update${tabletop?cap_first}', saveEquipmentCallback, ($("#saveForm").serialize() || "").replace(/save/g, ""));
         }
     }
 }
@@ -99,9 +99,9 @@ function delConfirm(index) {
 function del(data) {
     var operatorInfoList = [];
     for (var i in data) {
-        operatorInfoList.push(data[i].operatorId);
+        operatorInfoList.push(data[i].id);
     }
-    $ajax('del${tabletop}', delEquipmentCallback, {id: operatorInfoList.join(',')});
+    $ajax('del${tabletop?cap_first}', delEquipmentCallback, {id: operatorInfoList.join(',')});
 }
 
 function delone(data) {

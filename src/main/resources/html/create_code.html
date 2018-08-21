@@ -3,33 +3,23 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    <link href="static/css/createcode/bootstrap.min.css" rel="stylesheet" />
-    <link href="static/css/createcode/bootstrap-responsive.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="static/css/createcode/font-awesome.min.css" />
-    <link rel="stylesheet" href="static/css/createcode/ace.min.css" />
-    <link rel="stylesheet" href="static/css/createcode/ace-responsive.min.css" />
-    <link rel="stylesheet" href="static/css/createcode/ace-skins.min.css" />
+    <link href="static/css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
+    <link href="static/css/other/font-awesome.min.css" rel="stylesheet"/>
+    <link href="static/css/other/animate.min.css" rel="stylesheet"/>
+    <link href="static/css/other/style.min.css?v=4.1.0" rel="stylesheet"/>
+    <link href="static/css/plugins/iCheck/custom.css" rel="stylesheet"/>
+    <link href="static/css/bootstrap/bootstrap-table.min.css" rel="stylesheet"/>
+    <link href="static/css/bootstrap/bootstrap-select.min.css" rel="stylesheet"/>
+    <link href="static/css/plugins/sweetalert/sweetalert.css" rel="stylesheet"/>
+    <link href="static/css/select.css" rel="stylesheet"/>
     <script type="text/javascript" src="static/js/createcode/jquery-1.7.2.js"></script>
-    <!--提示框-->
-    <script type="text/javascript" src="static/js/createcode/jquery.tips.js"></script>
 
     <style type="text/css">
         #dialog-add,#dialog-message,#dialog-comment{width:100%; height:100%; position:fixed; top:0px; z-index:10000; display:none;}
         #mysql_dialog-add,#dialog-message,#dialog-comment{width:100%; height:100%; position:fixed; top:0px; z-index:10000; display:none;}  /*概要_样式*/
         #mysql_dialog-add_tap{width:100%; height:100%; position:fixed; top:0px; z-index:10000; display:none;}  /*mysql_样式*/
         #entity_dialog-add_tap{width:100%; height:100%; position:fixed; top:0px; z-index:10000; display:none;}  /*mysql_样式*/
-        .commitopacity{position:absolute; width:100%; height:500px; background:#7f7f7f; filter:alpha(opacity=50); -moz-opacity:0.5; -khtml-opacity: 0.5; opacity: 0.5; top:0px; z-index:99999;}
-        .commitbox{width:79%; padding-left:81px; padding-top:69px; position:absolute; top:0px; z-index:99999;}
-        .commitbox_inner{width:96%; height:235px;  margin:6px auto; background:#efefef; border-radius:5px;}
-        .commitbox_top{width:100%; height:230px; margin-bottom:10px; padding-top:10px; background:#FFF; border-radius:5px; box-shadow:1px 1px 3px #e8e8e8;}
-        .commitbox_top textarea{width:95%; height:165px; display:block; margin:0px auto; border:0px;}
-        .commitbox_cen{width:95%; height:40px; padding-top:10px;}
-        .commitbox_cen div.left{float:left;background-size:15px; background-position:0px 3px; padding-left:18px; color:#f77500; font-size:16px; line-height:27px;}
-        .commitbox_cen div.left img{width:30px;}
-        .commitbox_cen div.right{float:right; margin-top:7px;}
-        .commitbox_cen div.right span{cursor:pointer;}
-        .commitbox_cen div.right span.save{border:solid 1px #c7c7c7; background:#6FB3E0; border-radius:3px; color:#FFF; padding:5px 10px;}
-        .commitbox_cen div.right span.quxiao{border:solid 1px #f77400; background:#f77400; border-radius:3px; color:#FFF; padding:4px 9px;}
+
     </style>
 
 </head>
@@ -209,21 +199,19 @@
 
 
 
-
-    <table border="0">
+    <table border="0" style="margin: 20px">
         <tr>
-            <td style="width:76px;text-align: right;">项目名：</td>
-            <td><input type="text" name="objectName" id="objectName" value="项目名" placeholder="项目名"   style="width:200px" title="类名称"/></td>
-            <td style="width:86px;text-align: right;">包名：</td>
-            <td><input type="text" name="packageName"  id="packageName"  value="test"   placeholder="test" style="width:200px" title="表前缀"/></td>
+            <td  >项目名：</td>
+            <td><input type="text"  style="width:200px;margin-right:20px;float: left" class="form-control "   name="packageName"  id="packageName"  value="org.kjtc.dianji"   placeholder="org.kjtc.dianji"   title="表前缀"/></td>
 
             <td style="width:86px;text-align: right;">功能类名称：</td>
-            <td><input type="text" name="tabletop"  id="tabletop"  value="test"   placeholder="test" style="width:200px" title="表前缀"/></td>
+            <td><input type="text"  style="width:200px;margin-right:20px;float: left" class="form-control "  name="tabletop"  id="tabletop"  value="test"   placeholder="test"   title="表前缀"/></td>
 
             <td style="width:76px;text-align: right;">功能备注：</td>
-            <td><input type="text" name="objectRemark" id="objectRemark" value="功能备注" placeholder="功能备注" style="width:200px" title="备注"/></td>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-app btn-success btn-mini" onclick="saveAll();" id="productcAll"><i class="icon-print"></i>生成</a></td>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-app btn-danger btn-mini" onclick="top.Dialog.close();"><i class="icon-share-alt"></i>重置</a></td>
+            <td><input type="text"  style="width:200px;margin-right:20px;float: left" class="form-control "  name="objectRemark" id="objectRemark" value="功能备注" placeholder="功能备注" title="备注"/></td>
+            <td><button id="search_btn" style="margin-right:20px;" type="button" onclick="saveAll();" class="btn btn-w-m btn-success">生成</button>
+                <button type="reset" style="margin-right:20px;" class="btn btn-w-m btn-default">重置</button></td>
+
         </tr>
     </table>
 
@@ -242,20 +230,74 @@
     <!--概要-->
     <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="gaiYao">
-            <table id="table_gai_yao" class="table table-striped table-bordered table-hover">
+            <!--<button type="button" class="btn btn-primary btn-sm" onclick="showSave()">
+                <img src="static/images/add_btn.png" height="16" width="16"/> 添加
+            </button>-->
+            <table id="table_gai_yao_fields"></table>
+            <div class="modal inmodal" id="save" style="display: none" tabindex="-1" data-backdrop="static" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content animated bounceInRight">
+                        <div class="modal-header">
+                            <button type="button" class="close" onclick="closeSave()">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">关闭</span>
+                            </button>
+                            <h4 class="modal-title">充电桩添加</h4>
+                        </div>
+                        <div class="modal-footer" style="text-align: left">
+                            <form id="saveForm">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="fg-line">
+                                            <label for="saveOrNot">是否生成</label>
+                                            <select id="saveOrNot"  name="saveOrNot"  class="form-control"   required=""   >
+                                                <option  value="是">是</option>
+                                                <option  value="否">否</option>
+                                            </select>
 
-                <thead>
-                <tr>
-                    <th class="center">是否生成</th>
-                    <th class="center">模板类型</th>
-                    <th class="center">模板路径</th>
-                    <th class="center" style="width:69px;">操作</th>
-                </tr>
-                </thead>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="fg-line">
+                                            <label for="saveModelType">模板类型</label>
+                                            <input id="saveModelType" name="saveModelType" type="text" class="form-control" maxlength="255" placeholder="模板类型" title="模板类型"/>
+                                            <input id="saveId" name="saveId" type="hidden" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="fg-line">
+                                            <label for="saveModelAddr">模板路径</label>
+                                            <input id="saveModelAddr" name="saveModelAddr" type="text" class="form-control" maxlength="255" placeholder="模板路径" title="模板路径"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="fg-line">
+                                            <label for="saveModelSuffix">模板生成类型</label>
+                                            <input id="saveModelSuffix" name="saveModelSuffix" type="text" class="form-control" maxlength="255" placeholder="模板生成类型" title="模板生成类型"/>
+                                        </div>
+                                    </div>
+                                </div>
 
-                <tbody id="table_gai_yao_fields"></tbody>
 
-            </table>
+                                <div class="col-sm-12" style="text-align: right">
+                                    <button type="button" class="btn" onclick="closeSave()">
+                                        <img src="static/images/close_btn.png" height="16" width="16"/> 关闭
+                                    </button>
+                                    <button type="button" class="btn btn-primary" onclick="save()">
+                                        <img src="static/images/save_btn.png" height="16" width="16"/> 保存
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <!--mysql生成-->
         <div class="tab-pane fade" id="mysql">
@@ -294,6 +336,7 @@
                     </td>
                 </tr>
             </table>
+            <div style="width: auto;height: auto">ssssssssssssssssssss</div>
         </div>
         <!-- 生成Entity -->
         <div class="tab-pane fade" id="entity">
@@ -315,13 +358,13 @@
                 <tbody id="table_entity_fields"></tbody>
 
             </table>
-            <table id="mysql_entity_report" class="table table-striped table-bordered table-hover">
+
                 <tr>
                     <td style="text-align: center;" colspan="100">
                         <a class="btn btn-app btn-success btn-mini" onclick="entity_dialog_open();"><i class="icon-ok"></i>entity新增</a>
                     </td>
                 </tr>
-            </table>
+
 
 
         </div>
@@ -333,6 +376,7 @@
                 <label style="float:left;padding-left: 20px;"><input name="controllerAdd"   checked = "checked"  type="checkbox" value="controllerAdd" ></input><span class="lbl" >生成新增</span></label>
                 <label style="float:left;padding-left: 20px;"><input name="controllerExport"   checked = "checked"  type="checkbox" value="controllerExport" ></input><span class="lbl" >生成导出</span></label>
                 <label style="float:left;padding-left: 20px;"><input name="controllerImport"   checked = "checked"  type="checkbox" value="controllerImport" ></input><span class="lbl" >生成导入</span></label>
+                <label style="float:left;padding-left: 20px;"><input name="controllerOrPage"   checked = "checked"  type="checkbox" value="controllerOrPage" ></input><span class="lbl" >是否分页</span></label>
                 <label style="float:left;padding-left: 20px;">创建者：<input type="text" name="controllerCreator"  id="controllerCreator"  value="root"   placeholder="创建者" style="width:200px" title="创建者"/></label>
 
             </div>
@@ -352,7 +396,10 @@
         </div>
 
         <div class="tab-pane fade" id="redis">
-            <p>tap</p>
+            <div>
+                <label style="float:left;padding-left: 20px;"><input name="redisSelect" id="redisSelect"  checked = "checked"  type="checkbox" value="redisSelect" ></input><span class="lbl" >是否生成redis查询</span></label>
+
+            </div>
         </div>
 
     </div>
@@ -365,7 +412,29 @@
 <script src="static/js/createcode/bootstrap.min.js"></script>
 <script src="static/js/createcode/ace-elements.min.js"></script>
 <script src="static/js/createcode/ace.min.js"></script>
+
+
+<script src="static/js/bootstrap/bootstrap.min.js"></script>
+<script src="static/js/bootstrap/bootstrap-table.js"></script>
+<script src="static/js/bootstrap/bootstrap-table-zh-CN.min.js"></script>
+<script src="static/js/bootstrap/bootstrap-select.min.js"></script>
+
+<script src="static/js/plugins/iCheck/icheck.min.js"></script>
+<script src="static/js/plugins/layer/laydate/laydate.js"></script>
+<script src="static/js/plugins/layer/layer.min.js"></script>
+<script src="static/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="static/js/plugins/sweetalert/sweetalert-dev.js"></script>
+
+<script src="static/js/other/content.min.js?v=1.0.0"></script>
+<script src="static/js/other/contabs.min.js"></script>
+
+
+
 <script src="static/js/createcode/productCode.js"></script>
+<script src="static/js/createcode/creatCode.js"></script>
+<script src="static/js/createcode/creatCodeOperate.js"></script>
+<script src="static/js/common.js"></script>
+
 <script type="text/javascript">
 
     /*第二版js*/
@@ -375,10 +444,10 @@
             url: "/New/query_gai_yao" ,
             type: "POST" ,
             success: function( json, textStatus, jqXHR ){
-                $.each(json, function(idx, obj) {
+              /*  $.each(json, function(idx, obj) {
                     var fields = obj.orNot+',fh,'+obj.modelType+',fh,'+obj.modelAddr;
                     arrayFieldMysql(fields);
-                });
+                });*/
 
 
             } ,

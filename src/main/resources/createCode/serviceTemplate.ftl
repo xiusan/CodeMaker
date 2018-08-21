@@ -40,7 +40,9 @@ public class  ${tabletop?cap_first}Service {
 <#if controllerSelect != '' >
 
 	public List<${tabletop?cap_first}Entity> get${tabletop?cap_first}List(${tabletop?cap_first}Entity ${tabletop?uncap_first}Entity) {
-		return ${tabletop?uncap_first}Mapper.get${tabletop?cap_first}List(${tabletop?uncap_first}Entity);
+
+        return ${tabletop?uncap_first}Mapper.get${tabletop?cap_first}List(${tabletop?uncap_first}Entity);
+
 		}
 </#if>
 <#if controllerAdd != '' >

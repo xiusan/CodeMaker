@@ -9,6 +9,15 @@ public class OutLineEntity {
     private String orNot;
     private String modelType;
     private String modelAddr;
+    private String modelSuffix;
+
+    public String getModelSuffix() {
+        return modelSuffix;
+    }
+
+    public void setModelSuffix(String modelSuffix) {
+        this.modelSuffix = modelSuffix;
+    }
 
     public String getId() {
         return id;
