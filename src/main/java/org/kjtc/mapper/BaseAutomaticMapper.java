@@ -4,6 +4,7 @@ package org.kjtc.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.SelectProvider;
 import org.kjtc.entity.OutLineEntity;
+import org.kjtc.entity.OutMysqlEntity;
 
 import java.util.List;
 
@@ -14,5 +15,8 @@ import java.util.List;
 public interface BaseAutomaticMapper {
 
     @SelectProvider(type = BaseAutomaticProvider.class,method = "queryGaiYaoList")
-    public List<OutLineEntity> getQueryGaiYao();
+    List<OutLineEntity> getQueryGaiYao();
+
+    @SelectProvider(type = BaseAutomaticProvider.class,method = "queryMysqlList")
+    List<OutMysqlEntity> getQueryMysql();
 }

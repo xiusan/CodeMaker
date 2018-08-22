@@ -202,13 +202,13 @@
     <table border="0" style="margin: 20px">
         <tr>
             <td  >项目名：</td>
-            <td><input type="text"  style="width:200px;margin-right:20px;float: left" class="form-control "   name="packageName"  id="packageName"  value="org.kjtc.dianji"   placeholder="org.kjtc.dianji"   title="表前缀"/></td>
+            <td><input type="text"  style="width:200px;margin-right:20px;float: left" class="form-control "   name="packageName"  id="packageName"  value="test" onkeyup="chagegengNeng(value);"   placeholder="test"   title="项目名"/></td>
 
             <td style="width:86px;text-align: right;">功能类名称：</td>
-            <td><input type="text"  style="width:200px;margin-right:20px;float: left" class="form-control "  name="tabletop"  id="tabletop"  value="test"   placeholder="test"   title="表前缀"/></td>
+            <td><input type="text"  style="width:200px;margin-right:20px;float: left" class="form-control "  name="tabletop"  id="tabletop"  value="test" onchange="addTableValue(value);"  placeholder="test"   title="功能类名称"/></td>
 
             <td style="width:76px;text-align: right;">功能备注：</td>
-            <td><input type="text"  style="width:200px;margin-right:20px;float: left" class="form-control "  name="objectRemark" id="objectRemark" value="功能备注" placeholder="功能备注" title="备注"/></td>
+            <td><input type="text"  style="width:200px;margin-right:20px;float: left" class="form-control "  name="objectRemark" id="objectRemark" value="功能备注" placeholder="功能备注" title="功能备注"/></td>
             <td><button id="search_btn" style="margin-right:20px;" type="button" onclick="saveAll();" class="btn btn-w-m btn-success">生成</button>
                 <button type="reset" style="margin-right:20px;" class="btn btn-w-m btn-default">重置</button></td>
 
@@ -242,7 +242,7 @@
                                 <span aria-hidden="true">&times;</span>
                                 <span class="sr-only">关闭</span>
                             </button>
-                            <h4 class="modal-title">充电桩添加</h4>
+                            <h4 class="modal-title" id ="gaiyao-modal-title">充电桩添加</h4>
                         </div>
                         <div class="modal-footer" style="text-align: left">
                             <form id="saveForm">
@@ -250,7 +250,7 @@
                                     <div class="form-group">
                                         <div class="fg-line">
                                             <label for="saveOrNot">是否生成</label>
-                                            <select id="saveOrNot"  name="saveOrNot"  class="form-control"   required=""   >
+                                            <select id="saveOrNot"     class="form-control"   required=""   >
                                                 <option  value="是">是</option>
                                                 <option  value="否">否</option>
                                             </select>
@@ -262,8 +262,8 @@
                                     <div class="form-group">
                                         <div class="fg-line">
                                             <label for="saveModelType">模板类型</label>
-                                            <input id="saveModelType" name="saveModelType" type="text" class="form-control" maxlength="255" placeholder="模板类型" title="模板类型"/>
-                                            <input id="saveId" name="saveId" type="hidden" class="form-control" />
+                                            <input id="saveModelType"   type="text" class="form-control" maxlength="255" placeholder="模板类型" title="模板类型"/>
+                                            <input id="saveId"   type="hidden" class="form-control" />
                                         </div>
                                     </div>
                                 </div>
@@ -271,7 +271,7 @@
                                     <div class="form-group">
                                         <div class="fg-line">
                                             <label for="saveModelAddr">模板路径</label>
-                                            <input id="saveModelAddr" name="saveModelAddr" type="text" class="form-control" maxlength="255" placeholder="模板路径" title="模板路径"/>
+                                            <input id="saveModelAddr" type="text" class="form-control" maxlength="255" placeholder="模板路径" title="模板路径"/>
                                         </div>
                                     </div>
                                 </div>
@@ -279,7 +279,7 @@
                                     <div class="form-group">
                                         <div class="fg-line">
                                             <label for="saveModelSuffix">模板生成类型</label>
-                                            <input id="saveModelSuffix" name="saveModelSuffix" type="text" class="form-control" maxlength="255" placeholder="模板生成类型" title="模板生成类型"/>
+                                            <input id="saveModelSuffix"   type="text" class="form-control" maxlength="255" placeholder="模板生成类型" title="模板生成类型"/>
                                         </div>
                                     </div>
                                 </div>
@@ -302,41 +302,135 @@
         <!--mysql生成-->
         <div class="tab-pane fade" id="mysql">
             <div>
+
                 <label style="float:left;padding-left: 20px;"><input name="mysqlGrTable"  checked = "checked"  type="checkbox" value="mysqlGrTable" ></input><span class="lbl" >生成创建表</span></label>
                 <label style="float:left;padding-left: 20px;"><input name="mysqlDeleteTable"   checked = "checked"  type="checkbox" value="mysqlDeleteTable" ></input><span class="lbl" >删除</span></label>
                 <label style="float:left;padding-left: 20px;"><input name="mysqlEditTable"   checked = "checked"  type="checkbox" value="mysqlEditTable" ></input><span class="lbl" >修改</span></label>
                 <label style="float:left;padding-left: 20px;"><input name="mysqlAddTable"   checked = "checked"  type="checkbox" value="mysqlAddTable" ></input><span class="lbl" >新增</span></label>
-                <label style="float:left;padding-left: 20px;">表名：<input type="text" name="tableName"  id="tableName"  value=""   placeholder="表名" style="width:200px" title="表名"/></label>
+                <label style="float:left;padding-left: 20px;">表名：<input type="text" name="tableName"  id="tableName"  value="test"   placeholder="表名"   title="表名"/></label>
+                <label style="float:left;padding-left: 20px;">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="mysqlShowSave()">
+                        <img src="static/images/add_btn.png" height="16" width="16"/> 添加
+                    </button>
+                </label>
 
             </div>
+            <table id="table_mysql_fields"></table>
+            <div class="modal inmodal" id="mysqlSave" style="display: none" tabindex="-1" data-backdrop="static" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content animated bounceInRight">
+                        <div class="modal-header">
+                            <button type="button" class="close" onclick="mysqlCloseSave()">
+                                <span aria-hidden="true">&times;</span>
+                                <span class="sr-only">关闭</span>
+                            </button>
+                            <h4 class="modal-title"  id ="mysql-modal-title">mysql添加</h4>
+                        </div>
+                        <div class="modal-footer" style="text-align: left">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="fg-line">
+                                        <label for="saveAttributeName">属性名 </label>
+                                        <input id="saveAttributeName"   type="text" class="form-control" maxlength="255" placeholder="属性名"  />
+                                        <input id="savemysqlId"   type="hidden" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
 
-            <table id="table_mysql" class="table table-striped table-bordered table-hover">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="fg-line">
+                                        <label for="saveAttributeChinese">属性中文 </label>
+                                        <input id="saveAttributeChinese"  type="text" class="form-control" maxlength="255" placeholder="属性中文"  />
 
-                <thead>
-                <tr>
-                    <th class="center">属性名</th>
-                    <th class="center">属性中文</th>
-                    <th class="center">类型</th>
-                    <th class="center">默认值</th>
-                    <th class="center">是否允许为空</th>
-                    <th class="center">是否为主键</th>
-                    <th class="center">是否为查询</th>
-                    <th class="center">查询类型</th>
-                    <th class="center" style="width:69px;">操作</th>
-                </tr>
-                </thead>
+                                    </div>
+                                </div>
+                            </div>
 
-                <tbody id="table_mysql_fields"></tbody>
 
-            </table>
-            <table id="mysql_table_report" class="table table-striped table-bordered table-hover">
-                <tr>
-                    <td style="text-align: center;" colspan="100">
-                        <a class="btn btn-app btn-success btn-mini" onclick="mysql_dialog_open();"><i class="icon-ok"></i>mysql新增</a>
-                    </td>
-                </tr>
-            </table>
-            <div style="width: auto;height: auto">ssssssssssssssssssss</div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="fg-line">
+                                        <label for="saveMysqlType">模板类型</label>
+                                        <input id="saveMysqlType"   type="text" class="form-control" maxlength="255" placeholder="模板类型"  />
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="fg-line">
+                                        <label for="saveDefaultValue">模板类型</label>
+                                        <input id="saveDefaultValue"   type="text" class="form-control" maxlength="255" placeholder="模板类型" />
+
+                                    </div>
+                                </div>
+                            </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="fg-line">
+                                            <label for="saveBeEmpty">是否允许为空 </label>
+                                            <select id="saveBeEmpty"   class="form-control"   required=""   >
+                                                <option  value="是">是</option>
+                                                <option  value="否">否</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="fg-line">
+                                        <label for="savePrimaryKey">是否为主键</label>
+                                        <select id="savePrimaryKey"  name="savePrimaryKey"  class="form-control"   required=""   >
+                                            <option  value="是">是</option>
+                                            <option  value="否">否</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="fg-line">
+                                        <label for="saveIsQuery">是否为查询 </label>
+                                        <select id="saveIsQuery"   class="form-control"   required=""   >
+                                            <option  value="是">是</option>
+                                            <option  value="否">否</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <div class="fg-line">
+                                        <label for="saveQueryType">查询类型</label>
+                                        <input id="saveQueryType"   type="text" class="form-control" maxlength="255" placeholder="查询类型" />
+
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="col-sm-12" style="text-align: right">
+                                    <button type="button" class="btn" onclick="mysqlCloseSave()">
+                                        <img src="static/images/close_btn.png" height="16" width="16"/> 关闭
+                                    </button>
+                                    <button type="button" class="btn btn-primary" onclick="mysqlSave()">
+                                        <img src="static/images/save_btn.png" height="16" width="16"/> 保存
+                                    </button>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="width: auto;height: auto;margin-left: 20px;margin-right:20px;">
+                <div   style="margin-bottom:20px;" ><span class="btn btn-primary radius" onclick="mysqlShowSql();">预览</span></div>
+                <div><textarea class="textarea" readonly="readonly" style="width: 100%;height: 300px" id="mysqlTextarea" placeholder="" rows="" cols="" ></textarea></div>
+            </div>
         </div>
         <!-- 生成Entity -->
         <div class="tab-pane fade" id="entity">
@@ -461,11 +555,11 @@
         var fieldsMsql2 ='age'+',fh,'+'年龄'+',fh,'+'Integer'+',fh,'+'无'+',fh,'+'是'+',fh,'+'否'+',fh,'+'是'+',fh,'+'=';
         var fieldsMsql3 ='creattime'+',fh,'+'时间'+',fh,'+'DATE'+',fh,'+'无'+',fh,'+'否'+',fh,'+'否'+',fh,'+'否'+',fh,'+'=';
         var fieldsMsql4 ='updattime'+',fh,'+'时间'+',fh,'+'DATE'+',fh,'+'无'+',fh,'+'否'+',fh,'+'否'+',fh,'+'否'+',fh,'+'=';
-        arrayFieldMysqlTap(fieldsMsql);
+       /* arrayFieldMysqlTap(fieldsMsql);
         arrayFieldMysqlTap(fieldsMsql1);
         arrayFieldMysqlTap(fieldsMsql2);
         arrayFieldMysqlTap(fieldsMsql3);
-        arrayFieldMysqlTap(fieldsMsql4);
+        arrayFieldMysqlTap(fieldsMsql4);*/
     });
 </script>
 

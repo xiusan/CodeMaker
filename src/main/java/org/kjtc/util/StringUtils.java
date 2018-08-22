@@ -876,4 +876,43 @@ public class StringUtils {
         }
         return str;
     }
+
+    /**
+     * 获取路径
+     * @param str
+     * @return
+     */
+    public static String getPath(String str) {
+        int show = show1(str, "..\\");
+        String[] spl = str.split("\\\\");
+        System.out.println(spl.length);
+        String s ="";
+        for (int i = 0; i < spl.length-show*2; i++) {
+            s  =s+ spl[i]+"\\";
+        }
+
+        return s;
+    } //第一种
+    public static int show1(String str, String key) {
+        int count = 0;// 计数器
+        int tmp = 0;// 记录截取后的新位置
+        while ((tmp = str.indexOf(key)) != -1) {// 查找key(ss),找到的地址码给tmp
+            str = str.substring(tmp + key.length());// 截取
+            // 地址码+key长度,截取后重组成新str,继续while
+            // 截取指导索引位置的字符串
+            // 子串第一次出现的位置+长度=下一次的起始位置
+            count++;
+        }
+        return count;
+    }
+    //第二种
+    public static int show2(String str, String key) {
+        int count = 0;
+        int index = 0;
+        while ((index = str.indexOf(key, index)) != -1) {// 循环到没有ss就停
+            index = index + key.length();
+            count++;
+        }
+        return count;
+    }
 }

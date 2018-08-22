@@ -3,6 +3,17 @@
  */
 
 /*------------------------------------公用开始----------------------------------------------*/
+//检测是否为中文，true表示是中文，false表示非中文
+function isChinese(str){
+    if(/^[\u3220-\uFA29]+$/.test(str)){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+
+
 //关闭弹出框
 function cancel_pl(idVame){
     $("#"+idVame).css("display","none");
@@ -23,6 +34,43 @@ function  selectIs(str) {
         bo = true;
     }
     return bo;
+
+}
+
+//功能修改修改mysql的表明
+function addTableValue(value) {
+    console.log(value);
+    $("#tableName").val(value);
+    $("#tabletop").val(value);
+
+}
+//根据项目名称修改类名
+function chagegengNeng(value) {
+    $("#tabletop").val(value);
+
+}
+
+function mysqlShowSql() {
+    var data = $("#FormAll").serialize();
+    $.ajax( {
+        url: "/New/querySqlShow" ,
+        type: "POST" ,
+        data: data,
+        dataType: "json",
+        success: function( json, textStatus, jqXHR ){
+            console.log(json);
+            console.log(textStatus);
+            console.log(jqXHR);
+           $("#mysqlTextarea").val(json+textStatus);
+
+
+        } ,
+        error: function(jqXHR, textStatus, errorMsg){
+            var txt=jqXHR.responseText;
+            $("#mysqlTextarea").val(txt);
+            console.log(txt);
+        }
+    });
 
 }
 /*------------------------------------公用结束----------------------------------------------*/
@@ -404,12 +452,11 @@ function saveAll(){
     var objectName = $("#objectName").val();
     var tabletop = $("#tabletop").val();  //类名
     var objectRemark = $("#objectRemark").val();//备注
-/*    if (objectName == ''){
-        alert("项目名不能为空");
+    if (isChinese(objectName)){
+        alert("项目名不能能含有汉字");
         $("#objectName").focus();
         return;
-    }*/
-    if (tabletop == ''){
+    }if (tabletop == ''){
         alert("类名不能为空");
         $("#tabletop").focus();
         return;
