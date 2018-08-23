@@ -89,7 +89,7 @@ function save() {
 }
 function delConfirm(index) {
         if(confirm("确认删除吗")){
-           equipmentData.splice(equipmentData[index],1);
+           equipmentData.splice(index,1);
             $("#table_gai_yao_fields").bootstrapTable("load",equipmentData)
         }
 
@@ -127,7 +127,7 @@ function mysqlShowSave(index) {
         }
         $("#mysqlIndexflag").val(index);
 
-        $("#savemysqlId").val(mysqlData[index].id);
+        $("#saveentityId").val(mysqlData[index].id);
         $("#saveAttributeName").val(mysqlData[index].attributeName);
         $("#saveAttributeChinese").val(mysqlData[index].attributeChinese);
         $("#saveMysqlType").val(mysqlData[index].mysqlType);
@@ -187,6 +187,18 @@ function mysqlSave() {
             queryType:$("#saveQueryType").val()});
         $("#table_mysql_fields").bootstrapTable("load",mysqlData)
         console.log(mysqlData.length)
+        entityData.push({id:$("#savemysqlId").val(),
+            attributeName:$("#saveAttributeName").val(),
+            attributeChinese:$("#saveAttributeChinese").val(),
+            mysqlType:$("#saveMysqlType").val(),
+            defaultValue:$("#saveDefaultValue").val(),
+            beEmpty:beEmpty,
+            primaryKey:primaryKey,
+            isQuery:isQuery,
+            queryType:$("#saveQueryType").val()});
+        $("#table_entity_fields").bootstrapTable("load",entityData)
+        console.log(entityData.length)
+
         $("#mysqlSave").modal('hide');
     } else if (mysqSaveFlag == "UPDATE") {
         console.log("更新");
@@ -227,13 +239,150 @@ function mysqlSave() {
 }
 function mysqlDelConfirm(index) {
     if(confirm("确认删除吗")){
-        mysqlData.splice(mysqlData[index],1);
+        mysqlData.splice(index,1);
         $("#table_mysql_fields").bootstrapTable("load",mysqlData)
     }
 
 
 }
-
-
-
 /*----------------------------------mysql结束-----------------------------------*/
+
+/*----------------------------------entity开始-----------------------------------*/
+var entitySaveFlag = undefined;
+function entityShowSave(index) {
+    if (index != undefined) {
+        entitySaveFlag = "UPDATE";
+        console.log("entity修改");
+        $("#entity-modal-title").text("entity修改");
+
+        if(entityData[index].beEmpty == '是'){
+            document.getElementById('entityradio-BeEmpty-2').checked=false;//取消勾选
+            document.getElementById("entityradio-BeEmpty-1").checked = true;//勾选
+        }else{
+            document.getElementById('entityradio-BeEmpty-2').checked = true;//勾选
+            document.getElementById("entityradio-BeEmpty-1").checked = false;//取消勾选
+        }
+        if(entityData[index].primaryKey == '是'){
+            document.getElementById('entityradio-PrimaryKey-2').checked=false;//取消勾选
+            document.getElementById("entityradio-PrimaryKey-1").checked = true;//勾选
+        }else{
+            document.getElementById('entityradio-PrimaryKey-2').checked = true;//勾选
+            document.getElementById("entityradio-PrimaryKey-1").checked = false;//取消勾选
+        }
+        if(entityData[index].isQuery == '是'){
+            document.getElementById('entityradio-IsQuery-2').checked=false;//取消勾选
+            document.getElementById("entityradio-IsQuery-1").checked = true;//勾选
+        }else{
+            document.getElementById('entityradio-IsQuery-2').checked = true;//勾选
+            document.getElementById("entityradio-IsQuery-1").checked = false;//取消勾选
+        }
+        $("#entityIndexflag").val(index);
+
+        $("#saveentitymysqlId").val(entityData[index].id);
+        $("#saveentityAttributeName").val(entityData[index].attributeName);
+        $("#saveentityAttributeChinese").val(entityData[index].attributeChinese);
+        $("#saveentityMysqlType").val(entityData[index].mysqlType);
+        $("#saveentityDefaultValue").val(entityData[index].defaultValue);
+        $("#saveentityQueryType").val(entityData[index].queryType.trim());
+    } else {
+        console.log("mysqlINSERT");
+        $("#saveentitymysqlId").val("");
+        $("#saveentityAttributeName").val("");
+        $("#saveentityAttributeChinese").val("");
+        $("#saveentityMysqlType").val("");
+        $("#saveentityDefaultValue").val("");
+        $("#saveentityBeEmpty").val("");
+        $("#saveentityPrimaryKey").val("");
+        $("#saveentityIsQuery").val("");
+        $("#saveentityQueryType").val("");
+        entitySaveFlag = "INSERT";
+        $("#entity-modal-title").text("entity添加");
+    }
+    $("#entitySave").modal('show');
+}
+//关闭（添加或更新）mysql
+function entityCloseSave() {
+    $("#entitySave").modal('hide');
+}
+
+// 添加或更新
+function entitySave() {
+    console.log("操作数据");
+    if (entitySaveFlag == "INSERT") {
+        var beEmpty = "";
+        var primaryKey = "";
+        var isQuery = "";
+        if(document.getElementById("entityradio-BeEmpty-1").checked == true){
+            beEmpty = "是";
+        }else{
+            beEmpty = "否";
+        }
+        if(document.getElementById("entityradio-PrimaryKey-1").checked == true){
+            primaryKey = "是";
+        }else{
+            primaryKey = "否";
+        }
+        if(document.getElementById("entityradio-IsQuery-1").checked == true){
+            isQuery = "是";
+        }else{
+            isQuery = "否";
+        }
+        entityData.push({id:$("#saveentitymysqlId").val(),
+            attributeName:$("#saveentityAttributeName").val(),
+            attributeChinese:$("#saveentityAttributeChinese").val(),
+            mysqlType:$("#saveentityMysqlType").val(),
+            defaultValue:$("#saveentityDefaultValue").val(),
+            beEmpty:beEmpty,
+            primaryKey:primaryKey,
+            isQuery:isQuery,
+            queryType:$("#saveentityQueryType").val()});
+        $("#table_entity_fields").bootstrapTable("load",entityData)
+        console.log(entityData.length)
+        $("#entitySave").modal('hide');
+    } else if (entitySaveFlag == "UPDATE") {
+        console.log("更新");
+        var beEmpty = "";
+        var primaryKey = "";
+        var isQuery = "";
+        if(document.getElementById("entityradio-BeEmpty-1").checked == true){
+            beEmpty = "是";
+        }else{
+            beEmpty = "否";
+        }
+        if(document.getElementById("entityradio-PrimaryKey-1").checked == true){
+            primaryKey = "是";
+        }else{
+            primaryKey = "否";
+        }
+        if(document.getElementById("entityradio-IsQuery-1").checked == true){
+            isQuery = "是";
+        }else{
+            isQuery = "否";
+        }
+
+        var index = $("#entityIndexflag").val();
+        entityData[index].id = $("#saveentitymysqlId").val();
+        entityData[index].attributeName = $("#saveentityAttributeName").val();
+        entityData[index].attributeChinese = $("#saveentityAttributeChinese").val();
+        entityData[index].mysqlType = $("#saveentityMysqlType").val();
+        entityData[index].defaultValue = $("#saveentityDefaultValue").val();
+        entityData[index].beEmpty = beEmpty;
+        entityData[index].primaryKey = primaryKey;
+        entityData[index].isQuery =isQuery ;
+        entityData[index].queryType = $("#saveentityQueryType").val();
+        $("#table_entity_fields").bootstrapTable("load",entityData)
+        $("#entitySave").modal('hide');
+    }
+
+}
+function entityDelConfirm(index) {
+    if(confirm("确认删除吗")){
+        console.log(index);
+        entityData.splice(index,1);
+        $("#table_entity_fields").bootstrapTable("load",entityData)
+    }
+
+
+}
+
+/*----------------------------------entity结束-----------------------------------*/

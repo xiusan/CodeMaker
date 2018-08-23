@@ -40,6 +40,7 @@
 <input type="hidden" id="entityIndexTap" name="entityIndexTap"/>  <!--Entity藏的id-->
 <input type="hidden" id="gaiyaoIndex"  />  <!--定义概要修改的序号-->
 <input type="hidden" id="mysqlIndexflag"  />  <!--定义mysql修改的序号-->
+<input type="hidden" id="entityIndexflag"  />  <!--定义mysql修改的序号-->
 
 
 
@@ -288,7 +289,7 @@
         <div class="tab-pane fade" id="entity">
             <div>
                  <label style="float:left;padding-left: 20px;">
-                    <button type="button" class="btn btn-primary btn-sm" onclick="mysqlShowSave()">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="entityShowSave()">
                         <img src="static/images/add_btn.png" height="16" width="16"/> 添加
                     </button>
                 </label>
@@ -298,7 +299,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content animated bounceInRight">
                         <div class="modal-header">
-                            <button type="button" class="close" onclick="mysqlCloseSave()">
+                            <button type="button" class="close" onclick="entityCloseSave()">
                                 <span aria-hidden="true">&times;</span>
                                 <span class="sr-only">关闭</span>
                             </button>
@@ -308,9 +309,9 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="fg-line">
-                                        <label for="saveAttributeName">属性名 </label>
-                                        <input id="saveAttributeName"   type="text" class="form-control" maxlength="255" placeholder="属性名"  />
-                                        <input id="savemysqlId"   type="hidden" class="form-control" />
+                                        <label for="saveentityAttributeName">属性名 </label>
+                                        <input id="saveentityAttributeName"   type="text" class="form-control" maxlength="255" placeholder="属性名"  />
+                                        <input id="saveentityId"   type="hidden" class="form-control" />
                                     </div>
                                 </div>
                             </div>
@@ -318,8 +319,8 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="fg-line">
-                                        <label for="saveAttributeChinese">属性中文 </label>
-                                        <input id="saveAttributeChinese"  type="text" class="form-control" maxlength="255" placeholder="属性中文"  />
+                                        <label for="saveentityAttributeChinese">属性中文 </label>
+                                        <input id="saveentityAttributeChinese"  type="text" class="form-control" maxlength="255" placeholder="属性中文"  />
 
                                     </div>
                                 </div>
@@ -329,8 +330,8 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="fg-line">
-                                        <label for="saveMysqlType">模板类型</label>
-                                        <input id="saveMysqlType"   type="text" class="form-control" maxlength="255" placeholder="模板类型"  />
+                                        <label for="saveentityMysqlType">模板类型</label>
+                                        <input id="saveentityMysqlType"   type="text" class="form-control" maxlength="255" placeholder="模板类型"  />
 
                                     </div>
                                 </div>
@@ -339,8 +340,8 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="fg-line">
-                                        <label for="saveDefaultValue">模板类型</label>
-                                        <input id="saveDefaultValue"   type="text" class="form-control" maxlength="255" placeholder="模板类型" />
+                                        <label for="saveentityDefaultValue">模板类型</label>
+                                        <input id="saveentityDefaultValue"   type="text" class="form-control" maxlength="255" placeholder="模板类型" />
 
                                     </div>
                                 </div>
@@ -351,9 +352,9 @@
                                     <div class="mt-20 skin-minimal">
                                         <div class="fg-line">
                                             <label  >是否允许为空</label>
-                                            <input type="radio" id="radio-BeEmpty-1" checked="checked" value="是" name="radio-BeEmpty"/>
+                                            <input type="radio" id="entityradio-BeEmpty-1" checked="checked" value="是" name="entityradio-BeEmpty"/>
                                             <label for="radio-1">是</label>
-                                            <input type="radio" id="radio-BeEmpty-2"  value="否"  name="radio-BeEmpty"   />
+                                            <input type="radio" id="entityradio-BeEmpty-2"  value="否"  name="entityradio-BeEmpty"   />
                                             <label for="radio-2">否</label>
 
                                         </div>
@@ -366,9 +367,9 @@
                                     <div class="mt-20 skin-minimal">
                                         <div class="fg-line">
                                             <label  >是否为主键</label>
-                                            <input type="radio" id="radio-PrimaryKey-1" value="是" name="mysqlPrimaryKey"/>
+                                            <input type="radio" id="entityradio-PrimaryKey-1" value="是" name="entityPrimaryKey"/>
                                             <label for="radio-1">是</label>
-                                            <input type="radio" id="radio-PrimaryKey-2"  checked="checked" value="否"  name="mysqlPrimaryKey"   />
+                                            <input type="radio" id="entityradio-PrimaryKey-2"  checked="checked" value="否"  name="entityPrimaryKey"   />
                                             <label for="radio-2">否</label>
 
                                         </div>
@@ -380,9 +381,9 @@
                                     <div class="mt-20 skin-minimal">
                                         <div class="fg-line">
                                             <label  >是否为查询 </label>
-                                            <input type="radio" id="radio-IsQuery-1" checked="checked" value="是" name="mysqlIsQuery"/>
+                                            <input type="radio" id="entityradio-IsQuery-1" checked="checked" value="是" name="entityIsQuery"/>
                                             <label for="radio-1">是</label>
-                                            <input type="radio" id="radio-IsQuery-2"  value="否"  name="mysqlIsQuery"   />
+                                            <input type="radio" id="entityradio-IsQuery-2"  value="否"  name="entityIsQuery"   />
                                             <label for="radio-2">否</label>
 
                                         </div>
@@ -392,17 +393,17 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="fg-line">
-                                        <label for="saveQueryType">查询类型</label>
-                                        <input id="saveQueryType"   type="text" class="form-control" maxlength="255" placeholder="查询类型" />
+                                        <label for="saveentityQueryType">查询类型</label>
+                                        <input id="saveentityQueryType"   type="text" class="form-control" maxlength="255" placeholder="查询类型" />
 
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-12" style="text-align: right">
-                                <button type="button" class="btn" onclick="mysqlCloseSave()">
+                                <button type="button" class="btn" onclick="entityCloseSave()">
                                     <img src="static/images/close_btn.png" height="16" width="16"/> 关闭
                                 </button>
-                                <button type="button" class="btn btn-primary" onclick="mysqlSave()">
+                                <button type="button" class="btn btn-primary" onclick="entitySave()">
                                     <img src="static/images/save_btn.png" height="16" width="16"/> 保存
                                 </button>
                             </div>
