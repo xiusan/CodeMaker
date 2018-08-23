@@ -3,6 +3,8 @@ $(document).ready(function() {
     setBootstrapTable('#table_gai_yao_fields', bootstrapTableOption);
     //初始化mysql
     setBootstrapTable('#table_mysql_fields', bootstrapTableOptionMysql);
+    //初始化entity 根据mysql
+    setBootstrapTable('#table_entity_fields', bootstrapTableOptionMysql);
 });
 /*----------------------概要开始------------------------*/
 var chargingStationNameList = [];
