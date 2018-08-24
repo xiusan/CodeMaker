@@ -62,7 +62,8 @@ function save() {
                  modelType:$("#saveModelType").val(),
                  modelAddr:$("#saveModelAddr").val(),
                  modelSuffix:$("#saveModelSuffix").val()});
-            $("#table_gai_yao_fields").bootstrapTable("load",equipmentData)
+            $("#table_gai_yao_fields").bootstrapTable("load",equipmentData);
+            $("#mysqlIndex").val(equipmentData.length);
             console.log(equipmentData.length)
             $("#save").modal('hide');
          } else if (saveFlag == "UPDATE") {
@@ -83,6 +84,7 @@ function save() {
             equipmentData[index].modelAddr   = $("#saveModelAddr").val();
             equipmentData[index].modelSuffix  = $("#saveModelSuffix").val();
             $("#table_gai_yao_fields").bootstrapTable("load",equipmentData)
+            $("#mysqlIndex").val(equipmentData.length);
             $("#save").modal('hide');
         }
 
@@ -91,6 +93,7 @@ function delConfirm(index) {
         if(confirm("确认删除吗")){
            equipmentData.splice(index,1);
             $("#table_gai_yao_fields").bootstrapTable("load",equipmentData)
+            $("#mysqlIndex").val(equipmentData.length);
         }
 
 
@@ -186,6 +189,8 @@ function mysqlSave() {
             isQuery:isQuery,
             queryType:$("#saveQueryType").val()});
         $("#table_mysql_fields").bootstrapTable("load",mysqlData)
+        //添加mysql增删要提交的值
+        $("#mysqlIndexTap").val(mysqlData.length);
         console.log(mysqlData.length)
         entityData.push({id:$("#savemysqlId").val(),
             attributeName:$("#saveAttributeName").val(),
@@ -197,8 +202,8 @@ function mysqlSave() {
             isQuery:isQuery,
             queryType:$("#saveQueryType").val()});
         $("#table_entity_fields").bootstrapTable("load",entityData)
-        console.log(entityData.length)
 
+        $("#entityIndexTap").val(entityData.length);
         $("#mysqlSave").modal('hide');
     } else if (mysqSaveFlag == "UPDATE") {
         console.log("更新");
@@ -241,6 +246,7 @@ function mysqlDelConfirm(index) {
     if(confirm("确认删除吗")){
         mysqlData.splice(index,1);
         $("#table_mysql_fields").bootstrapTable("load",mysqlData)
+        $("#mysqlIndexTap").val(mysqlData.length);
     }
 
 
@@ -337,6 +343,7 @@ function entitySave() {
             isQuery:isQuery,
             queryType:$("#saveentityQueryType").val()});
         $("#table_entity_fields").bootstrapTable("load",entityData)
+        $("#entityIndexTap").val(entityData.length);
         console.log(entityData.length)
         $("#entitySave").modal('hide');
     } else if (entitySaveFlag == "UPDATE") {
@@ -371,6 +378,7 @@ function entitySave() {
         entityData[index].isQuery =isQuery ;
         entityData[index].queryType = $("#saveentityQueryType").val();
         $("#table_entity_fields").bootstrapTable("load",entityData)
+        $("#entityIndexTap").val(entityData.length);
         $("#entitySave").modal('hide');
     }
 
@@ -380,6 +388,7 @@ function entityDelConfirm(index) {
         console.log(index);
         entityData.splice(index,1);
         $("#table_entity_fields").bootstrapTable("load",entityData)
+        $("#entityIndexTap").val(entityData.length);
     }
 
 

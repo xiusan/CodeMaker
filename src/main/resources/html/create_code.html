@@ -198,8 +198,8 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="fg-line">
-                                        <label for="saveMysqlType">模板类型</label>
-                                        <input id="saveMysqlType"   type="text" class="form-control" maxlength="255" placeholder="模板类型"  />
+                                        <label for="saveMysqlType">类型</label>
+                                        <input id="saveMysqlType"   type="text" class="form-control" maxlength="255" placeholder="类型"  />
 
                                     </div>
                                 </div>
@@ -208,8 +208,8 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="fg-line">
-                                        <label for="saveDefaultValue">模板类型</label>
-                                        <input id="saveDefaultValue"   type="text" class="form-control" maxlength="255" placeholder="模板类型" />
+                                        <label for="saveDefaultValue">默认值</label>
+                                        <input id="saveDefaultValue"   type="text" class="form-control" maxlength="255" placeholder="默认值" />
 
                                     </div>
                                 </div>
@@ -262,7 +262,14 @@
                                 <div class="form-group">
                                     <div class="fg-line">
                                         <label for="saveQueryType">查询类型</label>
-                                        <input id="saveQueryType"   type="text" class="form-control" maxlength="255" placeholder="查询类型" />
+                                        <select id="saveQueryType"     class="form-control"   required=""   >
+                                            <option  value="=">=</option>
+                                            <option  value="like">like</option>
+                                            <option  value="&gt;">&gt;</option>
+                                            <option  value="&lt;">&lt;</option>
+                                            <option  value="&gt;=">&gt;=</option>
+                                            <option  value="&lt;=">&lt;=</option>
+                                        </select>
 
                                     </div>
                                 </div>
@@ -330,8 +337,8 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="fg-line">
-                                        <label for="saveentityMysqlType">模板类型</label>
-                                        <input id="saveentityMysqlType"   type="text" class="form-control" maxlength="255" placeholder="模板类型"  />
+                                        <label for="saveentityMysqlType">类型</label>
+                                        <input id="saveentityMysqlType"   type="text" class="form-control" maxlength="255" placeholder="类型"  />
 
                                     </div>
                                 </div>
@@ -340,8 +347,8 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="fg-line">
-                                        <label for="saveentityDefaultValue">模板类型</label>
-                                        <input id="saveentityDefaultValue"   type="text" class="form-control" maxlength="255" placeholder="模板类型" />
+                                        <label for="saveentityDefaultValue">默认值</label>
+                                        <input id="saveentityDefaultValue"   type="text" class="form-control" maxlength="255" placeholder="默认值" />
 
                                     </div>
                                 </div>
@@ -394,11 +401,20 @@
                                 <div class="form-group">
                                     <div class="fg-line">
                                         <label for="saveentityQueryType">查询类型</label>
-                                        <input id="saveentityQueryType"   type="text" class="form-control" maxlength="255" placeholder="查询类型" />
+                                        <select id="saveentityQueryType"     class="form-control"   required=""   >
+                                            <option  value="=">=</option>
+                                            <option  value="like">like</option>
+                                            <option  value="&gt;">&gt;</option>
+                                            <option  value="&lt;">&lt;</option>
+                                            <option  value="&gt;=">&gt;=</option>
+                                            <option  value="&lt;=">&lt;=</option>
+                                        </select>
 
                                     </div>
                                 </div>
                             </div>
+
+
                             <div class="col-sm-12" style="text-align: right">
                                 <button type="button" class="btn" onclick="entityCloseSave()">
                                     <img src="static/images/close_btn.png" height="16" width="16"/> 关闭

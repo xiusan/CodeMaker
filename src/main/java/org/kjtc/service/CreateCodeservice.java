@@ -86,6 +86,7 @@ public class CreateCodeservice {
             root.put("controllerExport", pd.get("controllerExport")==null?"":pd.get("controllerExport"));//获取生成导出
             root.put("controllerImport", pd.get("controllerImport")==null?"":pd.get("controllerImport"));//获取生成导入
             root.put("controllerCreator", pd.get("controllerCreator")==null?"":pd.get("controllerCreator"));//创建人
+            root.put("controllerOrPage", pd.get("controllerOrPage")==null?"":pd.get("controllerOrPage"));//是否分页
 
             Freemarker.printFile(strings[2],root,packageName+"controller/"+ objectName +  "Controller.java", filePath, ftlPath);
             logger.info("生成"+strings[2]+"结束");
