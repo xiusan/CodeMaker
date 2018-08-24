@@ -110,7 +110,7 @@
                                         <div class="fg-line">
                                             <label for="saveModelType">模板类型</label>
                                             <input id="saveModelType"   type="text" class="form-control" maxlength="255" placeholder="模板类型" title="模板类型"/>
-                                            <input id="saveId"   type="hidden" class="form-control" />
+                                            <input id="saveId"   disabled="disabled"   type="hidden" class="form-control" />
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +118,7 @@
                                     <div class="form-group">
                                         <div class="fg-line">
                                             <label for="saveModelAddr">模板路径</label>
-                                            <input id="saveModelAddr" type="text" class="form-control" maxlength="255" placeholder="模板路径" title="模板路径"/>
+                                            <input id="saveModelAddr" disabled="disabled" type="text" class="form-control" maxlength="255" placeholder="模板路径" title="模板路径"/>
                                         </div>
                                     </div>
                                 </div>
@@ -126,11 +126,16 @@
                                     <div class="form-group">
                                         <div class="fg-line">
                                             <label for="saveModelSuffix">模板生成类型</label>
-                                            <input id="saveModelSuffix"   type="text" class="form-control" maxlength="255" placeholder="模板生成类型" title="模板生成类型"/>
+                                            <select id="saveModelSuffix"     class="form-control"   required=""   >
+                                                <option  value=".java">.java</option>
+                                                <option  value=".html">.html</option>
+                                                <option  value=".js">.js</option>
+                                                <option  value=".ftl">.ftl</option>
+                                            </select>
+
                                         </div>
                                     </div>
                                 </div>
-
 
                                 <div class="col-sm-12" style="text-align: right">
                                     <button type="button" class="btn" onclick="closeSave()">
@@ -194,16 +199,20 @@
                                 </div>
                             </div>
 
-
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="fg-line">
                                         <label for="saveMysqlType">类型</label>
-                                        <input id="saveMysqlType"   type="text" class="form-control" maxlength="255" placeholder="类型"  />
+                                        <select id="saveMysqlType"     class="form-control"   required=""   >
+                                            <option  value="String">String</option>
+                                            <option  value="Integer">Integer</option>
+                                            <option  value="DATE">DATE</option>
+                                        </select>
 
                                     </div>
                                 </div>
                             </div>
+
 
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -330,15 +339,18 @@
                                         <input id="saveentityAttributeChinese"  type="text" class="form-control" maxlength="255" placeholder="属性中文"  />
 
                                     </div>
+
                                 </div>
                             </div>
-
-
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <div class="fg-line">
                                         <label for="saveentityMysqlType">类型</label>
-                                        <input id="saveentityMysqlType"   type="text" class="form-control" maxlength="255" placeholder="类型"  />
+                                        <select id="saveentityMysqlType"     class="form-control"   required=""   >
+                                            <option  value="String">String</option>
+                                            <option  value="Integer">Integer</option>
+                                            <option  value="DATE">DATE</option>
+                                        </select>
 
                                     </div>
                                 </div>

@@ -1,3 +1,22 @@
+/*------------------------------------公用开始----------------------------------------------*/
+//判断是否为空
+function  str(id) {
+    var fal = false;
+    if($("#"+id).val() == null ||''==$("#"+id).val()){
+        fal = true;
+    }
+    return fal;
+}
+//提示不能为空
+function almag(msg) {
+    swal("错误", msg+"不能为空!!!", "error");
+}
+//提示不能重复
+function alRepeat(msg) {
+    swal("错误", msg+"不能重复!!!", "error");
+}
+
+/*------------------------------------公用结束----------------------------------------------*/
 /*----------------------------------概要开始-----------------------------------*/
 var saveFlag = undefined;
 function showSave(index) {
@@ -42,6 +61,10 @@ function closeSave() {
 
 // 添加或更新
 function save() {
+    if(str("saveModelType")){
+        almag("模板类型");
+        return;
+    }
     console.log("操作数据");
         if (saveFlag == "INSERT") {
              $("#saveId").val("");
@@ -159,6 +182,24 @@ function mysqlCloseSave() {
 
 // 添加或更新
 function mysqlSave() {
+
+    for(var i = 0;i<mysqlData.length;i++){
+        if($("#saveAttributeName").val() ==mysqlData[i].attributeName ){
+            alRepeat("mysql属性名");
+            return;
+        }
+
+    }
+
+    if(str("saveAttributeName")){ ;
+        almag("属性名");
+        return;
+    }
+    if(str("saveAttributeChinese")){
+        almag("属性中文");
+        return;
+    }
+
     console.log("操作数据");
     if (mysqSaveFlag == "INSERT") {
         var beEmpty = "";
@@ -313,6 +354,25 @@ function entityCloseSave() {
 
 // 添加或更新
 function entitySave() {
+
+    for(var i = 0;i<entityData.length;i++){
+        if($("#saveAttributeName").val() == entityData[i].attributeName){
+            alRepeat("entity属性名");
+            return;
+        }
+
+    }
+
+    if(str("saveentityAttributeName")){ ;
+        almag("属性名");
+        return;
+    }
+    if(str("saveentityAttributeChinese")){
+        almag("属性中文 ");
+        return;
+    }
+
+
     console.log("操作数据");
     if (entitySaveFlag == "INSERT") {
         var beEmpty = "";
