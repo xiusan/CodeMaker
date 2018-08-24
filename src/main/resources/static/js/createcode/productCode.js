@@ -51,6 +51,13 @@ function chagegengNeng(value) {
 }
 
 function mysqlShowSql() {
+
+
+    if(str("tableName")){ ;
+        almag("表名");
+        return;
+    }
+
     var data = $("#FormAll").serialize();
     $.ajax( {
         url: "/New/querySqlShow" ,

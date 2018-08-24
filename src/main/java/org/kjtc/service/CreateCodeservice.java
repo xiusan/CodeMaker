@@ -59,7 +59,7 @@ public class CreateCodeservice {
             root.put("mysqlEditTable", pd.get("mysqlEditTable")==null?"":pd.get("mysqlEditTable"));//获取是否修改表
             root.put("mysqlAddTable", pd.get("mysqlAddTable")==null?"":pd.get("mysqlAddTable"));//获取是否新增
             root.put("controllerCreator", pd.get("controllerCreator")==null?"":pd.get("controllerCreator"));//创建人
-
+            root.put("tableName", pd.get("tableName")==null?pd.get("tabletop")==null?"":pd.get("tabletop"):pd.get("tableName"));//表明
 
             Freemarker.printFile(strings[2],root,"mysql/"+ objectName +  "mysql.sql", filePath, ftlPath);
             logger.info("生成"+strings[2]+"结束");

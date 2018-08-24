@@ -1,8 +1,8 @@
 <#if mysqlGrTable != ''>
 -- 删除表
-DROP TABLE  ${tabletop};
+DROP TABLE  ${tableName};
 -- 创建表
-CREATE TABLE ${tabletop} (
+CREATE TABLE ${tableName} (
 	<#list mysqlList as var>
 		<#if  var?size/2 == var_index >
 			<#if var[2] == 'Integer'>
@@ -34,12 +34,12 @@ CREATE TABLE ${tabletop} (
 
 <#if mysqlDeleteTable != ''>
 -- 删除
-DELETE FROM   ${tabletop};
+DELETE FROM   ${tableName};
 </#if>
 
 <#if mysqlEditTable != ''>
 -- 修改
-UPDATE SET  ${tabletop}
+UPDATE SET  ${tableName}
 	<#list mysqlList as var>
 		<#if  var?size/2 == var_index >
 		${var[0]} = ''
@@ -57,7 +57,7 @@ UPDATE SET  ${tabletop}
 
 <#if mysqlAddTable != ''>
 	-- 新增
-	insert into ${tabletop}(
+	insert into ${tableName}(
 		<#list mysqlList as var>
 			<#if  var?size/2 == var_index >
 			${var[0]} = ''
