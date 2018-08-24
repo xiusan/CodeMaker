@@ -480,39 +480,6 @@
 <script src="static/js/createcode/creatCodeOperate.js"></script>
 <script src="static/js/common.js"></script>
 
-<script type="text/javascript">
-
-    /*第二版js*/
-    $(document).ready(function(){
-        //概要
-        $.ajax( {
-            url: "/New/query_gai_yao" ,
-            type: "POST" ,
-            success: function( json, textStatus, jqXHR ){
-              /*  $.each(json, function(idx, obj) {
-                    var fields = obj.orNot+',fh,'+obj.modelType+',fh,'+obj.modelAddr;
-                    arrayFieldMysql(fields);
-                });*/
-
-
-            } ,
-            error: function(jqXHR, textStatus, errorMsg){
-                console.log("error!");
-            }
-        });
-        //mysql tap页
-        var fieldsMsql ='id'+',fh,'+'id'+',fh,'+'String'+',fh,'+'主键'+',fh,'+'否'+',fh,'+'是'+',fh,'+'是'+',fh,'+'=';
-        var fieldsMsql1 ='name'+',fh,'+'名字'+',fh,'+'String'+',fh,'+'无'+',fh,'+'是'+',fh,'+'否'+',fh,'+'是'+',fh,'+'=';
-        var fieldsMsql2 ='age'+',fh,'+'年龄'+',fh,'+'Integer'+',fh,'+'无'+',fh,'+'是'+',fh,'+'否'+',fh,'+'是'+',fh,'+'=';
-        var fieldsMsql3 ='creattime'+',fh,'+'时间'+',fh,'+'DATE'+',fh,'+'无'+',fh,'+'否'+',fh,'+'否'+',fh,'+'否'+',fh,'+'=';
-        var fieldsMsql4 ='updattime'+',fh,'+'时间'+',fh,'+'DATE'+',fh,'+'无'+',fh,'+'否'+',fh,'+'否'+',fh,'+'否'+',fh,'+'=';
-       /* arrayFieldMysqlTap(fieldsMsql);
-        arrayFieldMysqlTap(fieldsMsql1);
-        arrayFieldMysqlTap(fieldsMsql2);
-        arrayFieldMysqlTap(fieldsMsql3);
-        arrayFieldMysqlTap(fieldsMsql4);*/
-    });
-</script>
 
 </body>
 </html>

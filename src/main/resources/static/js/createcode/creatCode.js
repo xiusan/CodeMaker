@@ -6,6 +6,11 @@ $(document).ready(function() {
     //初始化entity 根据mysql
     setBootstrapTable('#table_entity_fields', bootstrapTableOptioEntity);
 });
+
+/*$("#table_gai_yao_fields").on("click-row.bs.table",function(e, row, $element){
+    //var  index= $element.data('index');
+    console.log(row);
+})*/
 /*----------------------概要开始------------------------*/
 var chargingStationNameList = [];
 var equipmentData = {};

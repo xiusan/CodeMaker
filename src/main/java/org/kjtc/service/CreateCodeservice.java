@@ -68,9 +68,9 @@ public class CreateCodeservice {
 		/*生成 实体*/
         if(strings[2].equals("EntityTemplate.ftl")){
             logger.info("生成"+strings[2]+"开始");
-            List<String[]>  mysqlList = getTableList(pd,"mysqlIndexTap","mysql");
+            //List<String[]>  mysqlList = getTableList(pd,"mysqlIndexTap","mysql");
             List<String[]>  entityList = getTableList(pd,"entityIndexTap","entity");
-            root.put("mysqlList", mysqlList);//获取mysql的所有参数
+            //root.put("mysqlList", mysqlList);//获取mysql的所有参数
             root.put("entityList", entityList);//获取entity的所有参数
             Freemarker.printFile(strings[2],root,packageName+"entity/"+ objectName +  "Entity.java", filePath, ftlPath);
             logger.info("生成"+strings[2]+"结束");

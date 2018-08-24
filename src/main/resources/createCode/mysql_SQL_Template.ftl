@@ -1,5 +1,5 @@
-
 <#if mysqlGrTable != ''>
+-- 删除表
 DROP TABLE  ${tabletop};
 -- 创建表
 CREATE TABLE ${tabletop} (

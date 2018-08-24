@@ -1,5 +1,5 @@
 <#if packageName != ''>
-package ${packageName}.controller;
+package org.kjtc.${packageName}.controller;
 <#else >
 package org.kjtc.controller;
 </#if>
@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 <#if packageName != ''>
-import ${packageName}.entity.${tabletop?cap_first}Entity;
-import ${packageName}.service.${tabletop?cap_first}Service;
+import org.kjtc.${packageName}.entity.${tabletop?cap_first}Entity;
+import org.kjtc.${packageName}.service.${tabletop?cap_first}Service;
 <#else >
 import org.kjtc.entity.${tabletop?cap_first}Entity;
 import org.kjtc.service.${tabletop?cap_first}Service;

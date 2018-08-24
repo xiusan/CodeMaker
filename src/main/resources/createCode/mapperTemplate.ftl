@@ -1,11 +1,11 @@
 <#if packageName != ''>
-package ${packageName}.mapper;
+package org.kjtc.${packageName}.mapper;
 <#else >
 package org.kjtc.mapper;
 </#if>
 
 <#if packageName != ''>
-import ${packageName}.entity.${tabletop?cap_first}Entity;
+import org.kjtc.${packageName}.entity.${tabletop?cap_first}Entity;
 <#else >
 import org.kjtc.entity.${tabletop?cap_first}Entity;
 </#if>
