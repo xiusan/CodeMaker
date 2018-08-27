@@ -8,10 +8,8 @@ import org.kjtc.entity.OutMysqlEntity;
 import org.kjtc.service.BaseAutomaticService;
 import org.kjtc.util.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -62,5 +60,10 @@ public class BaseAutomaticController {
 
         return showSql;
     }
+    @RequestMapping("/insertFile")
+    public String insertFile(HttpServletResponse response,HttpServletRequest request,@RequestParam("myfile") MultipartFile file) throws Exception {
+        String  showSql= baseAutomaticService.insertFile(response,request,file);
 
+        return showSql;
+    }
 }

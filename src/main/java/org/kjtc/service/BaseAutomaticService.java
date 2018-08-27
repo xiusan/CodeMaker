@@ -8,8 +8,10 @@ import org.kjtc.util.StringUtils;
 import org.kjtc.util.createCode.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -113,5 +115,12 @@ public class BaseAutomaticService {
             gaiYaoList.add(pd.getString(nameTap + i).split(",fh,"));    //属性放到集合里面
         }
         return gaiYaoList;
+    }
+
+    public String insertFile(HttpServletResponse response, HttpServletRequest request, MultipartFile file) {
+        String filePath = "D://ftl//";
+        FileUpload.fileUp(file,filePath,"sss");
+
+        return "";
     }
 }

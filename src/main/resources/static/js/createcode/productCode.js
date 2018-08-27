@@ -11,7 +11,16 @@ function isChinese(str){
         return false;
     }
 }
-
+//判断数组里面的值是否相等
+function isAllEqual(array){
+    if(array.length>0){
+        return !array.some(function(value,index){
+            return value !== array[0];
+        });
+    }else{
+        return true;
+    }
+}
 
 
 //关闭弹出框
@@ -59,7 +68,7 @@ function mysqlShowSql() {
     }
 
     var data = $("#FormAll").serialize();
-    $.ajax( {
+    $.ajax({
         url: "/New/querySqlShow" ,
         type: "POST" ,
         data: data,
@@ -473,9 +482,27 @@ function saveAll(){
         $("#objectRemark").focus();
         return;
     }
-
-
-
+//校验是否有生成的需求
+    var  arr =  new Array();
+    console.log(equipmentData.length);
+    for(var i = 0;i<equipmentData.length;i++){
+            arr[i]= equipmentData[i].orNot;
+    }
+    var  falg = false;
+    for(var i = 0;i<arr.length;i++){
+        if(arr[i].orNot == '是'){
+            falg = true;
+            break;
+        }
+    }
+    if(!falg){
+    console.log(isAllEqual(arr));
+    if(isAllEqual(arr)){
+        alerrorms("必须选一个是要生成的文件！！！");
+        return false;
+    }
+    }
+    console.log("生成");
 
     if(!confirm("确定要生成吗?")){
         return false;
