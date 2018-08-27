@@ -490,7 +490,7 @@ function saveAll(){
     }
     var  falg = false;
     for(var i = 0;i<arr.length;i++){
-        if(arr[i].orNot == '是'){
+        if(arr[i] == '是'){
             falg = true;
             break;
         }

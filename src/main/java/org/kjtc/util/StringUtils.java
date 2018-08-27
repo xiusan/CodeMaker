@@ -8,12 +8,24 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * Created By Donghua.Chen on  2018/1/9
  */
 public class StringUtils {
+
+
+    public static String replaceBlank(String str) {
+        String dest = "";
+        if (str != null) {
+            Pattern p = Pattern.compile("\\s*|\t|\r|\n");
+            Matcher m = p.matcher(str);
+            dest = m.replaceAll("");
+        }
+        return dest;
+    }
 
     public static String UUID(){
         return UUID.randomUUID().toString().replace("-", "");
@@ -826,8 +838,8 @@ public class StringUtils {
     }
 
     public static void main(String[] args) {
-        String aa = "\\u5168\\u5355\\u8fd4\\u522910%";
-        System.out.println(unicodeToUtf8(aa));
+        String aa = "ssss.ftl";
+        System.out.println(getFileName(aa));
     }
 
 
@@ -914,5 +926,15 @@ public class StringUtils {
             count++;
         }
         return count;
+    }
+
+    public static String getFileName(String originalFilename) {
+        String[] str =originalFilename.split("\\.");
+        String fName = "";
+        for (int i = 0; i < str.length; i++) {
+            fName= str[0];
+
+        }
+        return fName;
     }
 }

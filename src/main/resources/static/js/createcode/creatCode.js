@@ -20,12 +20,22 @@ var bootstrapTableOption = {
         {checkbox: true}, // 显示一个勾选框
         {field: 'orNot', title: '是否生成'},
         {field: 'modelType', title: '模板类型'},
-        {field: 'modelAddr', title: '模板路径'},
+        {field: 'modelAddr', title: '模板路径', formatter:function (value, row, index) {
+            return [row.modelAddr+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a><i onclick='downloadsh(" + index + ")'>下载</i></a>"].join('');
+        }},
         {field: 'modelSuffix', title: '模板生成类型'},
         {title: '操作', formatter:function (value, row, index) {
-            var fields = row.orNot+',fh,' + row.modelType + ',fh,' + row.modelAddr+ ',fh,' + row.modelSuffix ;
-            return ["<a><i class='' onclick='showSave(" + index + ")'>修改</i></a>","&nbsp;<a><i class='' onclick='delConfirm(" + index + ")'>删除</i><input type='hidden'  name='field"+index+"' value='"+fields+"'   /></a>"].join('');
-        }
+        console.log(row.xin)
+            if (typeof(row.xin) == "undefined") {
+                var fields = row.orNot+',fh,' + row.modelType + ',fh,' + row.modelAddr+ ',fh,' + row.modelSuffix ;
+                return ["<a><i class='' onclick='showSave(" + index + ")'>修改</i></a>","&nbsp;<a><i class='' onclick='delConfirm(" + index + ")'>删除</i><input type='hidden'  name='field"+index+"' value='"+fields+"'   /></a>"].join('');
+
+            }else {
+                var fields = row.orNot+',fh,' + row.modelType + ',fh,' + row.modelAddr+ ',fh,' + row.modelSuffix + ',fh,' + row.xin ;
+                return ["<a><i class='' onclick='showSave(" + index + ")'>修改</i></a>","&nbsp;<a><i class='' onclick='delConfirm(" + index + ")'>删除</i><input type='hidden'  name='field"+index+"' value='"+fields+"'   /></a>"].join('');
+
+            }
+          }
         }
     ],
     responseHandler: function (data) {

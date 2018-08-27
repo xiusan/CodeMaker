@@ -75,9 +75,9 @@
     <!--概要-->
     <div id="myTabContent" class="tab-content">
         <div class="tab-pane fade in active" id="gaiYao">
-            <!--<button type="button" class="btn btn-primary btn-sm" onclick="showSave()">
+            <button type="button" class="btn btn-primary btn-sm" onclick="showSave()">
                 <img src="static/images/add_btn.png" height="16" width="16"/> 添加
-            </button>-->
+            </button>
             <table id="table_gai_yao_fields"></table>
             <div class="modal inmodal" id="save" style="display: none" tabindex="-1" data-backdrop="static" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
@@ -110,7 +110,7 @@
                                         <div class="fg-line">
                                             <label for="saveModelType">模板类型</label>
                                             <input id="saveModelType"   type="text" class="form-control" maxlength="255" placeholder="模板类型" title="模板类型"/>
-                                            <input id="saveId"   disabled="disabled"   type="hidden" class="form-control" />
+                                            <input id="saveId"     type="hidden" class="form-control" />
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +118,7 @@
                                     <div class="form-group">
                                         <div class="fg-line">
                                             <label for="saveModelAddr">模板路径</label>
-                                            <input id="saveModelAddr" disabled="disabled" type="text" class="form-control" maxlength="255" placeholder="模板路径" title="模板路径"/>
+                                            <input id="saveModelAddr"   type="text" class="form-control" maxlength="255" placeholder="模板路径" title="模板路径"/>
                                         </div>
                                     </div>
                                 </div>

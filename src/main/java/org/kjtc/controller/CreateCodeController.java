@@ -12,6 +12,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.util.*;
 
 @Controller
@@ -71,7 +72,21 @@ public class CreateCodeController {
 				logger.info(strings[1]+"用户不需要生成");
 			}
 		}
+		//处理用户添加的概要内容
+		for (String[] strings : gaiYaoList) {
+			if(strings.length>4){
+				String xin = strings[4]==null?"":strings[4];
+				if (xin.equals("xin")){
+					if (strings[0].equals("是")){
+						//filePath ="D:"+ File.separator+"ftl"+ File.separator;
+						createCodeservice.getCreatCodeNew(pd,strings,root,tabletop ,filePath, ftlPath);
+					}
+			}
 
+			}else {
+				logger.info(strings[1]+"用户不需要生成");
+			}
+		}
 
 		
 		/*生成的全部代码压缩成zip文件*/

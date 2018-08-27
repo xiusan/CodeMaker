@@ -35,16 +35,16 @@
                             <#if var[6] == "是">
                                 <#if var[2]=='DATE' >
                                     <#assign straddac=1>
-                                    <label for="id">开始${var[1]}:</label>
+                                    <label for="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>str">开始${var[1]}:</label>
                                     <input id="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>str" name="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>str" class="selectpicker" data-live-search="true"  >
                                     </input>
                                     <#assign straddacend=1>
-                                    <label for="id">结束${var[1]}:</label>
+                                    <label for="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>end">结束${var[1]}:</label>
                                     <input id="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddacend=straddacend+1><#if straddacend==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>end" name="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddacend=straddacend+1><#if straddacend==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>end" class="selectpicker" data-live-search="true"  >
                                     </input>
                                 <#else>
                                     <#assign straddac=1>
-                                    <label for="id">${var[1]}:</label>
+                                    <label for="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>">${var[1]}:</label>
                                     <input id="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>" name="<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>" class="selectpicker" data-live-search="true"  >
                                     </input>
                                 </#if>

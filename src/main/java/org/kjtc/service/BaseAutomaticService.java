@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.util.*;
 
 
@@ -118,8 +119,10 @@ public class BaseAutomaticService {
     }
 
     public String insertFile(HttpServletResponse response, HttpServletRequest request, MultipartFile file) {
-        String filePath = "D://ftl//";
-        FileUpload.fileUp(file,filePath,"sss");
+        String filePath = "D:"+ File.separator+"ftl"+ File.separator;
+        System.out.println(file.getOriginalFilename());
+        String str = StringUtils.getFileName(file.getOriginalFilename());
+        FileUpload.fileUp(file,filePath,str);
 
         return "";
     }

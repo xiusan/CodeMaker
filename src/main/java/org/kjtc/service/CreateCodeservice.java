@@ -1,6 +1,7 @@
 package org.kjtc.service;
 
 import org.apache.log4j.Logger;
+import org.kjtc.util.StringUtils;
 import org.kjtc.util.createCode.Freemarker;
 import org.kjtc.util.createCode.PageData;
 import org.springframework.stereotype.Service;
@@ -139,13 +140,10 @@ public class CreateCodeservice {
         }
 		 /*生成HTML*/
         if(strings[2].equals("htmlTemplate.ftl")){
-            List<String[]>  mysqlList = getTableList(pd,"mysqlIndexTap","mysql");
+            //List<String[]>  mysqlList = getTableList(pd,"mysqlIndexTap","mysql");
             List<String[]>  entityList = getTableList(pd,"entityIndexTap","entity");
-            for (int i = 0; i < entityList.size(); i++) {
-                mysqlList.add(entityList.get(i));
 
-            }
-            root.put("mysqlList", mysqlList);//获取mysql的所有参数
+            root.put("mysqlList", entityList);//获取mysql的所有参数
             Freemarker.printFile("htmlTemplate.ftl", root, "html/"+ objectName.toLowerCase() +  ".html", filePath, ftlPath);
 
         }
@@ -201,4 +199,55 @@ public class CreateCodeservice {
         }
         return gaiYaoList;
     }
+
+    /**
+     *
+     * @param pd  总参
+     * @param strings   数组
+     * @param root 参数
+     * @param objectName  项目名
+     * @param filePath 输出路径
+     * @param ftlPath  模板路径
+     * @throws Exception
+     */
+
+    public void getCreatCodeNew(PageData pd, String[] strings, Map<String, Object> root, String objectName, String filePath, String ftlPath) throws Exception {
+
+        //首字母大写
+        objectName = objectName.substring(0,1).toUpperCase().concat(objectName.substring(1,objectName.length()));
+        //获取包名
+        String  packageName= getPackage(root.get("packageName").toString())+"/";
+
+            logger.info("生成"+strings[2]+"开始");
+            List<String[]>  mysqlList = getTableList(pd,"mysqlIndexTap","mysql");
+
+            List<String[]>  entityList = getTableList(pd,"entityIndexTap","entity");
+            root.put("entityList", entityList);//获取entity的所有参数
+
+            root.put("mysqlList", mysqlList);//获取mysql的所有参数
+            root.put("mysqlGrTable", pd.get("mysqlGrTable")==null?"":pd.get("mysqlGrTable"));//获取是否生成创建表
+            root.put("mysqlDeleteTable", pd.get("mysqlDeleteTable")==null?"":pd.get("mysqlDeleteTable"));//获取是否删除表
+            root.put("mysqlEditTable", pd.get("mysqlEditTable")==null?"":pd.get("mysqlEditTable"));//获取是否修改表
+            root.put("mysqlAddTable", pd.get("mysqlAddTable")==null?"":pd.get("mysqlAddTable"));//获取是否新增
+            root.put("controllerCreator", pd.get("controllerCreator")==null?"":pd.get("controllerCreator"));//创建人
+            root.put("tableName", pd.get("tableName")==null?pd.get("tabletop")==null?"":pd.get("tabletop"):pd.get("tableName"));//表明
+
+            root.put("controllerSelect", pd.get("controllerSelect")==null?"":pd.get("controllerSelect"));//获取生成查询
+            root.put("controllerDelete", pd.get("controllerDelete")==null?"":pd.get("controllerDelete"));//获取生成删除
+            root.put("controllerUpadte", pd.get("controllerUpadte")==null?"":pd.get("controllerUpadte"));//获取生成修改
+            root.put("controllerAdd", pd.get("controllerAdd")==null?"":pd.get("controllerAdd"));//获取生成新增
+            root.put("controllerExport", pd.get("controllerExport")==null?"":pd.get("controllerExport"));//获取生成导出
+            root.put("controllerImport", pd.get("controllerImport")==null?"":pd.get("controllerImport"));//获取生成导入
+            root.put("controllerCreator", pd.get("controllerCreator")==null?"":pd.get("controllerCreator"));//创建人
+            root.put("controllerOrPage", pd.get("controllerOrPage")==null?"":pd.get("controllerOrPage"));//是否分页
+            root.put("tableName", pd.get("tableName")==null?pd.get("tabletop")==null?"":pd.get("tabletop"):pd.get("tableName"));//表明
+
+
+        String str = StringUtils.getFileName(strings[2]);
+            Freemarker.printFilenew(strings[2], root, packageName+"/"+ StringUtils.replaceBlank(str)+ strings[3] , filePath, ftlPath);
+
+
+
+    }
+
 }

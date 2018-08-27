@@ -60,55 +60,75 @@ function showSave(index) {
 }
 //关闭（添加或更新）功能备注
 function closeSave() {
+    $("#saveId").val("");
+    $("#saveOrNot").val("");
+    $("#saveModelType").val("");
+    $("#saveModelAddr").val("");
+    $("#saveModelSuffix").val("");
     $("#save").modal('hide');
+}
+//下载模板
+function downloadsh(index) {
+    console.log(index);
+
+    var url = "/New/downLode";
+    var fileName = "oracle_SQL_Template.ftl";
+    var form = $("<form></form>").attr("action", url).attr("method", "post");
+    form.append($("<input></input>").attr("type", "hidden").attr("name", "myfile").attr("value",  equipmentData[index].modelAddr));
+    form.appendTo('body').submit().remove();
 }
 
 // 添加或更新
 function save() {
 
-    //上传文件
-   /* var formData = new FormData();
-    formData.append("myfile", document.getElementById("savefilegei").files[0]);
-    $.ajax({
-        url: "/New/insertFile",
-        type: "POST",
-        data: formData,
-        /!**
-         *必须false才会自动加上正确的Content-Type
-         *!/
-        contentType: false,
-        /!**
-         * 必须false才会避开jQuery对 formdata 的默认处理
-         * XMLHttpRequest会对 formdata 进行正确的处理
-         *!/
-        processData: false,
-        success: function (data) {
-            if (data.status == "true") {
-                alert("上传成功！");
-            }
-            if (data.status == "error") {
-                alert(data.msg);
-            }
-            $("#imgWait").hide();
-        },
-        error: function () {
-            alert("上传失败！");
-            $("#imgWait").hide();
-        }
-    });
-*/
+
 
     if(str("saveModelType")){
         almag("模板类型");
         return;
     }
+    for(var i = 0;i<equipmentData.length;i++){
+        if($("#saveModelAddr").val().trim() == equipmentData[i].modelAddr){
+            alRepeat(" 模板路径");
+            return;
+        }
+
+    }
     console.log("操作数据");
         if (saveFlag == "INSERT") {
-             $("#saveId").val("");
-             $("#saveOrNot").val();
-             $("#saveModelType").val("");
-             $("#saveModelAddr").val("");
-             $("#saveModelSuffix").val("");
+            //上传文件
+             var formData = new FormData();
+             formData.append("myfile", document.getElementById("savefilegei").files[0]);
+             $.ajax({
+             url: "/New/insertFile",
+             type: "POST",
+             data: formData,
+             /**
+             *必须false才会自动加上正确的Content-Type
+             */
+             contentType: false,
+             /**
+             * 必须false才会避开jQuery对 formdata 的默认处理
+             * XMLHttpRequest会对 formdata 进行正确的处理
+             */
+             processData: false,
+             success: function (data) {
+             if (data.status == "true") {
+             alert("上传成功！");
+             }
+             if (data.status == "error") {
+             alert(data.msg);
+             }
+             $("#imgWait").hide();
+             },
+             error: function () {
+             alert("上传失败！");
+             $("#imgWait").hide();
+             }
+             });
+
+
+
              var orNot = "";
             if(document.getElementById("radio-1").checked == true){
                 orNot = "是";
@@ -121,10 +141,14 @@ function save() {
                  orNot:orNot,
                  modelType:$("#saveModelType").val(),
                  modelAddr:$("#saveModelAddr").val(),
+                 xin:'xin',
                  modelSuffix:$("#saveModelSuffix").val()});
             $("#table_gai_yao_fields").bootstrapTable("load",equipmentData);
             $("#mysqlIndex").val(equipmentData.length);
             console.log(equipmentData.length)
+            //情空
+
+
             $("#save").modal('hide');
          } else if (saveFlag == "UPDATE") {
             console.log("更新");
