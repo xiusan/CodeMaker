@@ -220,7 +220,7 @@ public class CreateCodeservice {
 
             logger.info("生成"+strings[2]+"开始");
             List<String[]>  mysqlList = getTableList(pd,"mysqlIndexTap","mysql");
-
+        root.put("mysqlList", mysqlList);
             List<String[]>  entityList = getTableList(pd,"entityIndexTap","entity");
             root.put("entityList", entityList);//获取entity的所有参数
 
@@ -238,9 +238,7 @@ public class CreateCodeservice {
             root.put("controllerAdd", pd.get("controllerAdd")==null?"":pd.get("controllerAdd"));//获取生成新增
             root.put("controllerExport", pd.get("controllerExport")==null?"":pd.get("controllerExport"));//获取生成导出
             root.put("controllerImport", pd.get("controllerImport")==null?"":pd.get("controllerImport"));//获取生成导入
-            root.put("controllerCreator", pd.get("controllerCreator")==null?"":pd.get("controllerCreator"));//创建人
             root.put("controllerOrPage", pd.get("controllerOrPage")==null?"":pd.get("controllerOrPage"));//是否分页
-            root.put("tableName", pd.get("tableName")==null?pd.get("tabletop")==null?"":pd.get("tabletop"):pd.get("tableName"));//表明
 
 
         String str = StringUtils.getFileName(strings[2]);
