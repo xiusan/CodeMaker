@@ -20,6 +20,19 @@ function alerrorms(msg) {
     swal("错误", msg, "error");
 }
 
+//获取后缀
+function CheckInput(id)
+{
+    var  extension ="";
+    var file = encodeURI(document.getElementById(id).value);
+    if(file == "") {
+        alerrorms("文件不能为空!");
+    } else {
+         extension = file.substring(file.lastIndexOf('.'), file.length).toLowerCase();
+
+    }
+    return extension;
+}
 /*------------------------------------公用结束----------------------------------------------*/
 /*----------------------------------概要开始-----------------------------------*/
 var saveFlag = undefined;
@@ -78,6 +91,7 @@ function downloadsh(index) {
     form.appendTo('body').submit().remove();
 }
 
+
 // 添加或更新
 function save() {
 
@@ -87,15 +101,26 @@ function save() {
         almag("模板类型");
         return;
     }
-    for(var i = 0;i<equipmentData.length;i++){
-        if($("#saveModelAddr").val().trim() == equipmentData[i].modelAddr){
-            alRepeat(" 模板路径");
-            return;
-        }
-
+    //判断模板路径必须包含ftl
+    if($("#saveModelAddr").val().indexOf("ftl") == -1){
+        alerrorms("模板路后缀必须为.ftl");
+        return;
+    }
+    //判断文件后缀必须为ftl
+    if(CheckInput("savefilegei") != ".ftl"){
+        alerrorms("文件名称后缀必须为.ftl");
+        return;
     }
     console.log("操作数据");
         if (saveFlag == "INSERT") {
+            //判断不能重复
+            for(var i = 0;i<equipmentData.length;i++){
+                if($("#saveModelAddr").val().trim() == equipmentData[i].modelAddr){
+                    alRepeat(" 模板路径");
+                    return;
+                }
+
+            }
             //上传文件
              var formData = new FormData();
              formData.append("myfile", document.getElementById("savefilegei").files[0]);
@@ -244,13 +269,7 @@ function mysqlCloseSave() {
 // 添加或更新
 function mysqlSave() {
 
-    for(var i = 0;i<mysqlData.length;i++){
-        if($("#saveAttributeName").val() ==mysqlData[i].attributeName ){
-            alRepeat("mysql属性名");
-            return;
-        }
 
-    }
 
     if(str("saveAttributeName")){ ;
         almag("属性名");
@@ -263,6 +282,13 @@ function mysqlSave() {
 
     console.log("操作数据");
     if (mysqSaveFlag == "INSERT") {
+        for(var i = 0;i<mysqlData.length;i++){
+            if($("#saveAttributeName").val() ==mysqlData[i].attributeName ){
+                alRepeat("mysql属性名");
+                return;
+            }
+
+        }
         var beEmpty = "";
         var primaryKey = "";
         var isQuery = "";
@@ -416,14 +442,6 @@ function entityCloseSave() {
 // 添加或更新
 function entitySave() {
 
-    for(var i = 0;i<entityData.length;i++){
-        if($("#saveAttributeName").val() == entityData[i].attributeName){
-            alRepeat("entity属性名");
-            return;
-        }
-
-    }
-
     if(str("saveentityAttributeName")){ ;
         almag("属性名");
         return;
@@ -436,6 +454,13 @@ function entitySave() {
 
     console.log("操作数据");
     if (entitySaveFlag == "INSERT") {
+        for(var i = 0;i<entityData.length;i++){
+            if($("#saveentityAttributeName").val() == entityData[i].attributeName){
+                alRepeat("entity属性名");
+                return;
+            }
+
+        }
         var beEmpty = "";
         var primaryKey = "";
         var isQuery = "";
