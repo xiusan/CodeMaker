@@ -69,7 +69,7 @@ function mysqlShowSql() {
 
     var data = $("#FormAll").serialize();
     $.ajax({
-        url: "/New/querySqlShow" ,
+        url: "/codeMaker/querySqlShow" ,
         type: "POST" ,
         data: data,
         dataType: "json",

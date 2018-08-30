@@ -8,10 +8,10 @@ import java.nio.channels.FileChannel.MapMode;
 
 public class FileUtil {
 
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		String dirName = "d:/FH/topic/";// 创建目录
 		FileUtil.createDir(dirName);
-	}
+	}*/
 
 	/**
 	 * 创建目录

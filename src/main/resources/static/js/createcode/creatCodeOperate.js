@@ -84,7 +84,7 @@ function closeSave() {
 function downloadsh(index) {
     console.log(index);
 
-    var url = "/New/downLode";
+    var url = "/codeMaker/downLode";
     var fileName = "oracle_SQL_Template.ftl";
     var form = $("<form></form>").attr("action", url).attr("method", "post");
     form.append($("<input></input>").attr("type", "hidden").attr("name", "myfile").attr("value",  equipmentData[index].modelAddr));
@@ -125,7 +125,7 @@ function save() {
              var formData = new FormData();
              formData.append("myfile", document.getElementById("savefilegei").files[0]);
              $.ajax({
-             url: "/New/insertFile",
+             url: "/codeMakerw/insertFile",
              type: "POST",
              data: formData,
              /**

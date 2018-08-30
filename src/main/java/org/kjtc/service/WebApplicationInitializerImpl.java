@@ -69,7 +69,7 @@ public class WebApplicationInitializerImpl extends WebMvcConfigurerAdapter imple
             /*if (!StringUtils.isEmpty(uuid) && redisTemplate.hasKey(uuid)) {
                 redisTemplate.opsForValue().set(uuid, (User)redisTemplate.opsForValue().get(uuid), 1, TimeUnit.HOURS);
             } else {
-                response.sendRedirect("/New/login");
+                response.sendRedirect("/codeMaker/login");
             }*/
             return super.preHandle(request, response, handler);
         }

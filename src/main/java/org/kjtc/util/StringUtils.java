@@ -837,10 +837,10 @@ public class StringUtils {
 
     }
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         String aa = "ssss.ftl";
         System.out.println(getFileName(aa));
-    }
+    }*/
 
 
     public static String bytetoString(byte[] bytearray) {

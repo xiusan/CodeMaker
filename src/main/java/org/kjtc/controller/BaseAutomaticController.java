@@ -8,6 +8,7 @@ import org.kjtc.entity.OutMysqlEntity;
 import org.kjtc.service.BaseAutomaticService;
 import org.kjtc.util.JsonUtils;
 import org.kjtc.util.FileDownload;
+import org.kjtc.util.SystemUtils;
 import org.kjtc.util.createCode.PathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -87,8 +88,14 @@ public class BaseAutomaticController {
      */
     @RequestMapping("/downLode")
     public String insertFile(HttpServletResponse response,@RequestParam("myfile") String  fName) throws Exception {
+        String dir = null;
+        if (SystemUtils.getSystem()==true){
+            dir = "D:"+ File.separator+"ftl"+ File.separator;
 
-        FileDownload.fileDownload(response,  "D:"+ File.separator+"ftl"+ File.separator+fName, fName);
+        }else {
+            dir = "/home"+ File.separator+"tamp"+ File.separator;
+        }
+        FileDownload.fileDownload(response,  dir+fName, fName);
         return "succ";
     }
 }

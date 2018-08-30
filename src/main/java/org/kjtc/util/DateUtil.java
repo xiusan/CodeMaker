@@ -496,10 +496,10 @@ public class DateUtil {
  		Date date = calendar.getTime();
  		return date;
  	}	
-	public static void main(String[] args) throws Throwable {
+/*	public static void main(String[] args) throws Throwable {
         System.out.println(dayTomin(""));
 
-	}
+	}*/
 	
 
 	 public static String getWeek(Date date){

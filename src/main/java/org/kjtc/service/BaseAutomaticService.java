@@ -5,6 +5,7 @@ import org.kjtc.entity.OutLineEntity;
 import org.kjtc.entity.OutMysqlEntity;
 import org.kjtc.mapper.BaseAutomaticMapper;
 import org.kjtc.util.StringUtils;
+import org.kjtc.util.SystemUtils;
 import org.kjtc.util.createCode.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -119,7 +120,13 @@ public class BaseAutomaticService {
     }
 
     public String insertFile(HttpServletResponse response, HttpServletRequest request, MultipartFile file) {
-        String filePath = "D:"+ File.separator+"ftl"+ File.separator;
+        String filePath ="";
+        if (SystemUtils.getSystem()==true){
+            filePath = "D:"+ File.separator+"ftl"+ File.separator;
+
+        }else {
+            filePath = "/home"+ File.separator+"tamp"+ File.separator;
+        }
         System.out.println(file.getOriginalFilename());
         String str = StringUtils.getFileName(file.getOriginalFilename());
         FileUpload.fileUp(file,filePath,str);
