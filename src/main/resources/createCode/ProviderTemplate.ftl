@@ -48,7 +48,7 @@ public class ${tabletop?cap_first}Provider {
                     	sql.append("  ${foo}, " );
 					</#if>
 				</#list>
-				sql.append("  FROM  ${tabletop} ");//表名
+				sql.append("  FROM  ${tableName} ");//表名
 				sql.append("   WHERE 1 = 1          ");
 
 				<#list mysqlList as var>
@@ -88,7 +88,6 @@ public class ${tabletop?cap_first}Provider {
 
 					StringBuffer sql = new StringBuffer();
 					sql.append("insert into ${tableName}");
-					sql.append(" ${tabletop} ");
 					sql.append("(" );
 				<#assign stradd=1>
 				<#list mysqlList as var>
@@ -122,7 +121,7 @@ public class ${tabletop?cap_first}Provider {
 		public String update${tabletop?cap_first}(${tabletop?cap_first}Entity ${tabletop?uncap_first}Entity){
 
 					StringBuffer sql = new StringBuffer();
-					sql.append("update ${tabletop} set ");
+					sql.append("update ${tableName} set ");
 					<#assign stradd=1>
 					<#list mysqlList as var>
 						<#assign foo="${var[0]}">
@@ -151,7 +150,7 @@ public class ${tabletop?cap_first}Provider {
 					<#assign straesd=1>
 					<#list mysqlList as var>
 						<#if straesd<2 >
-						String newSql = "  ${tabletop}  where   ${var[0]} in (";
+						String newSql = "  ${tableName}  where   ${var[0]} in (";
 						</#if>
 						<#assign straesd=straesd+1>
 					</#list>
