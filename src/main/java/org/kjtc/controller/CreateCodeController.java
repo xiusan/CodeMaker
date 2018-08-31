@@ -1,7 +1,7 @@
 package org.kjtc.controller;
 
 import org.kjtc.service.CreateCodeservice;
-import org.kjtc.util.StringUtils;
+import org.kjtc.util.SystemUtils;
 import org.kjtc.util.createCode.*;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,15 +54,21 @@ public class CreateCodeController {
 		root.put("tabletop", tabletop);                            //类名
 		root.put("objectRemark", objectRemark);                    //备注
 		root.put("nowDate", new Date());                            //当前日期
-
-		DelAllFile.delFolder(PathUtil.getClasspath() + "admin/ftl"); //生成代码前,先清空之前生成的代码
+		String path ="";
+		//判断系统
+		if (SystemUtils.getSystem()==true){
+			path = PathUtil.getClasspath();
+		}else {
+			path = "/home"+ File.separator;
+		}
+		DelAllFile.delFolder(path + "admin/ftl"); //生成代码前,先清空之前生成的代码
 
 		//获取概要参数  //判断是否生成对应的代码
 		List<String[]> gaiYaoList  = createCodeservice.getGaiyao(pd);
 
 		logger.info("========开始生产代码========");
 		String filePath = "admin/ftl/code/";                        //存放路径
-		String ftlPath = "createCode";
+		String ftlPath = "createCode";   //模板路径
 		//判断是否生成对应的代码
 		for (String[] strings : gaiYaoList) {
 			if (strings[0].equals("是")){
@@ -88,12 +94,18 @@ public class CreateCodeController {
 			}
 		}
 
-		
+		String dir ="";
+		//判断系统
+		if (SystemUtils.getSystem()==true){
+			dir = PathUtil.getClasspath();
+		}else {
+			dir = "/home"+ File.separator;
+		}
 		/*生成的全部代码压缩成zip文件*/
-		FileZip.zip(PathUtil.getClasspath() + "admin/ftl/code", PathUtil.getClasspath() + "admin/ftl/code.zip");
+		FileZip.zip(dir + "admin/ftl/code", dir + "admin/ftl/code.zip");
 		
 		/*下载代码*/
-		FileDownload.fileDownload(response, PathUtil.getClasspath() + "admin/ftl/code.zip", "code.zip");
+		FileDownload.fileDownload(response, dir + "admin/ftl/code.zip", "code.zip");
 		logger.info("========结束生产代码========");
 	}
 

@@ -125,7 +125,7 @@ function save() {
              var formData = new FormData();
              formData.append("myfile", document.getElementById("savefilegei").files[0]);
              $.ajax({
-             url: "/codeMakerw/insertFile",
+             url: "/codeMaker/insertFile",
              type: "POST",
              data: formData,
              /**

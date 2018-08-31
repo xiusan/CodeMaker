@@ -74,7 +74,14 @@ public class BaseAutomaticService {
 
         Freemarker.printFile("mysql_SQL_Template.ftl", root, "mysql/mysql.sql", filePath, ftlPath);
         /*生成的全部代码压缩成zip文件*/
-        String pathsql = StringUtils.getPath(PathUtil.getClasspath());
+        String pathsql ="";
+        //判断系统
+        if (SystemUtils.getSystem()==true){
+            pathsql =StringUtils.getPath(PathUtil.getClasspath());;
+        }else {
+            pathsql = "/home"+ File.separator;
+        }
+
         System.out.println(pathsql);
         byte[]   bytes = FileUtil.getContent(pathsql+ "admin/ftl/code/mysql/"+"mysql.sql");
         String stru = new String(bytes);
