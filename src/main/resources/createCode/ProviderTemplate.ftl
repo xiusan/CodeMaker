@@ -42,10 +42,16 @@ public class ${tabletop?cap_first}Provider {
 				sql.append("SELECT  ");
 				<#list mysqlList as var>
 					<#assign foo="${var[0]}">
-					<#if  var?size/2 == var_index >
-                    	sql.append("  ${foo} " );
+					<#if  mysqlList?size-1 == var_index >
+						<#assign stradd =1>
+						<#assign straddac=1>
+						<#assign strzhuanhu=1>
+					sql.append("  ${foo}  AS <#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if> " );   //${var[0]}
 					<#else >
-                    	sql.append("  ${foo}, " );
+						<#assign stradd =1>
+						<#assign straddac=1>
+						<#assign strzhuanhu=1>
+                    sql.append("  ${foo}  AS <#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if> , " );   //${var[0]}
 					</#if>
 				</#list>
 				sql.append("  FROM  ${tableName} ");//表名

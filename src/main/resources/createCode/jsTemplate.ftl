@@ -10,13 +10,18 @@ var bootstrapTableOption = {
                 <#assign foo="${var[0]}">
                 <#if var[6] == "是">
                     <#if var[2]=='DATE' >
+                        <#assign stradd =1>
                         <#assign straddac=1>
+                        <#assign strzhuanhu=1>
                         <#assign straddacstr=1>
+                        <#assign strzhuanhuss=1>
                         <#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>str:$('#<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign stradd=stradd+1><#if stradd==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>str').val(),  //${var[0]}str,
-                        <#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddacstr=straddacstr+1><#if straddacstr==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>end:$('#<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddacstr=straddacstr+1><#if straddacstr==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>end').val(),  //${var[0]}end,
+                        <#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddacstr=straddacstr+1><#if straddacstr==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>end:$('#<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddacstr=straddacstr+1><#if straddacstr==2 >${s?lower_case}<#else><#assign strzhuanhuss=s?lower_case>${strzhuanhuss?cap_first}</#if></#list><#else>${foo?lower_case}</#if>end').val(),  //${var[0]}end,
                     <#else>
+                        <#assign stradd =1>
                         <#assign straddac=1>
-                        <#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>:$('#<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign stradd=stradd+1><#if stradd==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>').val(),  //${var[0]},
+                        <#assign strzhuanhu=1>
+                        <#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign straddac=straddac+1><#if straddac==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>: ${r'$("'}#<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign stradd=stradd+1><#if stradd==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>").val(),  //${var[0]},
                     </#if>
                 </#if>
             </#list>
