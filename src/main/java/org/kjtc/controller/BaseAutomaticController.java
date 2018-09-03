@@ -74,8 +74,8 @@ public class BaseAutomaticController {
      * @throws Exception
      */
     @RequestMapping("/insertFile")
-    public String insertFile(HttpServletResponse response,HttpServletRequest request,@RequestParam("myfile") MultipartFile file) throws Exception {
-        String  showSql= baseAutomaticService.insertFile(response,request,file);
+    public String insertFile(HttpServletResponse response,HttpServletRequest request,@RequestParam("myfile") MultipartFile file,@RequestParam("saveModelAddr") String  saveModelAddr) throws Exception {
+        String  showSql= baseAutomaticService.insertFile(response,request,file,saveModelAddr);
 
         return showSql;
     }

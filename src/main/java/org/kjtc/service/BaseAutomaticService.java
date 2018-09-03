@@ -126,7 +126,7 @@ public class BaseAutomaticService {
         return gaiYaoList;
     }
 
-    public String insertFile(HttpServletResponse response, HttpServletRequest request, MultipartFile file) {
+    public String insertFile(HttpServletResponse response, HttpServletRequest request, MultipartFile file, String saveModelAddr) {
         String filePath ="";
         if (SystemUtils.getSystem()==true){
             filePath = "D:"+ File.separator+"ftl"+ File.separator;
@@ -135,7 +135,8 @@ public class BaseAutomaticService {
             filePath = "/home"+ File.separator+"tamp"+ File.separator;
         }
         System.out.println(file.getOriginalFilename());
-        String str = StringUtils.getFileName(file.getOriginalFilename());
+       // String str = StringUtils.getFileName(file.getOriginalFilename());
+       String str = saveModelAddr.replaceAll(".ftl", "");
         FileUpload.fileUp(file,filePath,str);
 
         return "";

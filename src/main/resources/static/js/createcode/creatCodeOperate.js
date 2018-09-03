@@ -103,7 +103,7 @@ function save() {
     }
     //判断模板路径必须包含ftl
     if($("#saveModelAddr").val().indexOf("ftl") == -1){
-        alerrorms("模板路后缀必须为.ftl");
+        alerrorms("模板路径后缀必须为.ftl");
         return;
     }
     //判断文件后缀必须为ftl
@@ -111,49 +111,50 @@ function save() {
         alerrorms("文件名称后缀必须为.ftl");
         return;
     }
+    //判断不能重复
+    for(var i = 0;i<equipmentData.length;i++){
+        if($("#saveModelAddr").val().trim() == equipmentData[i].modelAddr){
+            alRepeat(" 模板路径");
+            return;
+        }
+
+    }
+
+    //上传文件
+    var formData = new FormData();
+    formData.append("myfile", document.getElementById("savefilegei").files[0]);
+    formData.append("saveModelAddr", $("#saveModelAddr").val());
+    $.ajax({
+        url: "/codeMaker/insertFile",
+        type: "POST",
+        data: formData,
+        /**
+         *必须false才会自动加上正确的Content-Type
+         */
+        contentType: false,
+        /**
+         * 必须false才会避开jQuery对 formdata 的默认处理
+         * XMLHttpRequest会对 formdata 进行正确的处理
+         */
+        processData: false,
+        success: function (data) {
+            if (data.status == "true") {
+                alert("上传成功！");
+            }
+            if (data.status == "error") {
+                alert(data.msg);
+            }
+            $("#imgWait").hide();
+        },
+        error: function () {
+            alert("上传失败！");
+            $("#imgWait").hide();
+        }
+    });
+
+
     console.log("操作数据");
         if (saveFlag == "INSERT") {
-            //判断不能重复
-            for(var i = 0;i<equipmentData.length;i++){
-                if($("#saveModelAddr").val().trim() == equipmentData[i].modelAddr){
-                    alRepeat(" 模板路径");
-                    return;
-                }
-
-            }
-            //上传文件
-             var formData = new FormData();
-             formData.append("myfile", document.getElementById("savefilegei").files[0]);
-             $.ajax({
-             url: "/codeMaker/insertFile",
-             type: "POST",
-             data: formData,
-             /**
-             *必须false才会自动加上正确的Content-Type
-             */
-             contentType: false,
-             /**
-             * 必须false才会避开jQuery对 formdata 的默认处理
-             * XMLHttpRequest会对 formdata 进行正确的处理
-             */
-             processData: false,
-             success: function (data) {
-             if (data.status == "true") {
-             alert("上传成功！");
-             }
-             if (data.status == "error") {
-             alert(data.msg);
-             }
-             $("#imgWait").hide();
-             },
-             error: function () {
-             alert("上传失败！");
-             $("#imgWait").hide();
-             }
-             });
-
-
-
              var orNot = "";
             if(document.getElementById("radio-1").checked == true){
                 orNot = "是";

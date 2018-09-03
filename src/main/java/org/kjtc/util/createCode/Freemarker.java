@@ -94,6 +94,14 @@ public class Freemarker {
 			Configuration cfg = new Configuration();  												//通过Freemaker的Configuration读取相应的ftl
 			cfg.setEncoding(Locale.CHINA, "utf-8");
 			String path = "D:"+ File.separator+"ftl";
+			//判断系统
+			if (SystemUtils.getSystem()==true){
+				path = PathUtil.getClassResources().replace("/target/classes/","")+"/src/main/resources";
+			}else {
+				path = "/home"+ File.separator+"tamp"+ File.separator;
+			}
+
+
 			cfg.setDirectoryForTemplateLoading(new File(path+"/"));		//设定去哪里读取相应的ftl模板文件
 			Template temp = cfg.getTemplate(ftlName);												//在模板文件目录中找到名称为name的文件
 			return temp;
