@@ -67,7 +67,7 @@ public class ${tabletop?cap_first}Provider {
                         sql.append("   AND    ${var[0]}   ${var[7]}   #${"{"}<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign stradd=stradd+1><#if stradd==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>}  ");//查询${var[1]}
 						</#if>
 						<#if var[7] == "like">
-                        sql.append("   AND    ${var[0]}   ${var[7]}   #${"{"}<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign stradd=stradd+1><#if stradd==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>}  ");//查询${var[1]}
+                        sql.append("   AND    ${var[0]}   ${var[7]}   CONCAT ('%',#${"{"}<#if foo?index_of("_")!=-1 ><#list foo?split("_") as s><#assign stradd=stradd+1><#if stradd==2 >${s?lower_case}<#else><#assign strzhuanhu=s?lower_case>${strzhuanhu?cap_first}</#if></#list><#else>${foo?lower_case}</#if>},'%')  ");//查询${var[1]}
 						</#if>
 						<#if var[7] == "DATE">
                         if (!StringUtils.isEmpty(${tabletop?uncap_first}Entity.get${var[0]?cap_first}())) {
