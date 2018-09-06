@@ -36,9 +36,11 @@ function CheckInput(id)
 /*------------------------------------公用结束----------------------------------------------*/
 /*----------------------------------概要开始-----------------------------------*/
 var saveFlag = undefined;
+var saveupoo = "";
 function showSave(index) {
     if (index != undefined) {
         saveFlag = "UPDATE";
+        saveupoo = equipmentData[index].modelAddr;
         $("#gaiyao-modal-title").text("概要修改");
         $("#saveId").val(equipmentData[index].id);
 
@@ -111,51 +113,45 @@ function save() {
         alerrorms("文件名称后缀必须为.ftl");
         return;
     }
-    //判断不能重复
-    for(var i = 0;i<equipmentData.length;i++){
-        if($("#saveModelAddr").val().trim() == equipmentData[i].modelAddr){
-            alRepeat(" 模板路径");
-            return;
-        }
-
-    }
-
-    //上传文件
-    var formData = new FormData();
-    formData.append("myfile", document.getElementById("savefilegei").files[0]);
-    formData.append("saveModelAddr", $("#saveModelAddr").val());
-    $.ajax({
-        url: "/codeMaker/insertFile",
-        type: "POST",
-        data: formData,
-        /**
-         *必须false才会自动加上正确的Content-Type
-         */
-        contentType: false,
-        /**
-         * 必须false才会避开jQuery对 formdata 的默认处理
-         * XMLHttpRequest会对 formdata 进行正确的处理
-         */
-        processData: false,
-        success: function (data) {
-            if (data.status == "true") {
-                alert("上传成功！");
-            }
-            if (data.status == "error") {
-                alert(data.msg);
-            }
-            $("#imgWait").hide();
-        },
-        error: function () {
-            alert("上传失败！");
-            $("#imgWait").hide();
-        }
-    });
 
 
     console.log("操作数据");
         if (saveFlag == "INSERT") {
-             var orNot = "";
+            //判断不能重复
+            for(var i = 0;i<equipmentData.length;i++){
+                if($("#saveModelAddr").val().trim() == equipmentData[i].modelAddr){
+                    alRepeat(" 模板路径");
+                    return;
+                }
+
+            }
+
+            //上传文件
+            var formData = new FormData();
+            formData.append("myfile", document.getElementById("savefilegei").files[0]);
+            formData.append("saveModelAddr", $("#saveModelAddr").val());
+            $.ajax({
+                url: "/codeMaker/insertFile",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data.status == "true") {
+                        alert("上传成功！");
+                    }
+                    if (data.status == "error") {
+                        alert(data.msg);
+                    }
+                    $("#imgWait").hide();
+                },
+                error: function () {
+                    alert("上传失败！");
+                    $("#imgWait").hide();
+                }
+            });
+
+            var orNot = "";
             if(document.getElementById("radio-1").checked == true){
                 orNot = "是";
             }else{
@@ -177,6 +173,42 @@ function save() {
 
             $("#save").modal('hide');
          } else if (saveFlag == "UPDATE") {
+            //判断不能重复
+            for(var i = 0;i<equipmentData.length;i++){
+                if(saveupoo == equipmentData[i].modelAddr ){
+
+                }else if($("#saveModelAddr").val().trim() == equipmentData[i].modelAddr){
+                    alRepeat(" 模板路径");
+                    return;
+                }
+
+            }
+
+            //上传文件
+            var formData = new FormData();
+            formData.append("myfile", document.getElementById("savefilegei").files[0]);
+            formData.append("saveModelAddr", $("#saveModelAddr").val());
+            $.ajax({
+                url: "/codeMaker/insertFile",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    if (data.status == "true") {
+                        alert("上传成功！");
+                    }
+                    if (data.status == "error") {
+                        alert(data.msg);
+                    }
+                    $("#imgWait").hide();
+                },
+                error: function () {
+                    alert("上传失败！");
+                    $("#imgWait").hide();
+                }
+            });
+
             console.log("更新");
             var orNot = "";
             if(document.getElementById("radio-1").checked == true){
@@ -211,9 +243,12 @@ function delConfirm(index) {
 /*----------------------------------概要结束-----------------------------------*/
 /*----------------------------------mysql开始-----------------------------------*/
 var mysqSaveFlag = undefined;
+//判断是修改还是添加如果是修改就不做本行修改
+var mysqlup = "";
 function mysqlShowSave(index) {
     if (index != undefined) {
         mysqSaveFlag = "UPDATE";
+        mysqlup = mysqlData[index].attributeName;
         console.log("mysql修改");
         $("#mysql-modal-title").text("mysql修改");
 
@@ -335,6 +370,18 @@ function mysqlSave() {
         $("#entityIndexTap").val(entityData.length);
         $("#mysqlSave").modal('hide');
     } else if (mysqSaveFlag == "UPDATE") {
+
+        for(var i = 0;i<mysqlData.length;i++){
+            if(mysqlup == mysqlData[i].attributeName){
+
+             }else if($("#saveAttributeName").val() ==mysqlData[i].attributeName ){
+                alRepeat("mysql属性名");
+                return;
+            }
+
+        }
+
+        mysqlup = "";
         console.log("更新");
         var beEmpty = "";
         var primaryKey = "";
@@ -384,9 +431,11 @@ function mysqlDelConfirm(index) {
 
 /*----------------------------------entity开始-----------------------------------*/
 var entitySaveFlag = undefined;
+var entityup = "";
 function entityShowSave(index) {
     if (index != undefined) {
         entitySaveFlag = "UPDATE";
+        entityup = entityData[index].attributeName;
         console.log("entity修改");
         $("#entity-modal-title").text("entity修改");
 
@@ -494,6 +543,17 @@ function entitySave() {
         console.log(entityData.length)
         $("#entitySave").modal('hide');
     } else if (entitySaveFlag == "UPDATE") {
+
+        for(var i = 0;i<entityData.length;i++){
+            if(entityup == entityData[i].attributeName){
+
+            }else if($("#saveentityAttributeName").val() == entityData[i].attributeName){
+                alRepeat("entity属性名");
+                return;
+            }
+
+        }
+        entityup = "";
         console.log("更新");
         var beEmpty = "";
         var primaryKey = "";
